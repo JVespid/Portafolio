@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  const [prueba, setPrueba] = useState(null);
+  let key = 0;
+
+  const [prueba, setPrueba] = useState([]);
 
   const pruebaGet = async () => {
-    //return await fetch( 'https://github.com/JVespid/apis/blob/0c97f39d9d1131bceebe72a6affd8715dc44fab4/db.json' ).then(data => data.json())
-    const res = await axios.get("https://jvespid.github.io/apis/db.json");
+    //return await fetch( 'https://jvespid.github.io/apis/portafolio/skills.json' ).then(data => data.json())
+    const res = await axios.get("https://jvespid.github.io/apis/portafolio/skills.json");
     console.log(res.data);
     setPrueba( res.data); 
   }
@@ -44,7 +46,13 @@ export default function Home() {
       <main>
         <Main></Main>
 
-
+        <div className="pruebas">
+          {prueba? prueba.map((item) => (
+            <div key={key++}> 
+              <p>{item.skill} -- {item.description}</p>
+            </div>
+          ) ) : null}
+        </div>
       </main>
 
       <Footer></Footer>
