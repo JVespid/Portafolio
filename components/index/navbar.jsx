@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <>
     <nav className="nav">
-        
+        <h2>wa ha ha</h2>
     </nav>
     </>
   )
