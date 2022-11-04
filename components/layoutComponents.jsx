@@ -22,7 +22,7 @@ const LayoutComponents = ({ url, title, type }) => {
     if (type !== "contacto") {
       request();
     }
-  }, []);
+  }, [type]);
 
   const size = useWindowSize();
   const style = {
@@ -103,11 +103,35 @@ const LayoutComponents = ({ url, title, type }) => {
           justify-content: space-around;
 
           margin: 10px auto;
+
+          position: relative;
+          z-index: 1;
         }
+
         .items {
+          background-color: rgba(111, 15, 15, 1);
+
           -webkit-box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.25);
           -moz-box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.25);
           box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.25);
+          position: relative;
+        }
+
+        .items p {
+          position: absolute;
+          top: 50%;
+          z-index: -1;
+          transition: 0.25s;
+
+          width: 100%;
+
+          background-color: rgba(250, 250, 250, 1);
+
+          display: flex;
+          justify-content: center;
+        }
+        .items:hover p {
+          top: 100%;
         }
       `}</style>
     </>

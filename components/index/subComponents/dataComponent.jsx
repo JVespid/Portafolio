@@ -25,13 +25,22 @@ const DataComponent = ({ data, type }) => {
 
         <style jsx>{`
           .skills {
+            position: relative;
+            z-index: 1;
           }
           .skill-item {
+            display: flex;
+            flex-direction: column;
             border: 1px solid #000;
+
+            position: relative;
           }
           .skill-item img {
-            width: clamp(120px, 50%, 200px);
+            width: clamp(70px, 100%, 80px);
             height: auto;
+            border-right: 1px solid rgb(0, 0, 0);
+            border-bottom: 1px solid rgb(0, 0, 0);
+            margin: 3px;
           }
           .skill-item h3 {
           }

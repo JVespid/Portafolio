@@ -34,10 +34,10 @@ export default async function data(req, res) {
 
 // función que se encarga de traer los datos de las skills desde la api en github para su posterior uso
 const skills = async (data_) => {
-
+/* 
   const exec = require('child_process').exec;
 
-  exec("git add .", (err, stdout)=>{
+  exec('git push github master ', (err, stdout)=>{
     if (err) {
       console.log(err);
       return err;
@@ -45,7 +45,7 @@ const skills = async (data_) => {
     console.log("git add . ejecutado");
     console.log(stdout);
 
-  });
+  }); */
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   if (data_ !== undefined) {
