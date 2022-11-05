@@ -1,21 +1,19 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable @next/next/no-img-element */
-import React, { useRef } from "react";
+import React, { createRef, useRef, useState, useEffect } from "react";
 import ContactoComponent from "./contactoComponent";
 
 const DataComponent = ({ data, type }) => {
-  
   const ref_h3 = useRef([]);
   const ref_img = useRef([]);
   const ref_p = useRef([]);
-  const style = {
-    top: `calc(${ref_img.current.clientHeight}px - ${ref_h3.current.clientHeight}px)`,
-  };
-  const style3 = {
-    height: `${ref_img.current.clientHeight}px `
-  };
 
+    const style3 = {
+      height: `${ref_img.current.clientHeight}px `,
+    }
+    
   
+
   if (type === "contacto") {
     return <ContactoComponent />;
   }
@@ -23,17 +21,17 @@ const DataComponent = ({ data, type }) => {
   if (type === "skills") {
     return (
       <>
-        <div className="skills general-content" >
+        <div className="skills general-content">
           {data
             ? data.map(item => (
-                <div className="skill-item items" key={item.id} style={style3} >
+                <div className="skill-item items" key={item.id} style={style3}>
                   {/*tiene que ser imágenes cuadradas */}
                   <img src={item.img} ref={ref_img} alt="imagen de la skill" />
-                  <h3 className="skill-h2" style={style} ref={ref_h3}>
+                  <h3 className="skill-h2" ref={ref_h3}>
                     {/*  no acepta palabras de mas de 13 letras (limitar)*/}
                     {item.skill}
                   </h3>
-                  <p ref={ref_p} >{item.description}</p>
+                  <p ref={ref_p}>{item.description}</p>
                 </div>
               ))
             : null}
@@ -45,7 +43,6 @@ const DataComponent = ({ data, type }) => {
             z-index: 1;
           }
           .skill-item {
-
             margin: 10px;
 
             background-color: red;
@@ -57,7 +54,7 @@ const DataComponent = ({ data, type }) => {
           }
           .skill-item h3 {
             width: calc(100% - 5px);
-            min-height: 40px;
+            height: 40px;
 
             background-color: rgba(250, 250, 250, 1);
 
@@ -69,6 +66,11 @@ const DataComponent = ({ data, type }) => {
             transition: 0.25s;
             align-items: center;
             align-content: center;
+
+            top: calc(100% - 40px);
+
+            text-overflow: ellipsis;
+
           }
           .skill-item:hover h3 {
             padding-left: 10px;
@@ -85,10 +87,16 @@ const DataComponent = ({ data, type }) => {
         <div className="hobbies general-content">
           {data
             ? data.map(item => (
-                <div className="hobbies-item items" key={item.id}>
+                <div
+                  className="hobbies-item items"
+                  key={item.id}
+                  style={style3}
+                >
                   <img src={item.img} alt="imagen de los hobbies" />
-                  <h3 style={style} ref={ref_h3}>{item.hobbie}</h3>
-                  <p >{item.description}</p>
+                  <h3 ref={ref_h3}>
+                    {item.hobbie}
+                  </h3>
+                  <p>{item.description}</p>
                 </div>
               ))
             : null}
@@ -110,7 +118,7 @@ const DataComponent = ({ data, type }) => {
           }
           .hobbies-item h3 {
             width: calc(100% - 5px);
-            min-height: 40px;
+            height: 40px;
 
             background-color: rgba(250, 250, 250, 1);
 
@@ -122,6 +130,10 @@ const DataComponent = ({ data, type }) => {
             transition: 0.25s;
             align-items: center;
             align-content: center;
+
+            top: calc(100% - 40px);
+
+            text-overflow: ellipsis;
           }
           .hobbies-item:hover h3 {
             padding-left: 10px;
