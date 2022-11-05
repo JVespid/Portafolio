@@ -5,8 +5,8 @@ import axios from "axios";
 export default async function data(req, res) {
   let data = undefined;
 
-  if (req.query.extra !== undefined) {
-    data = extra(req.query.extra);
+  if (req.query.range !== undefined) {
+    data = req.query.range;
   }
 
   switch (req.query.type) {
@@ -34,23 +34,30 @@ export default async function data(req, res) {
 
 // función que se encarga de traer los datos de las skills desde la api en github para su posterior uso
 const skills = async (data_) => {
-/* 
-  const exec = require('child_process').exec;
-
-  exec('git push github master ', (err, stdout)=>{
-    if (err) {
-      console.log(err);
-      return err;
-    }
-    console.log("git add . ejecutado");
-    console.log(stdout);
-
-  }); */
+  /* 
+    const exec = require('child_process').exec;
+  
+    exec('git push github master ', (err, stdout)=>{
+      if (err) {
+        console.log(err);
+        return err;
+      }
+      console.log("git add . ejecutado");
+      console.log(stdout);
+  
+    }); */
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   if (data_ !== undefined) {
-    return data_;
+    //obtiene los datos de la api de github de las skills
+    const res = await axios.get("https://jvespid.github.io/apis/portafolio/skills.json");
+
+    if ((res.data.length) > parseInt(data_)) {
+      //retorna los datos obtenidos de la api
+      return JSON.stringify(((res.data).slice(res.data.length - parseInt(data_), res.data.length)));
+    }
   }
+
   //obtiene los datos de la api de github de las skills
   const res = await axios.get("https://jvespid.github.io/apis/portafolio/skills.json");
 
@@ -65,7 +72,13 @@ const hobbies = async (data_) => {
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   if (data_ !== undefined) {
-    return data_;
+    //obtiene los datos de la api de github de las skills
+    const res = await axios.get("https://jvespid.github.io/apis/portafolio/hobbies.json");
+
+    if ((res.data.length) > parseInt(data_)) {
+      //retorna los datos obtenidos de la api
+      return JSON.stringify(((res.data).slice(res.data.length - parseInt(data_), res.data.length)));
+    }
   }
 
   //obtiene los datos de la api de github de los hobbies
@@ -81,7 +94,13 @@ const formacionAcademica = async (data_) => {
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   if (data_ !== undefined) {
-    return data_;
+    //obtiene los datos de la api de github de las skills
+    const res = await axios.get("https://jvespid.github.io/apis/portafolio/FormacionAcademica.json");
+
+    if ((res.data.length) > parseInt(data_)) {
+      //retorna los datos obtenidos de la api
+      return JSON.stringify(((res.data).slice(res.data.length - parseInt(data_), res.data.length)));
+    }
   }
 
   //obtiene los datos de la api de github de las formaciones académicas
@@ -96,7 +115,13 @@ const proyectos = async (data_) => {
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   if (data_ !== undefined) {
-    return data_;
+    //obtiene los datos de la api de github de las skills
+    const res = await axios.get("https://jvespid.github.io/apis/portafolio/proyectos.json");
+
+    if ((res.data.length) > parseInt(data_)) {
+      //retorna los datos obtenidos de la api
+      return JSON.stringify(((res.data).slice(res.data.length - parseInt(data_), res.data.length)));
+    }
   }
 
   //obtiene los datos de la api de github de los proyectos
@@ -111,7 +136,13 @@ const contacto = async (data_) => {
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   if (data_ !== undefined) {
-    return data_;
+    //obtiene los datos de la api de github de las skills
+    const res = await axios.get("https://jvespid.github.io/apis/portafolio/Contacto.json");
+
+    if ((res.data.length) > parseInt(data_)) {
+      //retorna los datos obtenidos de la api
+      return JSON.stringify(((res.data).slice(res.data.length - parseInt(data_), res.data.length)));
+    }
   }
 
   //obtiene los datos de la api de github de los contactos
@@ -119,11 +150,4 @@ const contacto = async (data_) => {
 
   //retorna los datos obtenidos de la api
   return JSON.stringify(res.data);
-}
-
-
-// función que manipula los datos dependiendo le lo que se necesite(es una función para posibles futuras actualizaciones)
-const extra = async (data_) => {
-  console.log(data_);
-  return data_;
 }

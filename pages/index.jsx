@@ -28,7 +28,7 @@ export default function Home() {
       </header>
 
       <main>
-        <Main></Main>
+        <Main page = "main"></Main>
       </main>
 
       <Footer></Footer>
