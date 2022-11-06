@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable @next/next/no-img-element */
 import React, { createRef, useRef, useState, useEffect } from "react";
-import Router from "next/router";
 import ContactoComponent from "./contactoComponent";
 
 const DataComponent = ({ data, type, page }) => {
-  const router = Router;
   const ref_h3 = useRef([]);
   const ref_img = useRef([]);
   const ref_p = useRef([]);
@@ -15,9 +13,6 @@ const DataComponent = ({ data, type, page }) => {
     width: `${ref_img.current.clientWidth}px `,
   };
 
-  const config1 = () => {
-    router.push(`https://nextjs.org/docs/basic-features/pages`);
-  };
 
   if (type === "contacto") {
     return <ContactoComponent />;

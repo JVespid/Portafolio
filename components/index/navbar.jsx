@@ -1,5 +1,3 @@
-import React from "react";
-import Link from "next/Link";
 
 const Navbar = () => {
   return (
@@ -33,13 +31,13 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-
+{/* 
       <style jsx>{`
 
 
       
       
-      `}</style>
+      `}</style> */}
     </>
   );
 };

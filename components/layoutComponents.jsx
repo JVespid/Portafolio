@@ -82,10 +82,6 @@ const LayoutComponents = ({ url, title, type, page }) => {
     width: size.width,
   };
 
-  const requestHover = e => {
-    console.log(e);
-  };
-  const redirectHover = () => {};
 
   return (
     <>
@@ -227,7 +223,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
           display: flex;
           flex-direction: column;
           position: relative;
-          background-color: rgba(244, 244, 244, 1);
+          background-color: ${color.gris};
           position: relative;
           cursor: pointer;
           overflow: hidden;
@@ -250,7 +246,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
           z-index: -1;
           transition: 0.25s;
           width: calc(100% - 5px);
-          background-color: rgba(250, 250, 250, 1);
+          background-color: ${color.blanco};
           display: flex;
           justify-content: center;
           overflow: hidden;
@@ -263,7 +259,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
         .items h3 {
           width: calc(100% - 5px);
           height: 40px;
-          background-color: rgba(250, 250, 250, 1);
+          background-color: ${color.blanco};
           padding-left: 5px;
           position: absolute;
           display: flex;
@@ -277,7 +273,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
 
         a {
           text-decoration: none;
-          color: ${color.test};
+          color: ${color.naranja};
         }
 
         .items:hover h3 {
