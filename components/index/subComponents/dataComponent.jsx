@@ -3,7 +3,7 @@
 import React, { createRef, useRef, useState, useEffect } from "react";
 import ContactoComponent from "./contactoComponent";
 
-const DataComponent = ({ data, type, page }) => {
+const DataComponent = ({ data, type, page, request }) => {
   const ref_h3 = useRef([]);
   const ref_img = useRef([]);
   const ref_p = useRef([]);
@@ -13,7 +13,6 @@ const DataComponent = ({ data, type, page }) => {
     width: `${ref_img.current.clientWidth}px `,
   };
 
-
   if (type === "contacto") {
     return <ContactoComponent />;
   }
@@ -22,19 +21,24 @@ const DataComponent = ({ data, type, page }) => {
     return (
       <>
         <div className="skills general-content">
-          {data
-            ? data.map(item => (
-                <div className="skill-item items" key={item.id} style={style3}>
-                  {/*tiene que ser imágenes cuadradas */}
-                  <img src={item.img} ref={ref_img} alt="imagen de la skill" />
-                  <h3 className="skill-h2" ref={ref_h3}>
-                    {/*  no acepta palabras de mas de 13 letras (limitar)*/}
-                    {item.skill}
-                  </h3>
-                  <p ref={ref_p}>{item.description}</p>
-                </div>
-              ))
-            : null}
+          {data ? (
+            data.map(item => (
+              <div className="skill-item items" key={item.id} style={style3}>
+                {/*tiene que ser imágenes cuadradas */}
+                <img src={item.img} ref={ref_img} alt="imagen de la skill" />
+                <h3 className="skill-h2" ref={ref_h3}>
+                  {/*  no acepta palabras de mas de 13 letras (limitar)*/}
+                  {item.skill}
+                </h3>
+                <p ref={ref_p}>{item.description}</p>
+              </div>
+            ))
+          ) : (
+            <div className="errorLoad">
+              <h3>Error al cargar los datos, intentarlo de nuevo</h3>
+              <button onClick={request}>Reintentar</button>
+            </div>
+          )}
         </div>
 
         <style jsx>{`
@@ -52,23 +56,20 @@ const DataComponent = ({ data, type, page }) => {
     return (
       <>
         <div className="hobbies general-content">
-          {data
-            ? data.map(item => (
-                <div
-                  className="hobbies-item items"
-                  key={item.id}
-                  style={style3}
-                >
-                  <img
-                    src={item.img}
-                    ref={ref_img}
-                    alt="imagen de los hobbies"
-                  />
-                  <h3>{item.hobbie}</h3>
-                  <p>{item.description}</p>
-                </div>
-              ))
-            : null}
+          {data ? (
+            data.map(item => (
+              <div className="hobbies-item items" key={item.id} style={style3}>
+                <img src={item.img} ref={ref_img} alt="imagen de los hobbies" />
+                <h3>{item.hobbie}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))
+          ) : (
+            <div className="errorLoad">
+              <h3>Error al cargar los datos, intentarlo de nuevo</h3>
+              <button onClick={request}>Reintentar</button>
+            </div>
+          )}
         </div>
 
         <style jsx>{`
@@ -87,33 +88,38 @@ const DataComponent = ({ data, type, page }) => {
     return (
       <>
         <div className="formacionAcademica general-content">
-          {data
-            ? data.map(item => (
-                <div
-                  className="formacionAcademica-item items"
-                  key={item.id}
-                  style={style3}
-                >
-                  <img
-                    src={item.img}
-                    alt="imagen de la formacionAcademica"
-                    ref={ref_img}
-                  />
-                  <h3>{item.name}</h3>
-                  <p>
-                    {item.description}
-                    <a href={`${item.link}`}> LInk </a>
-                  </p>
+          {data ? (
+            data.map(item => (
+              <div
+                className="formacionAcademica-item items"
+                key={item.id}
+                style={style3}
+              >
+                <img
+                  src={item.img}
+                  alt="imagen de la formacionAcademica"
+                  ref={ref_img}
+                />
+                <h3>{item.name}</h3>
+                <p>
+                  {item.description}
+                  <a href={`${item.link}`}> LInk </a>
+                </p>
 
-                  {page === "formacionAcademica" ? (
-                    <>
-                      <p className="formacionAcademica-other1">{item.other1}</p>
-                      <p className="formacionAcademica-other2">{item.other2}</p>
-                    </>
-                  ) : null}
-                </div>
-              ))
-            : null}
+                {page === "formacionAcademica" ? (
+                  <>
+                    <p className="formacionAcademica-other1">{item.other1}</p>
+                    <p className="formacionAcademica-other2">{item.other2}</p>
+                  </>
+                ) : null}
+              </div>
+            ))
+          ) : (
+            <div className="errorLoad">
+              <h3>Error al cargar los datos, intentarlo de nuevo</h3>
+              <button onClick={request}>Reintentar</button>
+            </div>
+          )}
         </div>
 
         <style jsx>{`
@@ -136,23 +142,28 @@ const DataComponent = ({ data, type, page }) => {
     return (
       <>
         <div className="proyectos general-content">
-          {data
-            ? data.map(item => (
-                <div
-                  className="proyectos-item items"
-                  key={item.id}
-                  style={style3}
-                >
-                  <img
-                    src={item.img}
-                    alt="imagen de la formacionAcademica"
-                    ref={ref_img}
-                  />
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
-                </div>
-              ))
-            : null}
+          {data ? (
+            data.map(item => (
+              <div
+                className="proyectos-item items"
+                key={item.id}
+                style={style3}
+              >
+                <img
+                  src={item.img}
+                  alt="imagen de la formacionAcademica"
+                  ref={ref_img}
+                />
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))
+          ) : (
+            <div className="errorLoad">
+              <h3>Error al cargar los datos, intentarlo de nuevo</h3>
+              <button onClick={request}>Reintentar</button>
+            </div>
+          )}
         </div>
         <style jsx>{`
           .proyectos-item {

@@ -82,10 +82,9 @@ const LayoutComponents = ({ url, title, type, page }) => {
     width: size.width,
   };
 
-
   return (
     <>
-      <section className="layout-components"id={`${type}`}>
+      <section className="layout-components" id={`${type}`}>
         <div className="bar">
           {type != "contacto" ? (
             <button
@@ -109,12 +108,24 @@ const LayoutComponents = ({ url, title, type, page }) => {
           />
         </div>
 
-        <div className="container" >
+        <div className="container">
           <div className="title">
             <h2>{title}</h2>
           </div>
           <div className="content">
-            <DataComponent data={data} type={type} key={type} />
+            {data ? (
+              <DataComponent
+                data={data}
+                type={type}
+                key={type}
+                request={request}
+              />
+            ) : (
+              <div className="errorLoad">
+                <h3>Error al cargar los datos, intentarlo de nuevo</h3>
+                <button onClick={request}>Reintentar</button>
+              </div>
+            )}
           </div>
         </div>
         <div className="up">
@@ -139,6 +150,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
           padding: 10px auto;
           display: flex;
           justify-content: flex-end;
+          flex-wrap: wrap;
         }
         .bar .request,
         .bar input {
@@ -150,7 +162,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
         .bar .request:hover,
         .bar input:hover {
           cursor: pointer;
-        
+
           cursor: pointer;
         }
 
@@ -201,6 +213,36 @@ const LayoutComponents = ({ url, title, type, page }) => {
       `}</style>
 
       <style jsx global>{`
+        .errorLoad {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .errorLoad h3 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+
+          font-size: clamp(1.5rem, 1.5vw, 2rem);
+          color: ${color.azul};
+        }
+        .errorLoad button {
+          width: clamp(50px, 10vw, 100px);
+          height: clamp(20px, 10vw, 40px);
+          border-radius: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: ${color.gris};
+          color: ${color.naranja};
+        }
+        .errorLoad button:hover {
+          cursor: pointer;
+          color: ${color.gris};
+          background-color: ${color.naranja};
+        }
         .general-content {
           position: relative;
           z-index: 1;
@@ -233,7 +275,7 @@ const LayoutComponents = ({ url, title, type, page }) => {
         }
 
         .items img {
-          width: clamp(40px, 100%, 10000px);
+          width: clamp(100px, 100%, 100%);
           height: auto;
           position: relative;
           transition: 0.25s;
