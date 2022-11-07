@@ -8,7 +8,8 @@ export default function estilos() {
       transparente: `rgba(0,0,0,0)`,
       naranja:"rgba(195, 117, 24,1)",
       blanco:"rgba(255,255,255,1)",
-      gris: "rgb(240, 240, 240)",
+      gris: "rgba(240, 240, 240,1)",
+      grisOp: "rgba(240, 240, 240,0.8)",
       negro: "rgba(0, 0, 0, 1)",
       test: `red`
     }
