@@ -6,7 +6,6 @@ const Navbar = () => {
   const size = useWindowSize();
 
   const [styleNav, setStyleNav] = useState({});
-  const [styleUl, setStyleUl] = useState({});
 
   const focurBurger = e => {
     setStyleNav({
@@ -14,14 +13,15 @@ const Navbar = () => {
       with: `${size.width - 20}px`,
       display: "flex",
       zIndex: "1000000",
-      overflow: "auto",
     });
+
   };
 
   const blurBurger = e => {
     setTimeout(() => {
-      setStyleNav({});
-
+      setStyleNav({
+        overflow: "scroll",
+      });
     }, 100);
   };
 
@@ -40,40 +40,30 @@ const Navbar = () => {
           </button>
         ) : null}
 
-        <ul className="nav-list" style={styleNav} >
+        <ul className="nav-list" style={styleNav}>
           <li className="item">
             <a href="#skills" className="link">
-              <button onFocus={focurBurger} onBlur={blurBurger}>
-                skills
-              </button>
+              <button>skills</button>
             </a>
           </li>
           <li className="item">
             <a href="#hobbies" className="link">
-              <button onFocus={focurBurger} onBlur={blurBurger}>
-                hobbies
-              </button>
+              <button>hobbies</button>
             </a>
           </li>
           <li className="item">
-            <a href="#formacionAcademica" className="link">
-              <button onFocus={focurBurger} onBlur={blurBurger}>
-                formación Académica
-              </button>
+            <a href="#FormacionAcademica" className="link">
+              <button>formación Académica</button>
             </a>
           </li>
           <li className="item">
             <a href="#proyectos" className="link">
-              <button onFocus={focurBurger} onBlur={blurBurger}>
-                proyectos
-              </button>
+              <button>proyectos</button>
             </a>
           </li>
           <li className="item">
-            <a href="#contacto" className="link">
-              <button onFocus={focurBurger} onBlur={blurBurger}>
-                contacto
-              </button>
+            <a href="#Contacto" className="link">
+              <button>contacto</button>
             </a>
           </li>
         </ul>

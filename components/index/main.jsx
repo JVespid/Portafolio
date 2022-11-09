@@ -21,13 +21,13 @@ const Main = ({ page }) => {
       <LayoutComponents
         url="/profile/formacionAcademica"
         title="Formación académica"
-        type="formacionAcademica"
+        type="FormacionAcademica"
         page={page}
       />
 
       <LayoutComponents
         url="/profile/experienciaProfesional"
-        title="Experiencia profesional"
+        title="Proyectos"
         type="proyectos"
         page={page}
       />
@@ -35,7 +35,7 @@ const Main = ({ page }) => {
       <LayoutComponents
         url="/profile/contacto"
         title="Contacto"
-        type="contacto"
+        type="Contacto"
         page={page}
       />
     </>

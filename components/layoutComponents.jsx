@@ -5,9 +5,10 @@ import axios from "axios";
 import useWindowSize from "../hooks/useWindowSize";
 import DataComponent from "./index/subComponents/dataComponent";
 import estilos from "../styles/stl.js";
+
 const { color } = estilos();
 
-const LayoutComponents = ({ url, title, type, page }) => {
+const LayoutComponents = ({ title, type }) => {
   const router = Router;
   const [stylehoverReq, setStyleHoverReq] = useState({});
   let [stylehoverRed, setStyleHoverRed] = useState({});
@@ -16,24 +17,11 @@ const LayoutComponents = ({ url, title, type, page }) => {
   const [isShownRed, setIsShownRed] = useState(false);
 
   const redirect = () => {
+    const url = `/moreInfo?type=${type}`;
     router.push(`${url}`);
   };
 
-  let range;
-  switch (type) {
-    case "hobbies":
-      range = 6;
-      break;
-    case "formacionAcademica":
-      range = 3;
-      break;
-    case "proyectos":
-      range = 5;
-      break;
-    default:
-      range = 7;
-      break;
-  }
+  let range = typeRange(type);
 
   const [data, setData] = useState([]);
 
@@ -43,12 +31,21 @@ const LayoutComponents = ({ url, title, type, page }) => {
   };
 
   useEffect(() => {
-    if (type !== "contacto" && page === "main") {
+    if (type !== "contacto") {
       request();
     }
   }, [type]);
 
   useEffect(() => {
+    setStyleHoverRed({
+      backgroundColor: color.gris,
+      color: color.naranja,
+    });
+    setStyleHoverReq({
+      backgroundColor: color.naranja,
+      color: color.gris,
+    });
+
     if (isShownRed) {
       setStyleHoverReq({
         backgroundColor: color.gris,
@@ -58,23 +55,14 @@ const LayoutComponents = ({ url, title, type, page }) => {
         backgroundColor: color.naranja,
         color: color.gris,
       });
-    } else {
-      setStyleHoverRed({
-        backgroundColor: color.gris,
-        color: color.naranja,
-      });
-      setStyleHoverReq({
-        backgroundColor: color.naranja,
-        color: color.gris,
-      });
     }
-    if (isShownReq) {
+
+    isShownReq &&
       setStyleHoverReq({
         backgroundColor: color.naranja,
         color: color.gris,
         fontSize: "15px",
       });
-    }
   }, [isShownReq, isShownRed]);
 
   const size = useWindowSize();
@@ -280,6 +268,8 @@ const LayoutComponents = ({ url, title, type, page }) => {
           position: relative;
           transition: 0.25s;
           top: 0;
+          
+          fit-content: cover;
         }
 
         .items p {
@@ -349,9 +339,59 @@ const LayoutComponents = ({ url, title, type, page }) => {
           -moz-box-shadow: 10px 0px 23px 0px rgba(0, 0, 0, 0.25);
           box-shadow: 10px 0px 23px 0px rgba(0, 0, 0, 0.25);
         }
+
+        /*estilos personalizados en base a medidas */
+        .skill-item {
+          min-width: clamp(100px, 100%, 150px);
+          max-width: clamp(100px, 100%, 150px);
+          fit-content: cover;
+        }
+
+        .hobbies-item {
+          min-width: clamp(100px, 100%, 150px);
+          max-width: clamp(100px, 100%, 150px);
+          height: auto;
+          fit-content: cover;
+        }
+        .formacionAcademica-item {
+          min-width: clamp(100px, 100%, 300px);
+          max-width: clamp(100px, 100%, 300px);
+          height: auto;
+          fit-content: cover;
+        }
+        .formacionAcademica-item h3 {
+          height: 60px;
+          top: calc(100% - 60px);
+        }
+        .proyectos-item {
+          min-width: clamp(100px, 100%, 300px);
+          max-width: clamp(100px, 100%, 300px);
+          height: auto;
+        }
+        .proyectos-item h3 {
+          height: 60px;
+          top: calc(100% - 60px);
+        }
       `}</style>
     </>
   );
+};
+
+const typeRange = type => {
+  let range;
+  switch (type) {
+    case "hobbies":
+      return (range = 6);
+
+    case "formacionAcademica":
+      return (range = 3);
+
+    case "proyectos":
+      return (range = 5);
+
+    default:
+      return (range = 7);
+  }
 };
 
 export default LayoutComponents;
