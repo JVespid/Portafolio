@@ -1,33 +1,32 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-*{
+* {
   list-style: none;
-	font-family: Arial, Helvetica, sans-serif !important;
-	box-sizing: content-box !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  box-sizing: content-box !important;
 
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	vertical-align: baseline;
-  
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  vertical-align: baseline;
 }
+/* 
+información sacada de la siguiente pagina, 
+http://meyerweb.com/eric/tools/css/reset/ 
+v2.0 | 20110126
+License: none (public domain)
+solo se saco la siguiente parte del código
+*/
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
-/*
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
-*/

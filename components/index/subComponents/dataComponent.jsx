@@ -3,7 +3,6 @@
 import ContactoComponent from "./contactoComponent";
 
 const DataComponent = ({ data, type, page, request }) => {
-
   if (type === "Contacto") {
     return <ContactoComponent />;
   }
@@ -16,12 +15,12 @@ const DataComponent = ({ data, type, page, request }) => {
             data.map(item => (
               <div className="skill-item items" key={item.id}>
                 {/*tiene que ser imágenes cuadradas */}
-                <img src={item.img}  alt="imagen de la skill" />
-                <h3 className="skill-h2" >
+                <img src={item.img} alt="imagen de la skill" />
+                <h3 className="skill-h2">
                   {/*  no acepta palabras de mas de 13 letras (limitar)*/}
                   {item.skill}
                 </h3>
-                <p >{item.description}</p>
+                <p>{item.description}</p>
               </div>
             ))
           ) : (
@@ -31,7 +30,6 @@ const DataComponent = ({ data, type, page, request }) => {
             </div>
           )}
         </div>
-
       </>
     );
   }
@@ -65,14 +63,8 @@ const DataComponent = ({ data, type, page, request }) => {
         <div className="formacionAcademica general-content">
           {data ? (
             data.map(item => (
-              <div
-                className="formacionAcademica-item items"
-                key={item.id}
-              >
-                <img
-                  src={item.img}
-                  alt="imagen de la formacionAcademica"
-                />
+              <div className="formacionAcademica-item items" key={item.id}>
+                <img src={item.img} alt="imagen de la formacionAcademica" />
                 <h3>{item.name}</h3>
                 <p>
                   {item.description}
@@ -104,16 +96,19 @@ const DataComponent = ({ data, type, page, request }) => {
         <div className="proyectos general-content">
           {data ? (
             data.map(item => (
-              <div
-                className="proyectos-item items"
-                key={item.id}
-              >
-                <img
-                  src={item.img}
-                  alt="imagen de la formacionAcademica"
-                />
+              <div className="proyectos-item items" key={item.id}>
+                <img src={item.img} alt="imagen de la formacionAcademica" />
                 <h3>{item.name}</h3>
-                <p>{item.description}</p>
+                <p>
+                  {item.description}
+                  <a href={`${item.link}`}> LInk </a>
+                </p>
+
+                {page === "proyectos" ? (
+                  <>
+                    <p className="formacionAcademica-other1">{item.other1}</p>
+                  </>
+                ) : null}
               </div>
             ))
           ) : (

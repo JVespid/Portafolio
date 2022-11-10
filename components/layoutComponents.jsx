@@ -268,7 +268,7 @@ const LayoutComponents = ({ title, type }) => {
           position: relative;
           transition: 0.25s;
           top: 0;
-          
+
           fit-content: cover;
         }
 
@@ -378,19 +378,18 @@ const LayoutComponents = ({ title, type }) => {
 };
 
 const typeRange = type => {
-  let range;
   switch (type) {
     case "hobbies":
-      return (range = 6);
+      return 6;
 
-    case "formacionAcademica":
-      return (range = 3);
+    case "FormacionAcademica":
+      return 3;
 
     case "proyectos":
-      return (range = 5);
+      return 5;
 
     default:
-      return (range = 7);
+      return 7;
   }
 };
 
