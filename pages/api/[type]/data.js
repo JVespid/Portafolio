@@ -22,19 +22,21 @@ const get = async ({ range, type, page, maxRange }) => {
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   const resOriginal = await axios.get(`https://jvespid.github.io/apis/portafolio/${type}.json`);
-  const res = resOriginal;
   if (range !== undefined) {
     const ranges = parseInt(range);
     //obtiene los datos de la api de github según el tipo
-
-    if ((res.data.length) > ranges) {
+    
+    if ((resOriginal.data.length) > ranges) {
       //retorna los datos obtenidos de la api
-      return JSON.stringify((res.data).slice(res.data.length - ranges, res.data.length));
+      return JSON.stringify((resOriginal.data).slice(resOriginal.data.length - ranges, resOriginal.data.length));
     }
+    //retorna los datos obtenidos de la api
+    return JSON.stringify(resOriginal.data);
   }
-
-
+  
+  
   if (page !== undefined && maxRange !== undefined) {
+    const res = resOriginal;
     const pages = parseInt(page);
     const maxRanges = parseInt(maxRange);
 
@@ -56,13 +58,11 @@ const get = async ({ range, type, page, maxRange }) => {
       return JSON.stringify(rest);
     }
   } else {
-
       let rest = ((res.data).slice(0, maxRanges));
       rest.push({ numberPages: numberPages});
       return JSON.stringify(rest);
-
   }
   //retorna los datos obtenidos de la api
-  return JSON.stringify(res.data);
+  return JSON.stringify(resOriginal.data);
 
 }
