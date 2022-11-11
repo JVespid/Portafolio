@@ -68,15 +68,8 @@ const DataComponent = ({ data, type, page, request }) => {
                 <h3>{item.name}</h3>
                 <p>
                   {item.description}
-                  <a href={`${item.link}`}> LInk </a>
+                  <a href={`${item.link}`} target="_blank"> LInk </a>
                 </p>
-
-                {page === "FormacionAcademica" ? (
-                  <>
-                    <p className="formacionAcademica-other1">{item.other1}</p>
-                    <p className="formacionAcademica-other2">{item.other2}</p>
-                  </>
-                ) : null}
               </div>
             ))
           ) : (
@@ -97,18 +90,12 @@ const DataComponent = ({ data, type, page, request }) => {
           {data ? (
             data.map(item => (
               <div className="proyectos-item items" key={item.id}>
-                <img src={item.img} alt="imagen de la formacionAcademica" />
+                <img src={item.img} alt="imagen del proyecto" />
                 <h3>{item.name}</h3>
                 <p>
                   {item.description}
-                  <a href={`${item.link}`}> LInk </a>
+                  <a href={`${item.link}`} target="_blank"> LInk </a>
                 </p>
-
-                {page === "proyectos" ? (
-                  <>
-                    <p className="formacionAcademica-other1">{item.other1}</p>
-                  </>
-                ) : null}
               </div>
             ))
           ) : (

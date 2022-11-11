@@ -28,10 +28,13 @@ const get = async ({ range, type, page, maxRange }) => {
     
     if ((resOriginal.data.length) > ranges) {
       //retorna los datos obtenidos de la api
-      return JSON.stringify((resOriginal.data).slice(resOriginal.data.length - ranges, resOriginal.data.length));
+      let res = ordenar((resOriginal.data).slice(resOriginal.data.length - ranges, resOriginal.data.length))
+
+      return JSON.stringify(res);
     }
     //retorna los datos obtenidos de la api
-    return JSON.stringify(resOriginal.data);
+    let res = resOriginal.data;
+    return JSON.stringify(res);
   }
   
   
@@ -53,16 +56,23 @@ const get = async ({ range, type, page, maxRange }) => {
 
       let rest = ((res.data).slice(initial, finaly));
       rest.push({ numberPages: numberPages});
-      console.log(rest[rest.length - 1]);
+      rest = ordenar(rest);
 
       return JSON.stringify(rest);
     }
   } else {
       let rest = ((res.data).slice(0, maxRanges));
       rest.push({ numberPages: numberPages});
+      rest = ordenar(rest);
       return JSON.stringify(rest);
   }
   //retorna los datos obtenidos de la api
-  return JSON.stringify(resOriginal.data);
+  let res = ordenar(resOriginal.data)
+  return JSON.stringify(res);
 
+}
+
+const ordenar = (valor) => {
+
+  return valor.reverse();
 }

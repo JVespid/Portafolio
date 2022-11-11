@@ -3,7 +3,7 @@ import Router from "next/router";
 import axios from "axios";
 
 import useWindowSize from "../hooks/useWindowSize";
-import DataComponent from "./index/subComponents/dataComponent";
+import DataComponent from "./index/subComponents/dataComponentHome";
 import estilos from "../styles/stl.js";
 
 const { color } = estilos();

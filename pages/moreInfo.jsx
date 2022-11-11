@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Router from "next/router";
+import Link from "next/link";
 
 import useWindowSize from "../hooks/useWindowSize";
-import DataComponent from "../components/index/subComponents/dataComponent";
+import DataComponent from "../components/index/subComponents/dataComponentMoreInfo";
 
 import estilos from "../styles/stl.js";
+import Pagination from "../components/moreInfo/pagination";
 const { color } = estilos();
 
 const MoreInfo = ({ query }) => {
   const router = Router;
-  const backToHome = () => router.push("/");
-  const nextPge = () =>
-    router.push(`/moreInfo?type=${type}&page=${setPage(page + 1)}&maxRange=${maxRange}`);
 
   const type = query.type;
 
   const maxRange = maxRangeType(type);
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(query.page ? query.page : 1);
+  const page = parseInt(query.page ? query.page : 1);
 
-  const request = async () => {
+  const backToHome = () => router.push("/");
+
+  const request = async page => {
     const res = await axios.get(
       `/api/${type}/data?page=${page}&maxRange=${maxRange}`
     );
-    setData(JSON.parse(res.data));
+
+    setData(await JSON.parse(res.data));
   };
 
   useEffect(() => {
     if (type !== "contacto") {
-      request();
+      request(page);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  console.log(1)
 
   return (
     <>
@@ -50,13 +54,41 @@ const MoreInfo = ({ query }) => {
             data={data}
             type={type}
             page={type}
-            key={type}
+            key={page}
             request={request}
           />
 
-          <div className="pagination"></div>
+          <div className="pagination">
+            <Link
+              href={{
+                pathname: `/moreInfo`,
+                query: { type: type, page: page - 1 },
+              }}
+            >
+              <a className="p2">previous</a>
+            </Link>
+
+              <Pagination />
+
+            <Link
+              href={{
+                pathname: `/moreInfo`,
+                query: { type: type, page: page + 1 },
+              }}
+            >
+              <a className="p1">next</a>
+            </Link>
+          </div>
         </div>
       </main>
+
+      <style jsx>{`
+        .p1,
+        .p2 {
+          border: 1px solid ${color.negro};
+          margin: 5px;
+        }
+      `}</style>
 
       <style jsx global>{`
         .errorLoad {
@@ -235,6 +267,7 @@ const MoreInfo = ({ query }) => {
     </>
   );
 };
+export default MoreInfo;
 
 export function getServerSideProps(context) {
   return {
@@ -257,4 +290,3 @@ const maxRangeType = type => {
       return 7;
   }
 };
-export default MoreInfo;
