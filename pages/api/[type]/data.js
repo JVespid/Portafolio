@@ -22,10 +22,11 @@ const get = async ({ range, type, page, maxRange }) => {
 
   //si hay alguna acción extra aquí se ejecutaría otro tipo de código
   const resOriginal = await axios.get(`https://jvespid.github.io/apis/portafolio/${type}.json`);
+
   if (range !== undefined) {
     const ranges = parseInt(range);
     //obtiene los datos de la api de github según el tipo
-    
+
     if ((resOriginal.data.length) > ranges) {
       //retorna los datos obtenidos de la api
       let res = ordenar((resOriginal.data).slice(resOriginal.data.length - ranges, resOriginal.data.length))
@@ -36,8 +37,8 @@ const get = async ({ range, type, page, maxRange }) => {
     let res = resOriginal.data;
     return JSON.stringify(res);
   }
-  
-  
+
+
   if (page !== undefined && maxRange !== undefined) {
     const res = resOriginal;
     const pages = parseInt(page);
@@ -45,32 +46,30 @@ const get = async ({ range, type, page, maxRange }) => {
 
     const numberPages = Math.ceil(res.data.length / maxRanges);
 
-    if (numberPages > 1) {
-      let initial = 0, finaly = maxRanges;
-      for (let i = 1; i < pages; i++) {
-        //i == 1? initial += (maxRanges+1): initial += maxRanges;
-        initial += maxRanges;
-        finaly += (maxRanges);
+    let initial = 0, finaly = maxRanges;
+    for (let i = 1; i < pages; i++) {
+      //i == 1? initial += (maxRanges+1): initial += maxRanges;
+      initial += maxRanges;
+      finaly += (maxRanges);
 
-      }
-
-      let rest = ((res.data).slice(initial, finaly));
-      rest.push({ numberPages: numberPages});
-      rest = ordenar(rest);
-
-      return JSON.stringify(rest);
     }
+
+    let rest = ((res.data).slice(initial, finaly));
+    rest.push({ numberPages: numberPages });
+    rest = ordenar(rest);
+
+    return JSON.stringify(rest);
   } else {
-      let rest = ((res.data).slice(0, maxRanges));
-      rest.push({ numberPages: numberPages});
-      rest = ordenar(rest);
-      return JSON.stringify(rest);
+
+    let rest = ((res.data).slice(0, maxRanges));
+    rest.push({ numberPages: numberPages });
+    rest = ordenar(rest);
+    return JSON.stringify(rest);
   }
-  //retorna los datos obtenidos de la api
-  let res = ordenar(resOriginal.data)
-  return JSON.stringify(res);
+
 
 }
+
 
 const ordenar = (valor) => {
 

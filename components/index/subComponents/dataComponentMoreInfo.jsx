@@ -43,13 +43,17 @@ const DataComponent = ({ data, type, page, request }) => {
       <>
         <div className="hobbies general-content">
           {data ? (
-            data.map(item => (
-              <div className="hobbies-item items" key={item.id}>
-                <img src={item.img} alt="imagen de los hobbies" />
-                <h3>{item.hobbie}</h3>
-                <p>{item.description}</p>
-              </div>
-            ))
+            data.map(item => {
+              if (!item.numberPages) {
+                return (
+                  <div className="hobbies-item items" key={item.id}>
+                    <img src={item.img} alt="imagen de los hobbies" />
+                    <h3>{item.hobbie}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                );
+              } else return null;
+            })
           ) : (
             <div className="errorLoad">
               <h3>Error al cargar los datos, intentarlo de nuevo</h3>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Router from "next/router";
-import Link from "next/link";
+import Head from "next/head";
 
 import useWindowSize from "../hooks/useWindowSize";
 import DataComponent from "../components/index/subComponents/dataComponentMoreInfo";
@@ -11,16 +11,26 @@ import Pagination from "../components/moreInfo/pagination";
 const { color } = estilos();
 
 const MoreInfo = ({ query }) => {
+
+  const size = useWindowSize();
+  const z=0;
+  const styleMain = {
+    minHeight: `${size.height - 40}px`,
+    width: `${size.width}px`,
+    position: `absolute`,
+    top: `40px`,
+  };
+
   const router = Router;
-
-  const type = query.type;
-
-  const maxRange = maxRangeType(type);
-  const [data, setData] = useState([]);
-  const page = parseInt(query.page ? query.page : 1);
-
   const backToHome = () => router.push("/");
+  
+  
+  const type = query.type;
+  const maxRange = maxRangeType(type);
 
+  const [data, setData] = useState([]);
+  
+  const page = parseInt(query.page ? query.page : 1);  
   const request = async page => {
     const res = await axios.get(
       `/api/${type}/data?page=${page}&maxRange=${maxRange}`
@@ -36,10 +46,13 @@ const MoreInfo = ({ query }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  console.log(1)
-
   return (
     <>
+      <Head>
+        <link rel="icon" href="/ICONO.ico" />
+        <title>{type}</title>
+      </Head>
+
       <nav>
         <div className="regresar">
           <button onClick={backToHome}>{"<--Regresar"}</button>
@@ -47,9 +60,9 @@ const MoreInfo = ({ query }) => {
       </nav>
       <div>LayoutPagesMore</div>
 
-      <main className="layout">
-        <div className="general"></div>
-        <div className="content">
+      <main className="layout" style={styleMain}>
+        <section className="general"></section>
+        <section className="content">
           <DataComponent
             data={data}
             type={type}
@@ -57,29 +70,17 @@ const MoreInfo = ({ query }) => {
             key={page}
             request={request}
           />
-
-          <div className="pagination">
-            <Link
-              href={{
-                pathname: `/moreInfo`,
-                query: { type: type, page: page - 1 },
-              }}
-            >
-              <a className="p2">previous</a>
-            </Link>
-
-              <Pagination />
-
-            <Link
-              href={{
-                pathname: `/moreInfo`,
-                query: { type: type, page: page + 1 },
-              }}
-            >
-              <a className="p1">next</a>
-            </Link>
-          </div>
-        </div>
+        </section>
+        <section className="pagination">
+          {data.length > 0 ? (
+            <Pagination
+              j={data[0].numberPages}
+              key={page}
+              type={type}
+              page={page}
+            />
+          ) : null}
+        </section>
       </main>
 
       <style jsx>{`
@@ -285,7 +286,6 @@ const maxRangeType = type => {
       return 8;
     case "proyectos":
       return 8;
-
     default:
       return 7;
   }
