@@ -2,10 +2,12 @@ import Head from "next/head";
 import Navbar from "../components/index/navbar";
 import Main from "../components/index/main";
 import Footer from "../components/footer";
+import AboutMe from "../components/index/aboutMe";
 
+import estilos from "../styles/stl.js";
+const { color } = estilos();
 
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -17,21 +19,53 @@ export default function Home() {
       <Navbar />
 
       <header>
-        <div className="header-container">
-          <div className="description"></div>
-          <div className="foto"></div>
-        </div>
-        <div className="aboutMy">
-          <div className="aboutMy-title"></div>
-          <div className="aboutMy-description"></div>
-        </div>
+        <AboutMe />
       </header>
 
       <main>
-        <Main page = "main"></Main>
+        <Main page="main"></Main>
       </main>
+      <div className="up">
+        <a href="#nav">subir ^</a>
+      </div>
 
       <Footer></Footer>
+      <style jsx>{`
+        header {
+          background-color: ${color.primario};
+          height: auto;
+          width: 100%;
+        }
+
+        .up {
+          position: fixed;
+          width: 60px;
+          height: 60px;
+
+          border-radius: 50%;
+          background-color: ${color.gris};
+
+          z-index: 100000000000;
+
+          left: calc(100% - 70px);
+          top: calc(100% - 70px);
+
+          overflow: hidden;
+          border: solid 1px ${color.primario};
+        }
+        .up a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .up:hover a {
+          color: ${color.gris};
+          background-color: ${color.naranja};
+        }
+      `}</style>
     </>
   );
 }

@@ -69,6 +69,7 @@ const Navbar = () => {
         </ul>
       </nav>
 
+
       <style jsx>{`
         .nav {
           width: 100%;
@@ -81,6 +82,7 @@ const Navbar = () => {
           display: flex;
           flex-wrap: wrap;
           justify-content: flex-end;
+          overflow: hidden;
         }
         .nav ul li {
           width: clamp(100px, 20%, 150px);
@@ -161,10 +163,11 @@ const Navbar = () => {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
           }
           .nav ul li {
-            width: clamp(10px, 100%, 340px);
-            margin: clamp(10px, 100%, 20px);
+            width: clamp(10px, 90%, 300px);
+            margin: 20px auto;
             text-align: center;
             height: 40px;
             border: solid 1px ${color.naranja};

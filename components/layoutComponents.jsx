@@ -116,11 +116,6 @@ const LayoutComponents = ({ title, type }) => {
             )}
           </div>
         </div>
-        <div className="up">
-          <a href="#nav" className="up-a">
-            <button>subir ^</button>
-          </a>
-        </div>
       </section>
 
       <style jsx>{`
@@ -174,29 +169,6 @@ const LayoutComponents = ({ title, type }) => {
           width: 100%;
           height: auto;
           display: flex;
-        }
-        .up {
-          width: 100%;
-          margin: 5px auto;
-          display: flex;
-          justify-content: flex-end;
-          margin-bottom: 20px;
-        }
-        .up-a {
-          width: 80px;
-          height: 30px;
-          overflow: hidden;
-          border-radius: 15px;
-        }
-        .up-a button {
-          width: 100%;
-          height: 100%;
-          color: ${color.naranja};
-        }
-        .up-a button:hover {
-          cursor: pointer;
-          background-color: ${color.naranja};
-          color: ${color.blanco};
         }
       `}</style>
 
