@@ -6,13 +6,16 @@ const { color } = estilos();
 
 /* eslint-disable @next/next/no-img-element */
 const AnimationHome = ({ type, request, title, children }) => {
-  const [childrenSTL, setChildrenSTL] = useState("animation-children");
+  const [childrenSTL, setChildrenSTL] = useState("");
+  const [btnActionSTL, setAtnActionSTL] = useState("");
 
   const click = e => {
     setChildrenSTL(" animation-children-click");
-
-    console.log(e.target.clientWidth);
-    request();
+    setAtnActionSTL("btn-action-click");
+    setTimeout(() => {
+      request();
+      
+    }, 2000);
   };
 
   switch (type) {
@@ -23,7 +26,7 @@ const AnimationHome = ({ type, request, title, children }) => {
             <div className={`animation-children ${childrenSTL}`}>
               {children}
             </div>
-            <button onClick={click} className="btn-action">
+            <button onClick={click} className={`btn-action ${btnActionSTL}`}>
               <div className="container-previews">
                 <div className="title-previews">
                   <h2>{title}</h2>
@@ -38,11 +41,13 @@ const AnimationHome = ({ type, request, title, children }) => {
               min-height: 300px;
               max-height: auto;
               box-sizing: border-box;
+              display: flex;
               overflow: hidden;
+
             }
             .animation-children {
-              width: 100%;
-              height: 0;
+              width: 0;
+              height: 100%;
               overflow: hidden;
               transition: height, width, top, bottom, 2s;
             }
@@ -86,7 +91,10 @@ const AnimationHome = ({ type, request, title, children }) => {
             }
 
             .animation-children-click {
-              height: 100%;
+              width: 100%;
+            }
+            .btn-action-click {
+              width: 0;
             }
           `}</style>
         </>
