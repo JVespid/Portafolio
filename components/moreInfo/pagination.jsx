@@ -15,7 +15,6 @@ const Pagination = ({ j, type, page }) => {
 
     if (j > 10 && page > 5) {
       jMax = 10;
-      jMin = 1;
       aux = page - 5;
 
       jMin += aux;

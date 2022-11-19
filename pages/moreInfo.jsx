@@ -4,16 +4,14 @@ import Router from "next/router";
 import Head from "next/head";
 
 import useWindowSize from "../hooks/useWindowSize";
-import DataComponent from "../components/index/subComponents/dataComponentMoreInfo";
+import DataComponent from "../components/dataComponent";
 
 import estilos from "../styles/stl.js";
 import Pagination from "../components/moreInfo/pagination";
 const { color } = estilos();
 
 const MoreInfo = ({ query }) => {
-
   const size = useWindowSize();
-  const z=0;
   const styleMain = {
     minHeight: `${size.height - 40}px`,
     width: `${size.width}px`,
@@ -66,7 +64,7 @@ const MoreInfo = ({ query }) => {
           <DataComponent
             data={data}
             type={type}
-            page={type}
+            typeComponent={2}
             key={page}
             request={request}
           />
@@ -277,16 +275,13 @@ export function getServerSideProps(context) {
 }
 
 const maxRangeType = type => {
-  switch (type) {
-    case "skills":
-      return 10;
-    case "hobbies":
-      return 10;
-    case "FormacionAcademica":
-      return 8;
-    case "proyectos":
-      return 8;
-    default:
-      return 7;
+
+  const maxRange = {
+    skills: 9,
+    hobbies: 9,
+    formacionAcademica: 6,
+    proyectos: 7
   }
+  return maxRange[type] ?? 7
+
 };

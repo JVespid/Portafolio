@@ -14,14 +14,11 @@ const Navbar = () => {
       display: "flex",
       zIndex: "1000000",
     });
-
   };
 
   const blurBurger = e => {
     setTimeout(() => {
-      setStyleNav({
-        overflow: "scroll",
-      });
+      setStyleNav({});
     }, 100);
   };
 
@@ -68,7 +65,6 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-
 
       <style jsx>{`
         .nav {

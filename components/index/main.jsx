@@ -2,41 +2,42 @@ import React from "react";
 
 import LayoutComponents from "../layoutComponents";
 const Main = ({ page }) => {
+
   return (
     <>
       <LayoutComponents
-        url="/profile/skills"
         title="Skills"
         type="skills"
         page={page}
+        key="skills"
       />
 
       <LayoutComponents
-        url="/profile/hobbies"
         title="Hobbies"
         type="hobbies"
         page={page}
+        key="hobbies"
       />
 
       <LayoutComponents
-        url="/profile/formacionAcademica"
-        title="Formación académica"
+        title="Formación Académica"
         type="FormacionAcademica"
         page={page}
+        key="FormacionAcademica"
       />
 
       <LayoutComponents
-        url="/profile/experienciaProfesional"
         title="Proyectos"
         type="proyectos"
         page={page}
+        key="proyectos"
       />
 
       <LayoutComponents
-        url="/profile/contacto"
         title="Contacto"
         type="Contacto"
         page={page}
+        key="Contacto"
       />
     </>
   );
