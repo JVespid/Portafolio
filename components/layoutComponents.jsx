@@ -110,9 +110,10 @@ const LayoutComponents = ({ title, type }) => {
 
       <style jsx>{`
         .layout-components {
-          width: clamp(20px, 90%, 1900px);
+          width: auto;
           display: flex;
-          flex-wrap: wrap;
+
+          overflow: hidden;
           justify-content: center;
           align-content: center;
           margin: 10px auto;

@@ -35,6 +35,14 @@ export default function Home() {
           background-color: ${color.primario};
           height: auto;
           width: 100%;
+          margin-bottom: 10px;
+          border-bottom: 1px solid ${color.gris};
+        }
+        main{
+          display: flex;
+          flex-wrap: wrap;
+          width: 100%;
+          height: auto;
         }
 
         .up {
