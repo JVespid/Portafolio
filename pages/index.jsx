@@ -53,7 +53,7 @@ export default function Home() {
           border-radius: 50%;
           background-color: ${color.gris};
 
-          z-index: 100000000000;
+          z-index: 100;
 
           left: calc(100% - 70px);
           top: calc(100% - 70px);
@@ -61,7 +61,7 @@ export default function Home() {
           overflow: hidden;
           border: solid 1px ${color.primario};
         }
-        .up a {
+        .up > a {
           width: 100%;
           height: 100%;
           display: flex;
@@ -69,7 +69,7 @@ export default function Home() {
           align-items: center;
         }
 
-        .up:hover a {
+        .up:hover > a {
           color: ${color.gris};
           background-color: ${color.naranja};
         }

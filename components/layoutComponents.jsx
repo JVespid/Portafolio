@@ -117,6 +117,7 @@ const LayoutComponents = ({ title, type }) => {
           justify-content: center;
           align-content: center;
           margin: 10px auto;
+          padding: 30px;
         }
         .bar {
           width: 99%;

@@ -60,3 +60,12 @@ section {
     background-position: 0 50%;
   }
 }
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}

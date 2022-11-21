@@ -71,7 +71,6 @@ const AnimationHome = ({ type, request, title, children }) => {
           min-height: 300px;
           max-height: auto;
           box-sizing: border-box;
-          overflow: hidden;
           transition: width, height, 5s;
           transition: display 0.5s;
         }
@@ -79,7 +78,6 @@ const AnimationHome = ({ type, request, title, children }) => {
           display: none;
           width: 0;
           height: 0;
-          overflow: hidden;
           transition: height, width, top, bottom, 1s;
         }
         .container-previews {
@@ -99,6 +97,10 @@ const AnimationHome = ({ type, request, title, children }) => {
           -webkit-backdrop-filter: blur(9px);
           border: 1px solid rgba(222, 142, 255, 1);
         }
+        .container-previews div h2{
+          
+          font-size: clamp(1.5rem, 2.5vw, 2rem);
+        }
         .btn-action {
           position: absolute;
           top: 0;
@@ -110,6 +112,11 @@ const AnimationHome = ({ type, request, title, children }) => {
           overflow: hidden;
           transition: top 2s;
           transition: width, height, 0.5s;
+
+          border-radius: 15px 0;
+        }
+        .btn-action:hover {
+          cursor: pointer;
         }
         .btn-action::after {
           content: "";
@@ -121,21 +128,24 @@ const AnimationHome = ({ type, request, title, children }) => {
             rgba(140, 1, 90, 1),
             rgba(30, 30, 30, 1)
           );
-          background-size: 500% 500%;
           overflow: hidden;
           inset: 4px;
-          animation: cambiar 2.5s ease-in-out infinite;
-        }
-        .btn-action:hover::after {
-          cursor: pointer;
+          background-size: 500% 500%;
+          animation: cambiar 3s ease-in-out infinite;
         }
         .btn-action::before {
           content: "";
           position: absolute;
           height: 70%;
           width: 1800%;
+        }
+        .btn-action:hover::before {
           background: ${color.naranja};
           animation: animation 2s linear infinite;
+        }
+        .btn-action:hover::after {
+          background-size: 500% 500%;
+          animation: cambiar 1.5s ease-in-out infinite;
         }
 
         .animation-children-click {
@@ -158,7 +168,7 @@ const AnimationHome = ({ type, request, title, children }) => {
         }
 
         .btn-action-click {
-          top: 100%;
+          top: 120%;
         }
         .btn-action-back-click {
           top: 0;
@@ -168,10 +178,11 @@ const AnimationHome = ({ type, request, title, children }) => {
           background: linear-gradient(
             45deg,
             rgba(30, 30, 30, 1),
-            rgba(140, 1, 1500, 1),
+            rgba(253, 235, 149,1),
             rgba(30, 30, 30, 1)
           );
           background-size: 500% 500%;
+          animation: cambiar 3.5s ease-in-out infinite;
         }
 
         .btn-action-FormacionAcademica::after {
@@ -182,6 +193,7 @@ const AnimationHome = ({ type, request, title, children }) => {
             rgba(30, 30, 30, 1)
           );
           background-size: 500% 500%;
+          animation: cambiar 2.5s ease-in-out infinite;
         }
 
         .btn-action-proyectos::after {
@@ -192,6 +204,7 @@ const AnimationHome = ({ type, request, title, children }) => {
             rgba(30, 30, 30, 1)
           );
           background-size: 500% 500%;
+          animation: cambiar 4s ease-in-out infinite;
         }
 
         .container-all-Contacto {
@@ -221,6 +234,17 @@ const AnimationHome = ({ type, request, title, children }) => {
           .container-all-back-click {
             width: clamp(200px, 95%, 500px);
           }
+        }
+        @media (max-width: 965px) {
+          
+        .btn-action::after {
+          background-size: 500% 500%;
+          animation: cambiar 2.5s ease-in-out infinite;
+        }
+        .btn-action::before {
+          background: ${color.naranja};
+          animation: animation 2s linear infinite;
+        }
         }
 
         @media (max-width: 720px) {
