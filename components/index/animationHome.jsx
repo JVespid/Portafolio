@@ -8,28 +8,32 @@ const { color } = estilos();
 const AnimationHome = ({ type, request, title, children }) => {
   const [childrenSTL, setChildrenSTL] = useState("");
   const [btnActionSTL, setAtnActionSTL] = useState("");
+  const [btnStyle, setBtnStyle] = useState("");
   const [reRequest, setReRequest] = useState(false);
 
   const click = e => {
     setChildrenSTL(" animation-children-click");
     setAtnActionSTL("container-all-click");
+    setBtnStyle("btn-action-click");
     setTimeout(() => {
       if (!reRequest) {
         request();
         setReRequest(true);
       }
-    }, 2000);
+    }, 1000);
   };
   const backClick = e => {
     setChildrenSTL(" animation-children-back-click");
     setAtnActionSTL("container-all-back-click");
+    setBtnStyle("btn-action-back-click");
+    setTimeout(() => {}, 2000);
   };
 
-  if (type === "contacto") {
+  if (type === "Contacto") {
     return (
-      <div className="container-all">
-        <div className="container-previews">
-          <h1 className="title">{title}</h1>
+      <div className={`container-all container-all-${type}`}>
+        <div className={`container-previews container-previews-${type}`}>
+          <h1 className={`title-previews title-previews-${type}`}>{title}</h1>
           <Contacto />
         </div>
       </div>
@@ -46,7 +50,10 @@ const AnimationHome = ({ type, request, title, children }) => {
           {children}
         </div>
 
-        <button onClick={click} className={`btn-action btn-action-${type}`}>
+        <button
+          onClick={click}
+          className={`btn-action btn-action-${type} ${btnStyle}`}
+        >
           <div className={`container-previews container-previews-${type}`}>
             <div className={`title-previews title-previews-${type}`}>
               <h2>{title}</h2>
@@ -57,21 +64,23 @@ const AnimationHome = ({ type, request, title, children }) => {
 
       <style jsx global>{`
         .container-all {
-          width: clamp(200px, 100000%, 600px);
-          min-width: 600px;
+          display: flex;
+          position: relative;
+          min-width: 700px;
           max-width: 100%;
           min-height: 300px;
           max-height: auto;
           box-sizing: border-box;
           overflow: hidden;
-          transition: width, height, 0.5s;
-          margin: 10px;
+          transition: width, height, 5s;
+          transition: display 0.5s;
         }
         .animation-children {
+          display: none;
           width: 0;
           height: 0;
           overflow: hidden;
-          transition: height, width, top, bottom, 2s;
+          transition: height, width, top, bottom, 1s;
         }
         .container-previews {
           transition: width, height, 0.5s;
@@ -91,14 +100,15 @@ const AnimationHome = ({ type, request, title, children }) => {
           border: 1px solid rgba(222, 142, 255, 1);
         }
         .btn-action {
-          width: 100%;
-          height: 100%;
+          position: absolute;
+          top: 0;
+          width: 99%;
+          height: 99%;
           display: flex;
           justify-content: center;
           align-items: center;
           overflow: hidden;
-          position: relative;
-          transition: height, width, top, bottom, 2s;
+          transition: top 2s;
           transition: width, height, 0.5s;
         }
         .btn-action::after {
@@ -123,24 +133,35 @@ const AnimationHome = ({ type, request, title, children }) => {
           content: "";
           position: absolute;
           height: 70%;
-          width: 110%;
+          width: 1800%;
           background: ${color.naranja};
-          animation: animation 4s linear infinite;
+          animation: animation 2s linear infinite;
         }
 
         .animation-children-click {
           height: 100%;
-          width: auto;
+          width: 14000px;
+          max-width: 90%;
+          display: inline-block;
+          margin: auto;
         }
         .animation-children-back-click {
           width: 0;
           height: 0;
+          display: none;
         }
         .container-all-click {
           width: 100%;
         }
         .container-all-back-click {
-          width: clamp(200px, 100%, 600px);
+          width: clamp(200px, 100%, 500px);
+        }
+
+        .btn-action-click {
+          top: 100%;
+        }
+        .btn-action-back-click {
+          top: 0;
         }
 
         .btn-action-hobbies::after {
@@ -171,6 +192,59 @@ const AnimationHome = ({ type, request, title, children }) => {
             rgba(30, 30, 30, 1)
           );
           background-size: 500% 500%;
+        }
+
+        .container-all-Contacto {
+          width: 100%;
+          height: auto;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .container-previews-Contacto {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          justify-content: center;
+        }
+
+        @media (max-width: 1200px) {
+          .container-all {
+            min-width: 500px;
+          }
+          .container-all-click {
+            width: 100%;
+          }
+          .container-all-back-click {
+            width: clamp(200px, 95%, 500px);
+          }
+        }
+
+        @media (max-width: 720px) {
+          .container-all {
+            min-width: 300px;
+          }
+          .container-all-click {
+            width: 100%;
+          }
+          .container-all-back-click {
+            width: clamp(200px, 95%, 300px);
+          }
+        }
+
+        @media (max-width: 320px) {
+          .container-all {
+            min-width: 200px;
+          }
+          .container-all-click {
+            width: 100%;
+          }
+          .container-all-back-click {
+            width: clamp(200px, 95%, 200px);
+          }
         }
       `}</style>
     </>

@@ -111,7 +111,7 @@ const LayoutComponents = ({ title, type }) => {
       <style jsx>{`
         .layout-components {
           width: auto;
-          display: flex;
+          display: inline-block;
 
           overflow: hidden;
           justify-content: center;
@@ -119,7 +119,7 @@ const LayoutComponents = ({ title, type }) => {
           margin: 10px auto;
         }
         .bar {
-          width: 100%;
+          width: 99%;
 
           padding: 10px auto;
           display: flex;
@@ -150,6 +150,7 @@ const LayoutComponents = ({ title, type }) => {
           height: auto;
           display: flex;
           flex-direction: column;
+          margin: 0 auto;
         }
         .title {
           width: 100%;
@@ -196,6 +197,17 @@ const LayoutComponents = ({ title, type }) => {
           color: ${color.gris};
           background-color: ${color.naranja};
         }
+
+        #Contacto {
+          width: 100%;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          
+        }
+
       `}</style>
     </>
   );
