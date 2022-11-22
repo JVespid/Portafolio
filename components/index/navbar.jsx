@@ -48,27 +48,27 @@ const Navbar = () => {
         </button>
 
         <ul className="nav-list">
-          <li className="item">
+          <li className="item skills">
             <a href="#skills" className="link">
               <button onClick={ifClickLi}>skills</button>
             </a>
           </li>
-          <li className="item">
+          <li className="item hobbies">
             <a href="#hobbies" className="link">
               <button onClick={ifClickLi}>hobbies</button>
             </a>
           </li>
-          <li className="item">
+          <li className="item FormacionAcademica">
             <a href="#FormacionAcademica" className="link">
               <button onClick={ifClickLi}>formación Académica</button>
             </a>
           </li>
-          <li className="item">
+          <li className="item proyectos">
             <a href="#proyectos" className="link">
               <button onClick={ifClickLi}>proyectos</button>
             </a>
           </li>
-          <li className="item">
+          <li className="item Contacto">
             <a href="#Contacto" className="link">
               <button onClick={ifClickLi}>contacto</button>
             </a>
@@ -80,7 +80,7 @@ const Navbar = () => {
       <style jsx>{`
         .nav {
           position: fixed;
-          width: 1px;
+          width: 0;
           height: 100vh;
           z-index: 50;
           background-color: ${color.primario};
@@ -101,7 +101,8 @@ const Navbar = () => {
         .nav ul {
           position: relative;
           left: -210px;
-          margin: 120px auto;
+          margin: 0 auto;
+          margin-top: clamp(80px, 100%, 120px);
           width: 1px;
           height: auto;
           display: flex;
@@ -114,7 +115,6 @@ const Navbar = () => {
           margin: 20px auto;
           text-align: center;
           height: 50px;
-          background-color: ${color.gris};
           clip-path: polygon(80% 1%, 100% 53%, 80% 100%, 0 100%, 0 0);
           overflow: hidden;
           transition: 0.2s;
@@ -126,8 +126,8 @@ const Navbar = () => {
 
         .nav ul li::before {
           clip-path: polygon(80% 1%, 100% 53%, 80% 100%, 0 100%, 0 0);
+          background: ${color.primario};
           overflow: hidden;
-          background-color: ${color.primario};
           position: absolute;
           content: "";
           inset: 2px;
@@ -159,9 +159,6 @@ const Navbar = () => {
           cursor: pointer;
         }
 
-        .nav ul li:last-child {
-          background-color: ${color.naranja};
-        }
 
         .burger-btn {
           background-color: ${color.primario};
@@ -185,6 +182,25 @@ const Navbar = () => {
           margin: auto;
         }
 
+        .skills {
+          background-color: rgba(140, 1, 90, 1);
+        }
+        .hobbies {
+          background-color: rgba(253, 235, 149, 1);
+        }
+        .FormacionAcademica {
+          background-color: rgba(114, 209, 229, 1);
+        }
+        .proyectos {
+          background-color: rgba(140, 1, 1500, 1);
+        }
+        .Contacto {
+          background: rgba(222, 142, 255, 0.93);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(9px);
+          -webkit-backdrop-filter: blur(9px);
+        }
+
         @media (max-width: 500px) {
           .nav ul li {
             width: clamp(100px, 100%, 270px);
@@ -203,7 +219,6 @@ const Navbar = () => {
         .nav-click ul {
           width: 100%;
           left: 0;
-          margin: 120px auto;
         }
         .nav-click ul li {
           width: 90%;
@@ -227,18 +242,5 @@ const Navbar = () => {
   );
 };
 
-/*
-
-        
-
-
-        .nav ul li:hover a button {
-          background-color: ${color.naranja};
-          color: ${color.blanco};
-          cursor: pointer;
-        }
-
-
-*/
 
 export default Navbar;

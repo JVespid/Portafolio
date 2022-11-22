@@ -4,6 +4,7 @@ export default function estilos() {
   return {
     color: {
       primario: "rgba(30, 30, 30, 1)",
+      primarioOscuro: "rgba(20, 18, 18, 1)",
       azul: "rgba(51, 144, 255,1)",
       transparente: `rgba(0,0,0,0)`,
       naranja:"rgba(195, 117, 24,1)",

@@ -73,6 +73,13 @@ const AnimationHome = ({ type, request, title, children }) => {
           box-sizing: border-box;
           transition: width, height, 5s;
           transition: display 0.5s;
+          background-color: ${color.primarioOscuro};
+
+          border-radius: 15px 0;
+          border: 1px solid ${color.gris};
+          -webkit-box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
+          -moz-box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
+          box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
         }
         .animation-children {
           display: none;
@@ -97,14 +104,13 @@ const AnimationHome = ({ type, request, title, children }) => {
           -webkit-backdrop-filter: blur(9px);
           border: 1px solid rgba(222, 142, 255, 1);
         }
-        .container-previews div h2{
-          
+        .container-previews div h2 {
           font-size: clamp(1.5rem, 2.5vw, 2rem);
         }
         .btn-action {
           position: absolute;
           top: 0;
-          width: 99%;
+          width: 101%;
           height: 99%;
           display: flex;
           justify-content: center;
@@ -178,7 +184,7 @@ const AnimationHome = ({ type, request, title, children }) => {
           background: linear-gradient(
             45deg,
             rgba(30, 30, 30, 1),
-            rgba(253, 235, 149,1),
+            rgba(253, 235, 149, 1),
             rgba(30, 30, 30, 1)
           );
           background-size: 500% 500%;
@@ -210,7 +216,7 @@ const AnimationHome = ({ type, request, title, children }) => {
         .container-all-Contacto {
           width: 100%;
           height: auto;
-
+          
           display: flex;
           justify-content: center;
           align-items: center;
@@ -236,15 +242,14 @@ const AnimationHome = ({ type, request, title, children }) => {
           }
         }
         @media (max-width: 965px) {
-          
-        .btn-action::after {
-          background-size: 500% 500%;
-          animation: cambiar 2.5s ease-in-out infinite;
-        }
-        .btn-action::before {
-          background: ${color.naranja};
-          animation: animation 2s linear infinite;
-        }
+          .btn-action::after {
+            background-size: 500% 500%;
+            animation: cambiar 2.5s ease-in-out infinite;
+          }
+          .btn-action::before {
+            background: ${color.naranja};
+            animation: animation 2s linear infinite;
+          }
         }
 
         @media (max-width: 720px) {
