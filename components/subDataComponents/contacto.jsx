@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
-function Contacto({ typeComponent }) {
-  return <div>wa ha ha for ever</div>;
+const Contacto = () => {
+  return (
+    <div>Contacto</div>
+  )
 }
 
-export default Contacto;
+export default Contacto

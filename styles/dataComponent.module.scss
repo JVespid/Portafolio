@@ -1,18 +1,102 @@
 @import "variables";
 @import "mixin";
+@import "efects";
 
-.title{
-  color: $test;
-}
+.content {
+  @include size(100%);
+  @include position(relative);
+  @include simple-color($primarioOscuro, $gris);
+  @include center-flex {
+    flex-direction: column;
+  }
 
-.skills-item-2{
-  @include size(200px, 200px);
-  overflow: hidden;
-  margin: 30px;
-  background-color: $test;
-  .img{
-    display: none;
+  .title {
+    @include position(relative);
+    @include size(100%, 10%);
+    @include center-flex;
+    h2{
+      @include simple-color($transparente, $azulLetra);
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      margin: 20px auto;
+    }
+  }
+
+  .map {
+    @include position(relative);
+    @include size(100%, 90%);
+    @include center-flex {
+      flex-wrap: wrap;
+    }
+    overflow: hidden;
+    padding-bottom: 80px;
+
+    .items {
+      @include position(relative);
+      @include size((clamp(100px, 20vw, 250px)));
+      @include simple-color($test);
+      @include center-flex {
+        flex-direction: column;
+      }
+      margin: 10px;
+      overflow: hidden;
+
+      .img {
+        @include position(relative);
+        @include size(100%, 100%);
+        z-index: 10;
+        img {
+          @include size(100%, 100%);
+          @include center-flex;
+          object-fit: cover;
+        }
+      }
+
+      .name {
+        @include size(calc(100% - 20px));
+        @include position(absolute, calc((100% - 1.5rem) - 40px));
+        @include espejo;
+        padding-left: 20px;
+        overflow: inherit;
+        z-index: 200;
+        h3 {
+          @include color($negro, clamp(1rem, 2vw, 1.5rem));
+          padding-top: 20px;
+          padding-bottom: 20px;
+        }
+      }
+
+      .description {
+        @include size(100%);
+        @include position(absolute,0);
+        @include espejo;
+        
+        transition: top 2s;
+        overflow: inherit;
+        z-index: -1;
+        visibility: hidden;
+        p {
+          @include simple-color($transparente, $negro);
+          font-weight: bold;
+          padding: 10px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+
+        }
+      }
+
+      &:hover .description {
+        visibility: visible;
+        @include espejo(
+          $color-background-espejo-primario-hover,
+          $color-borde-espejo-primario
+        );
+        z-index: 100;
+        top: 100%;
+      }
+
+      &:hover {
+        overflow: visible;
+      }
+    }
   }
 }
-
-

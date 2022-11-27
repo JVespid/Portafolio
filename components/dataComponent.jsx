@@ -7,13 +7,9 @@ import { globalContext } from "../context/global/globalState";
 import stl from "../styles/dataComponent.module.scss";
 
 const DataComponent = ({ type, typeComponent, title }) => {
-  const [style, setStyle] = useState(
-    `${stl.content} ${stl[type + "-content"]}`
-  );
-  const [styleMap, setStyleMap] = useState(`${stl.map} ${stl[type + "-map"]}`);
-  const [styleItem, setStyleItem] = useState(
-    `${stl[type + "-item"]} ${stl.items}`
-  );
+  const [style, setStyle] = useState(``);
+  const [styleMap, setStyleMap] = useState(``);
+  const [styleItem, setStyleItem] = useState(``);
 
   let data;
   switch (type) {
@@ -55,6 +51,10 @@ const DataComponent = ({ type, typeComponent, title }) => {
           stl.items_2
         }`
       );
+    } else {
+      setStyle(`${stl.content} ${stl[type + "-content"]} `);
+      setStyleMap(`${stl.map} ${stl[type + "-map"]}`);
+      setStyleItem(`${stl.items} ${stl[type + "-item"]}`);
     }
   }, []);
 

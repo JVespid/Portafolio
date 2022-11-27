@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useMemo } from "react";
+import { useContext, useEffect } from "react";
 import Router from "next/router";
 
 import DataComponent from "./dataComponent";
 import stl from "../styles/layoutC.module.scss";
 import AnimationHome from "./index/animationHome";
+
 
 import { globalContext } from "../context/global/globalState";
 
@@ -21,7 +22,7 @@ const LayoutComponents = ({ title, type }) => {
     getChangeData(type);
   };
 
-  useMemo(() => {
+  useEffect(() => {
     if (type != "Contacto") {
       request(type);
     }
