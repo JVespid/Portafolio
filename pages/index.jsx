@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Navbar from "../components/index/navbar";
-import Main from "../components/index/main";
 import Footer from "../components/footer";
 import AboutMe from "../components/index/aboutMe";
+import LayoutComponents from "../components/layoutComponents";
 
-import estilos from "../styles/stl.js";
-const { color } = estilos();
+import stl from "../styles/index.module.scss";
+import { globalContext } from "../context/global/globalState";
+import { useContext, useEffect } from "react";
 
 export default function Home() {
   return (
@@ -18,62 +19,36 @@ export default function Home() {
 
       <Navbar />
 
-      <header>
+      <header className={stl.header}>
         <AboutMe />
       </header>
 
-      <main>
+      <main className={stl.main}>
         <Main page="main"></Main>
       </main>
-      <div className="up">
+      <div className={stl.up}>
         <a href="#nav">subir ^</a>
       </div>
 
       <Footer></Footer>
-      <style jsx>{`
-        header {
-          background-color: ${color.primario};
-          height: auto;
-          width: 100%;
-          margin-bottom: 10px;
-          border-bottom: 1px solid ${color.gris};
-        }
-        main{
-          display: flex;
-          flex-wrap: wrap;
-          width: 100%;
-          height: auto;
-        }
-
-        .up {
-          position: fixed;
-          width: 60px;
-          height: 60px;
-
-          border-radius: 50%;
-          background-color: ${color.gris};
-
-          z-index: 100;
-
-          left: calc(100% - 70px);
-          top: calc(100% - 70px);
-
-          overflow: hidden;
-          border: solid 1px ${color.primario};
-        }
-        .up > a {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .up:hover > a {
-          color: ${color.gris};
-          background-color: ${color.naranja};
-        }
-      `}</style>
     </>
   );
 }
+
+const Main = ({ typePage }) => {
+  const { pages } = useContext(globalContext);
+  return (
+    <>
+      {pages
+        ? pages.map(page => (
+            <LayoutComponents
+              title={`${page.title}`}
+              type={page.type}
+              page={typePage}
+              key={`${page.type}`}
+            />
+          ))
+        : null}
+    </>
+  );
+};

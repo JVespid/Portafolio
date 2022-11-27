@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Contacto from "../subDataComponents/contacto";
 import estilos from "../../styles/stl";
-const { color } = estilos();
+const { color, efectos } = estilos();
 
 /* eslint-disable @next/next/no-img-element */
 const AnimationHome = ({ type, request, title, children }) => {
@@ -88,21 +88,21 @@ const AnimationHome = ({ type, request, title, children }) => {
           transition: height, width, top, bottom, 1s;
         }
         .container-previews {
-          transition: width, height, 0.5s;
           position: relative;
           z-index: 1;
+          font-size: clamp(1.5rem, 1vw, 2rem);
           color: ${color.gris};
+
           width: 70%;
           height: 70%;
+
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: clamp(1.5rem, 1vw, 2rem);
-          background: rgba(222, 142, 255, 0.13);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(9px);
-          -webkit-backdrop-filter: blur(9px);
-          border: 1px solid rgba(222, 142, 255, 1);
+
+          transition: width, height, 0.5s;
+          /*efecto espejo*/
+          ${efectos.espejo}
         }
         .container-previews div h2 {
           font-size: clamp(1.5rem, 2.5vw, 2rem);
@@ -130,9 +130,9 @@ const AnimationHome = ({ type, request, title, children }) => {
           background: ${color.primario};
           background: linear-gradient(
             45deg,
-            rgba(30, 30, 30, 1),
-            rgba(140, 1, 90, 1),
-            rgba(30, 30, 30, 1)
+            ${color.primario},
+            ${color.rosa},
+            ${color.primario}
           );
           overflow: hidden;
           inset: 4px;
@@ -183,9 +183,9 @@ const AnimationHome = ({ type, request, title, children }) => {
         .btn-action-hobbies::after {
           background: linear-gradient(
             45deg,
-            rgba(30, 30, 30, 1),
-            rgba(253, 235, 149, 1),
-            rgba(30, 30, 30, 1)
+            ${color.primario},
+            ${color.amarillo},
+            ${color.primario}
           );
           background-size: 500% 500%;
           animation: cambiar 3.5s ease-in-out infinite;
@@ -194,9 +194,9 @@ const AnimationHome = ({ type, request, title, children }) => {
         .btn-action-FormacionAcademica::after {
           background: linear-gradient(
             45deg,
-            rgba(30, 30, 30, 1),
-            rgba(114, 209, 229, 1),
-            rgba(30, 30, 30, 1)
+            ${color.primario},
+            ${color.azulFondo},
+            ${color.primario}
           );
           background-size: 500% 500%;
           animation: cambiar 2.5s ease-in-out infinite;
@@ -205,9 +205,9 @@ const AnimationHome = ({ type, request, title, children }) => {
         .btn-action-proyectos::after {
           background: linear-gradient(
             45deg,
-            rgba(30, 30, 30, 1),
-            rgba(140, 1, 1500, 1),
-            rgba(30, 30, 30, 1)
+            ${color.primario},
+            ${color.morado},
+            ${color.primario}
           );
           background-size: 500% 500%;
           animation: cambiar 4s ease-in-out infinite;
@@ -216,7 +216,7 @@ const AnimationHome = ({ type, request, title, children }) => {
         .container-all-Contacto {
           width: 100%;
           height: auto;
-          
+
           display: flex;
           justify-content: center;
           align-items: center;

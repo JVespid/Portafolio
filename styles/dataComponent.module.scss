@@ -1,0 +1,18 @@
+@import "variables";
+@import "mixin";
+
+.title{
+  color: $test;
+}
+
+.skills-item-2{
+  @include size(200px, 200px);
+  overflow: hidden;
+  margin: 30px;
+  background-color: $test;
+  .img{
+    display: none;
+  }
+}
+
+

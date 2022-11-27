@@ -1,0 +1,46 @@
+@import "variables";
+@import "mixin";
+
+
+.header {
+  background-color: $primario;
+  height: auto;
+  width: 100%;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $gris;
+}
+.main{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+}
+
+.up {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+  background-color: $gris;
+
+  z-index: 100;
+
+  left: calc(100% - 70px);
+  top: calc(100% - 70px);
+
+  overflow: hidden;
+  border: solid 1px $primario;
+}
+.up > a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.up:hover > a {
+  color: $gris;
+  background-color: $naranja;
+}

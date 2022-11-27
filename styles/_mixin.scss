@@ -1,0 +1,52 @@
+@mixin position($type: relative, $top: auto, $left: auto, $right: auto, $bottom: auto) {
+  position: $type;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin size(
+  $width: auto,
+  $height: auto,
+  $minWidth: 0,
+  $minHeight: 0,
+  $maxWidth: 100%,
+  $maxHeight: 100%
+) {
+  width: $width;
+  height: $height;
+  min-width: $minWidth;
+  min-height: $minHeight;
+  max-width: $maxWidth;
+  max-height: $maxHeight;
+  @content;
+}
+
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  @content;
+}
+
+@mixin background($color: $transparente, $image: none, $repeat: no-repeat) {
+  background-color: $color;
+  background-image: $image;
+  background-repeat: $repeat;
+  @content;
+}
+
+@mixin color ($color:auto, $font-size: auto){
+  color: $color;
+  font-size: $font-size;
+  @content;
+}
+
+@mixin simple-color($background-color: auto, $color:auto, $border-color: auto){
+  color: $color;
+  background-color: $background-color;
+  border-color: $border-color;
+  @content;
+}

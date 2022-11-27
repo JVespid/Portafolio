@@ -1,0 +1,53 @@
+@import "variables";
+@import "mixin";
+
+.pagination {
+  @include size(100%, 60px);
+}
+.container {
+  @include center-flex;
+  @include size(100%, 100%);
+}
+
+.paginationContainer {
+  @include center-flex;
+  @include size(auto, 100%);
+
+  ul {
+    @include center-flex;
+    @include size(auto, 100%);
+    margin: 0 5px;
+  }
+}
+
+.after,
+.before {
+  margin: 0 5px;
+  a {
+    &:hover {
+      @include simple-color($naranja, $blanco);
+      cursor: pointer;
+    }
+  }
+}
+
+.number {
+  @include center-flex;
+  @include size();
+  margin: 0 5px;
+  a {
+    @include center-flex;
+    @include size(21px, 21px);
+    @include simple-color($blanco);
+    border: solid 1px $negro;
+    border-radius: 15px;
+    &:hover {
+      @include simple-color($naranja, $blanco);
+      cursor: pointer;
+    }
+  }
+}
+
+.active a {
+  @include simple-color($naranja, $blanco);
+}

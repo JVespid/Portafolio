@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import stl from "../../styles/pagination.module.scss";
 
 import estilos from "../../styles/stl";
 const { color } = estilos();
@@ -27,9 +28,9 @@ const Pagination = ({ j, type, page }) => {
     }
 
     for (let i = jMin; i <= jMax; i++) {
-      active = i === page ? "active" : "no-active";
+      active = i === page ? stl.active : stl.noActive;
       pages.push(
-        <li className={`number ${active}`} key={k++}>
+        <li className={`${stl.number} ${active}`} key={k++}>
           <Link
             href={{
               pathname: `/moreInfo`,
@@ -46,8 +47,8 @@ const Pagination = ({ j, type, page }) => {
   const container = () => {
     const pages = [];
     pages.push(
-      <div key={1} className={`container`}>
-        <div className="before">
+      <div key={1} className={stl.container}>
+        <div className={stl.before}>
           <Link
             href={{
               pathname: `/moreInfo`,
@@ -59,7 +60,7 @@ const Pagination = ({ j, type, page }) => {
         </div>
         {0 < page - 1 ? (
           <>
-            <div className="before">
+            <div className={stl.before}>
               <Link
                 href={{
                   pathname: `/moreInfo`,
@@ -72,13 +73,13 @@ const Pagination = ({ j, type, page }) => {
           </>
         ) : null}
 
-        <div className={`pagination-container`}>
+        <div className={stl.paginationContainer}>
           <ul>{pagination()}</ul>
         </div>
 
         {j >= page + 1 ? (
           <>
-            <div className="after">
+            <div className={stl.after}>
               <Link
                 href={{
                   pathname: `/moreInfo`,
@@ -90,7 +91,7 @@ const Pagination = ({ j, type, page }) => {
             </div>
           </>
         ) : null}
-        <div className="after">
+        <div className={stl.after}>
           <Link
             href={{
               pathname: `/moreInfo`,
@@ -107,92 +108,7 @@ const Pagination = ({ j, type, page }) => {
 
   return (
     <>
-      <div className="pagination">{container()}</div>
-
-      <style jsx global>{`
-        .pagination {
-          width: 100%;
-          height: 60px;
-        }
-        .container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          width: 100%;
-          height: 100%;
-        }
-
-        .pagination-container {
-          display: flex;
-          flex-wrap: no-wrap;
-          justify-content: center;
-          align-items: center;
-
-          width: auto;
-          height: 100%;
-        }
-
-        .pagination-container ul {
-          display: flex;
-          flex-wrap: no-wrap;
-          justify-content: center;
-          align-items: center;
-
-          width: auto;
-          height: 100%;
-          margin: 0 5px;
-        }
-
-        .after,
-        .before {
-          margin: 0 5px;
-        }
-
-        .before a,
-        .after a {
-        }
-        .before a:hover,
-        .after a:hover {
-          cursor: pointer;
-          background-color: ${color.naranja};
-          color: ${color.blanco};
-        }
-
-        .number {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          margin: 0 5px;
-
-          width: auto;
-          height: auto;
-        }
-
-        .number a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          width: 21px;
-          height: 21px;
-          background-color: ${color.blanco};
-
-          border: solid 1px ${color.negro};
-          border-radius: 15px;
-        }
-        .number a:hover {
-          cursor: pointer;
-          color: ${color.blanco};
-          background-color: ${color.naranja};
-        }
-
-        .active a {
-          color: ${color.blanco};
-          background-color: ${color.naranja};
-        }
-      `}</style>
+      <div className={stl.pagination}>{container()}</div>
     </>
   );
 };

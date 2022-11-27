@@ -1,0 +1,39 @@
+@import "variables";
+@import "mixin";
+
+.layoutComponents {
+  @include size;
+  @include center-flex;
+  overflow: hidden;
+  margin: 10px auto;
+  padding: 30px;
+}
+.bar {
+  @include size(99%);
+  padding: 10px auto;
+
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  .request,
+  .redirect {
+    margin: 5px;
+    margin-right: 10px;
+    padding: 2px 10px;
+    border-radius: 15px;
+    @include simple-color($gris, $negro);
+
+    &:hover {
+      cursor: pointer;
+      @include simple-color($naranja, $gris);
+    }
+  }
+}
+
+.Contacto {
+  @include size(100%);
+  @include center-flex {
+    flex-direction: column;
+  }
+}
