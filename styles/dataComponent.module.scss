@@ -7,17 +7,61 @@
   @include position(relative);
   @include simple-color($primarioOscuro, $gris);
   @include center-flex {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .title {
     @include position(relative);
     @include size(100%, 10%);
     @include center-flex;
-    h2{
+    h2 {
       @include simple-color($transparente, $azulLetra);
       font-size: clamp(1.5rem, 2vw, 2rem);
       margin: 20px auto;
+    }
+  }
+
+  .rightBtn,
+  .leftBtn {
+    //@include position(absolute, 300px, 0);
+    @include position(absolute, 50%, -35px);
+    transform: translateY(-50%);
+
+    @include size(70px, 80%);
+    margin: 10px;
+    z-index: 300;
+    transition: left .5s;
+    &:hover {
+      @include position(absolute, 50%, -10px);
+    }
+    button {
+      @include size(100%, 100%);
+      @include simple-color($negro-transparente);
+      border: solid 1px $color-borde-espejo-primario;
+      @include center-flex {
+        justify-content: flex-end;
+        padding-right: 10px;
+        font-weight: bold;
+      }
+      font-size: clamp(1.5rem, 2vw, 1.5rem);
+      transition: background-color 0.5s;
+
+      &:hover {
+        @include espejo{
+          color:$negro;
+        }
+        cursor: pointer;
+      }
+    }
+  }
+  .rightBtn {
+    @include position(absolute, 50%, calc(100% - 55px));
+    button {
+      justify-content: flex-start;
+      padding-left: 10px;
+    }
+    &:hover {
+      @include position(absolute, 50%, calc(100% - 80px));
     }
   }
 
@@ -25,25 +69,25 @@
     @include position(relative);
     @include size(100%, 90%);
     @include center-flex {
-      flex-wrap: wrap;
+      justify-content: flex-start;
     }
     overflow: hidden;
     padding-bottom: 80px;
 
+    scroll-behavior: smooth;
+
     .items {
       @include position(relative);
-      @include size((clamp(100px, 20vw, 250px)));
+      @include size(300px, auto, 300px);
       @include simple-color($test);
       @include center-flex {
         flex-direction: column;
       }
       margin: 10px;
-      overflow: hidden;
-
       .img {
         @include position(relative);
         @include size(100%, 100%);
-        z-index: 10;
+        z-index: 150;
         img {
           @include size(100%, 100%);
           @include center-flex;
@@ -62,15 +106,18 @@
           @include color($negro, clamp(1rem, 2vw, 1.5rem));
           padding-top: 20px;
           padding-bottom: 20px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
 
       .description {
         @include size(100%);
-        @include position(absolute,0);
+        @include position(absolute, 0);
         @include espejo;
-        
-        transition: top 2s;
+
+        transition: top 0.5s;
         overflow: inherit;
         z-index: -1;
         visibility: hidden;
@@ -80,7 +127,11 @@
           padding: 10px;
           padding-top: 20px;
           padding-bottom: 20px;
+        }
+      }
 
+      .link {
+        a {
         }
       }
 

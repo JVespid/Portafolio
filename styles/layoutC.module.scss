@@ -8,6 +8,15 @@
   margin: 10px auto;
   padding: 30px;
 }
+
+
+.Contacto {
+  @include size(100%);
+  @include center-flex {
+    flex-direction: column;
+  }
+}
+
 .bar {
   @include size(99%);
   padding: 10px auto;
@@ -28,12 +37,5 @@
       cursor: pointer;
       @include simple-color($naranja, $gris);
     }
-  }
-}
-
-.Contacto {
-  @include size(100%);
-  @include center-flex {
-    flex-direction: column;
   }
 }

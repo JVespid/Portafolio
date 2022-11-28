@@ -1,4 +1,10 @@
-@mixin position($type: relative, $top: auto, $left: auto, $right: auto, $bottom: auto) {
+@mixin position(
+  $type: relative,
+  $top: auto,
+  $left: auto,
+  $right: auto,
+  $bottom: auto
+) {
   position: $type;
   top: $top;
   right: $right;
@@ -38,15 +44,37 @@
   @content;
 }
 
-@mixin color ($color:auto, $font-size: auto){
+@mixin color($color: auto, $font-size: auto) {
   color: $color;
   font-size: $font-size;
   @content;
 }
 
-@mixin simple-color($background-color: auto, $color:auto, $border-color: auto){
+@mixin simple-color(
+  $background-color: auto,
+  $color: auto,
+  $border-color: auto
+) {
   color: $color;
   background-color: $background-color;
   border-color: $border-color;
+  @content;
+}
+
+@mixin media-max-width($size: 250px) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin background-gradient-animationHome(
+  $color1: $primario,
+  $color2: $rosa,
+  $color3: $primario,
+  $rotate: 45deg
+) {
+  background: $color1;
+  background: linear-gradient($rotate, $color1, $color2, $color3);
+  background-size: 500% 500%;
   @content;
 }

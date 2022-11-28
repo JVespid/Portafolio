@@ -2,40 +2,83 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable @next/next/no-img-element */
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef, createRef } from "react";
 import { globalContext } from "../context/global/globalState";
 import stl from "../styles/dataComponent.module.scss";
 
-const DataComponent = ({ type, typeComponent, title }) => {
+const DataComponent = ({ type, typeComponent, title, change }) => {
+  const {
+    clientWidthItems,
+    setClientWidthItems,
+    skills,
+    hobbies,
+    FormacionAcademica,
+    proyectos,
+  } = useContext(globalContext);
+
+  const [visibleLeft, setVisibleLeft] = useState(false);
+  const [visibleRight, setVisibleRight] = useState(true);
+
   const [style, setStyle] = useState(``);
   const [styleMap, setStyleMap] = useState(``);
   const [styleItem, setStyleItem] = useState(``);
+  const contentMap = useRef([]);
+  const items = useRef([]);
+
+  const [Map, setMap] = useState(contentMap.current);
+
+  //const Map = contentMap.current.clientWidth;
+  const desplegable = items.current.clientWidth;
+
+  const scrollRight = () => {
+    let preview = contentMap.current.scrollLeft;
+    
+    contentMap.current.scrollLeft += contentMap.current.offsetWidth;
+
+    setTimeout(() => {
+      if (contentMap.current.scrollLeft <= preview) setVisibleRight(false);
+      else {setVisibleRight(true);
+      }
+    }, 500);
+    setVisibleLeft(true);
+  };
+
+
+  const scrollLeft = () => {
+    //let preview = Objet.assign({},contentMap.current.scrollLeft);
+    let preview = contentMap.current.scrollLeft;
+
+    contentMap.current.scrollLeft -= clientWidthItems * 2.5;
+
+    if (contentMap.current.scrollLeft - preview < clientWidthItems * 2.5)
+      setVisibleLeft(false);
+    else setVisibleLeft(true);
+    setVisibleRight(true);
+
+  };
 
   let data;
   switch (type) {
     case "skills": {
-      const { skills } = useContext(globalContext);
       data = skills;
       break;
     }
     case "hobbies": {
-      const { hobbies } = useContext(globalContext);
       data = hobbies;
       break;
     }
     case "FormacionAcademica": {
-      const { FormacionAcademica } = useContext(globalContext);
       data = FormacionAcademica;
       break;
     }
     case "proyectos": {
-      const { proyectos } = useContext(globalContext);
       data = proyectos;
       break;
     }
     case "Contacto":
       break;
   }
+
   useEffect(() => {
     if (typeComponent == 2) {
       setStyle(
@@ -57,6 +100,20 @@ const DataComponent = ({ type, typeComponent, title }) => {
       setStyleItem(`${stl.items} ${stl[type + "-item"]}`);
     }
   }, []);
+
+  useEffect(() => {
+    setMap(contentMap.current.clientWidth);
+  }, [change]);
+
+  useEffect(() => {
+    let desplegable = items.current.clientWidth;
+    if (
+      (clientWidthItems === 0 || clientWidthItems === undefined) &&
+      desplegable !== 0
+    ) {
+      setClientWidthItems(desplegable);
+    }
+  }, [desplegable]);
 
   const click = () => {
     if (typeComponent == 2) {
@@ -84,10 +141,21 @@ const DataComponent = ({ type, typeComponent, title }) => {
         <div className={stl.title}>
           <h2>{title}</h2>
         </div>
-
-        <div className={styleMap}>
+        {clientWidthItems * data.length > Map &&
+        typeComponent == 1 &&
+        visibleLeft ? (
+          <div className={stl.leftBtn}>
+            <button onClick={scrollLeft}>{"<<"}</button>
+          </div>
+        ) : null}
+        <div className={styleMap} ref={contentMap}>
           {data.map(item => (
-            <div className={styleItem} key={item.id} onClick={click}>
+            <div
+              className={styleItem}
+              key={item.id}
+              onClick={click}
+              ref={items}
+            >
               {item.img ? (
                 <div className={stl.img}>
                   <img src={item.img} alt={`imagen de la ${type}`} />
@@ -138,6 +206,14 @@ const DataComponent = ({ type, typeComponent, title }) => {
             </div>
           ))}
         </div>
+
+        {clientWidthItems * data.length > Map &&
+        typeComponent == 1 &&
+        visibleRight ? (
+          <div className={stl.rightBtn}>
+            <button onClick={scrollRight}>{">>"}</button>
+          </div>
+        ) : null}
       </div>
     </>
   );

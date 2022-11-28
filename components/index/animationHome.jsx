@@ -1,310 +1,136 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { useState } from "react";
 import Contacto from "../subDataComponents/contacto";
-import estilos from "../../styles/stl";
-const { color, efectos } = estilos();
+import DataComponent from "../dataComponent";
+import stl from "../../styles/animationHome.module.scss";
 
 /* eslint-disable @next/next/no-img-element */
-const AnimationHome = ({ type, request, title, children }) => {
-  const [childrenSTL, setChildrenSTL] = useState("");
-  const [btnActionSTL, setAtnActionSTL] = useState("");
-  const [btnStyle, setBtnStyle] = useState("");
-  const [reRequest, setReRequest] = useState(false);
+const AnimationHome = ({ type, request, title, redirect }) => {
+  const [childrenSTL, setChildrenSTL] = useState(``);
+  const [btnActionSTL, setAtnActionSTL] = useState(``);
+  const [btnStyle, setBtnStyle] = useState(``);
+  const [change, setChange] = useState(false);
+
+  const clickChangeState = () => {
+    if (!change) {
+      setChange(true);
+    } else if (change) {
+      setChange(false);
+    }
+  };
 
   const click = e => {
-    setChildrenSTL(" animation-children-click");
-    setAtnActionSTL("container-all-click");
-    setBtnStyle("btn-action-click");
-    setTimeout(() => {
-      if (!reRequest) {
-        request();
-        setReRequest(true);
-      }
-    }, 1000);
+    setChildrenSTL(`${stl.animation_children_click}`);
+    setAtnActionSTL(`${stl.container_all_click}`);
+    setBtnStyle(`${stl.btn_action_click}`);
+    clickChangeState();
   };
   const backClick = e => {
-    setChildrenSTL(" animation-children-back-click");
-    setAtnActionSTL("container-all-back-click");
-    setBtnStyle("btn-action-back-click");
-    setTimeout(() => {}, 2000);
+    setChildrenSTL(``);
+    setAtnActionSTL(``);
+    setBtnStyle(``);
+    clickChangeState();
   };
 
-  if (type === "Contacto") {
+  if (type === `Contacto`) {
     return (
-      <div className={`container-all container-all-${type}`}>
-        <div className={`container-previews container-previews-${type}`}>
-          <h1 className={`title-previews title-previews-${type}`}>{title}</h1>
+      <section
+        className={`${stl.container_all} ${
+          stl["container_all_" + type]
+        } ${stl.layoutComponents} ${stl[type]}`}
+        id={`${type}`}
+      >
+        <div
+          className={`${stl.container_previews} ${
+            stl["container_previews_" + type]
+          }`}
+        >
+          <h1
+            className={`${stl.title_previews} ${stl["title_previews_" + type]}`}
+          >
+            {title}
+          </h1>
           <Contacto />
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
     <>
-      <div className={`container-all container-all-${type}  ${btnActionSTL}`}>
+      <section
+        className={`${stl.container_all} ${
+          stl["container_all_" + type]
+        } ${btnActionSTL} ${stl.layoutComponents} ${stl[type]}`}
+        id={`${type}`}
+      >
         <div
-          className={`animation-children animation-children-${type} ${childrenSTL}`}
+          className={`${stl.animation_children} ${
+            stl["animation_children_" + type]
+          } ${childrenSTL}`}
         >
           <button onClick={backClick}>regresar</button>
-          {children}
+
+          <Children
+            type={type}
+            title={title}
+            request={request}
+            redirect={redirect}
+            change={change}
+          />
         </div>
 
         <button
           onClick={click}
-          className={`btn-action btn-action-${type} ${btnStyle}`}
+          className={`${stl.btn_action} ${
+            stl["btn_action_" + type]
+          } ${btnStyle}`}
         >
-          <div className={`container-previews container-previews-${type}`}>
-            <div className={`title-previews title-previews-${type}`}>
+          <div
+            className={`${stl.container_previews} ${
+              stl["container_previews_" + type]
+            }`}
+          >
+            <div
+              className={`${stl.title_previews} ${
+                stl["title_previews_" + type]
+              }`}
+            >
               <h2>{title}</h2>
             </div>
           </div>
         </button>
-      </div>
-
-      <style jsx global>{`
-        .container-all {
-          display: flex;
-          position: relative;
-          min-width: 700px;
-          max-width: 100%;
-          min-height: 300px;
-          max-height: auto;
-          box-sizing: border-box;
-          transition: width, height, 5s;
-          transition: display 0.5s;
-          background-color: ${color.primarioOscuro};
-
-          border-radius: 15px 0;
-          border: 1px solid ${color.gris};
-          -webkit-box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
-          -moz-box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
-          box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
-        }
-        .animation-children {
-          display: none;
-          width: 0;
-          height: 0;
-          transition: height, width, top, bottom, 1s;
-        }
-        .container-previews {
-          position: relative;
-          z-index: 1;
-          font-size: clamp(1.5rem, 1vw, 2rem);
-          color: ${color.gris};
-
-          width: 70%;
-          height: 70%;
-
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          transition: width, height, 0.5s;
-          /*efecto espejo*/
-          ${efectos.espejo}
-        }
-        .container-previews div h2 {
-          font-size: clamp(1.5rem, 2.5vw, 2rem);
-        }
-        .btn-action {
-          position: absolute;
-          top: 0;
-          width: 101%;
-          height: 99%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          overflow: hidden;
-          transition: top 2s;
-          transition: width, height, 0.5s;
-
-          border-radius: 15px 0;
-        }
-        .btn-action:hover {
-          cursor: pointer;
-        }
-        .btn-action::after {
-          content: "";
-          position: absolute;
-          background: ${color.primario};
-          background: linear-gradient(
-            45deg,
-            ${color.primario},
-            ${color.rosa},
-            ${color.primario}
-          );
-          overflow: hidden;
-          inset: 4px;
-          background-size: 500% 500%;
-          animation: cambiar 3s ease-in-out infinite;
-        }
-        .btn-action::before {
-          content: "";
-          position: absolute;
-          height: 70%;
-          width: 1800%;
-        }
-        .btn-action:hover::before {
-          background: ${color.naranja};
-          animation: animation 2s linear infinite;
-        }
-        .btn-action:hover::after {
-          background-size: 500% 500%;
-          animation: cambiar 1.5s ease-in-out infinite;
-        }
-
-        .animation-children-click {
-          height: 100%;
-          width: 14000px;
-          max-width: 90%;
-          display: inline-block;
-          margin: auto;
-        }
-        .animation-children-back-click {
-          width: 0;
-          height: 0;
-          display: none;
-        }
-        .container-all-click {
-          width: 100%;
-        }
-        .container-all-back-click {
-          width: clamp(200px, 100%, 500px);
-        }
-
-        .btn-action-click {
-          top: 120%;
-        }
-        .btn-action-back-click {
-          top: 0;
-        }
-
-        .btn-action-hobbies::after {
-          background: linear-gradient(
-            45deg,
-            ${color.primario},
-            ${color.amarillo},
-            ${color.primario}
-          );
-          background-size: 500% 500%;
-          animation: cambiar 3.5s ease-in-out infinite;
-        }
-
-        .btn-action-FormacionAcademica::after {
-          background: linear-gradient(
-            45deg,
-            ${color.primario},
-            ${color.azulFondo},
-            ${color.primario}
-          );
-          background-size: 500% 500%;
-          animation: cambiar 2.5s ease-in-out infinite;
-        }
-
-        .btn-action-proyectos::after {
-          background: linear-gradient(
-            45deg,
-            ${color.primario},
-            ${color.morado},
-            ${color.primario}
-          );
-          background-size: 500% 500%;
-          animation: cambiar 4s ease-in-out infinite;
-        }
-
-        .container-all-Contacto {
-          width: 100%;
-          height: auto;
-
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .container-previews-Contacto {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          justify-content: center;
-        }
-
-        @media (max-width: 1200px) {
-          .container-all {
-            min-width: 500px;
-          }
-          .container-all-click {
-            width: 100%;
-          }
-          .container-all-back-click {
-            width: clamp(200px, 95%, 500px);
-          }
-        }
-        @media (max-width: 965px) {
-          .btn-action::after {
-            background-size: 500% 500%;
-            animation: cambiar 2.5s ease-in-out infinite;
-          }
-          .btn-action::before {
-            background: ${color.naranja};
-            animation: animation 2s linear infinite;
-          }
-        }
-
-        @media (max-width: 720px) {
-          .container-all {
-            min-width: 300px;
-          }
-          .container-all-click {
-            width: 100%;
-          }
-          .container-all-back-click {
-            width: clamp(200px, 95%, 300px);
-          }
-        }
-
-        @media (max-width: 320px) {
-          .container-all {
-            min-width: 200px;
-          }
-          .container-all-click {
-            width: 100%;
-          }
-          .container-all-back-click {
-            width: clamp(200px, 95%, 200px);
-          }
-        }
-      `}</style>
+      </section>
     </>
   );
 };
 
 export default AnimationHome;
-function stylesSpecify(type) {
-  switch (type) {
-    case "skills":
-      return `
-      .container-previews {
-        color: red;
-      }`;
-    case "hobbies":
-      return `
-      .container-previews {
-        color: pink;
-      }`;
-    case "FormacionAcademica":
-      return `
-      .container-previews {
-        color: green;
-      }`;
-    case "proyectos":
-      return `
-      .container-previews {
-        color: blue;
-      }`;
 
-    default:
-      return ``;
-  }
-}
+const Children = ({ type, request, redirect, title, change }) => {
+  return (
+    <>
+      <div className={stl.bar}>
+        {type != "contacto" ? (
+          <button className={stl.request} onClick={request}>
+            recargar
+          </button>
+        ) : null}
+
+        <button className={stl.redirect} onClick={redirect}>
+          {"Ver más ->"}
+        </button>
+      </div>
+      <DataComponent
+        type={type}
+        key={type}
+        typeComponent={1}
+        request={() => {
+          request(type);
+        }}
+        title={title}
+        change={change}
+      />
+    </>
+  );
+};

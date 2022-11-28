@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 import axios from "axios";
@@ -9,6 +9,7 @@ const methods = {
   SET_Data: "SET_DATA",
   SET_PRUEBA: "SET_PRUEBA",
   SET_CHANGE_DATA_GENERAL: "SET_CHANGE_DATA_GENERAL",
+  SET_CHANGE_WIDTH_TO_ITEMS: "SET_CHANGE_WIDTH_TO_ITEMS",
 };
 
 export const globalContext = createContext();
@@ -18,13 +19,17 @@ export const GlobalState = ({ children }) => {
     valuePrueba: "wa ha ha",
 
     pages: [
-      { id:uuidv4(), title: "Skills", type: "skills" },
-      { id:uuidv4(), title: "Hobbies", type: "hobbies" },
-      { id:uuidv4(), title: "Formación Académica", type: "FormacionAcademica" },
-      { id:uuidv4(), title: "Proyectos", type: "proyectos" },
-      { id:uuidv4(), title: "Contacto", type: "Contacto" },
+      { id: uuidv4(), title: "Skills", type: "skills" },
+      { id: uuidv4(), title: "Hobbies", type: "hobbies" },
+      {
+        id: uuidv4(),
+        title: "Formación Académica",
+        type: "FormacionAcademica",
+      },
+      { id: uuidv4(), title: "Proyectos", type: "proyectos" },
+      { id: uuidv4(), title: "Contacto", type: "Contacto" },
     ],
-    
+
     skills: [],
     hobbies: [],
     FormacionAcademica: [],
@@ -32,23 +37,11 @@ export const GlobalState = ({ children }) => {
 
     users: [],
     prueba: "",
+    clientWidthItems: 0,
   };
 
   const [state, disPatch] = useReducer(GlobalReducer, initialState);
 
-  const action1 = async () => {
-    const res = await axios("https://reqres.in/api/users");
-    disPatch({
-      type: methods.Get_Data,
-      payload: res.data.data,
-    });
-  };
-  const action2 = prueba => {
-    disPatch({
-      type: methods.SET_PRUEBA,
-      payload: prueba,
-    });
-  };
   const getChangeData = async type => {
     const range = typeRange(type);
     const res = await axios.get(`/api/${type}/data/?range=${range}`);
@@ -59,10 +52,18 @@ export const GlobalState = ({ children }) => {
     });
   };
 
+  const setClientWidthItems = toChange => {
+    disPatch({
+      type: methods.SET_CHANGE_WIDTH_TO_ITEMS,
+      payload: toChange,
+    });
+  };
+
   return (
     <globalContext.Provider
       value={{
         state,
+
         pages: state.pages,
         skills: state.skills,
         hobbies: state.hobbies,
@@ -71,9 +72,9 @@ export const GlobalState = ({ children }) => {
         users: state.users,
         prueba: state.prueba,
         valuePrueba: state.valuePrueba,
-        action1,
-        action2,
+        clientWidthItems: state.clientWidthItems,
         getChangeData,
+        setClientWidthItems,
       }}
     >
       <>{children}</>
@@ -95,6 +96,12 @@ const GlobalReducer = (state, action) => {
       return {
         ...state,
         prueba: payload,
+      };
+    }
+    case methods.SET_CHANGE_WIDTH_TO_ITEMS: {
+      return {
+        ...state,
+        clientWidthItems: payload,
       };
     }
     case methods.SET_CHANGE_DATA_GENERAL: {

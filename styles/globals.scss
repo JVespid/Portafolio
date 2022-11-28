@@ -12,6 +12,9 @@
 
   color: $gris;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background-color: rgba(30, 30, 30, 1);
@@ -42,7 +45,6 @@ section {
 /*estilos generales de mensaje de error*/
 
 .errorLoad {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
