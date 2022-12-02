@@ -32,29 +32,29 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
 
   const scrollRight = () => {
     let preview = contentMap.current.scrollLeft;
-    
+
     contentMap.current.scrollLeft += contentMap.current.offsetWidth;
 
     setTimeout(() => {
-      if (contentMap.current.scrollLeft <= preview) setVisibleRight(false);
-      else {setVisibleRight(true);
+      preview = contentMap.current.scrollLeft - preview;
+      if (preview < contentMap.current.offsetWidth) {
+        setVisibleRight(false);
+      } else {
+        setVisibleRight(true);
       }
-    }, 500);
+    }, 650);
     setVisibleLeft(true);
   };
 
-
   const scrollLeft = () => {
-    //let preview = Objet.assign({},contentMap.current.scrollLeft);
-    let preview = contentMap.current.scrollLeft;
+    contentMap.current.scrollLeft -= contentMap.current.offsetWidth;
 
-    contentMap.current.scrollLeft -= clientWidthItems * 2.5;
-
-    if (contentMap.current.scrollLeft - preview < clientWidthItems * 2.5)
-      setVisibleLeft(false);
-    else setVisibleLeft(true);
+    setTimeout(() => {
+      if (contentMap.current.scrollLeft <= contentMap.current.offsetWidth / 1.5)
+        setVisibleLeft(false);
+      else setVisibleLeft(true);
+    }, 500);
     setVisibleRight(true);
-
   };
 
   let data;
@@ -82,22 +82,22 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
   useEffect(() => {
     if (typeComponent == 2) {
       setStyle(
-        `${stl.content} ${stl[type + "-content"]} ${stl[type + "-content-2"]} ${
+        `${stl.content} ${stl[type + "_content"]} ${stl[type + "_content_2"]} ${
           stl.content_2
         }`
       );
       setStyleMap(
-        `${stl.map} ${stl[type + "-map"]} ${stl[type + "-map-2"]} ${stl.map_2}`
+        `${stl.map} ${stl[type + "_map"]} ${stl[type + "_map_2"]} ${stl.map_2}`
       );
       setStyleItem(
-        `${stl.items} ${stl[type + "-item"]}  ${stl[type + "-item-2"]} ${
+        `${stl.items} ${stl[type + "_item"]}  ${stl[type + "_item_2"]} ${
           stl.items_2
         }`
       );
     } else {
-      setStyle(`${stl.content} ${stl[type + "-content"]} `);
-      setStyleMap(`${stl.map} ${stl[type + "-map"]}`);
-      setStyleItem(`${stl.items} ${stl[type + "-item"]}`);
+      setStyle(`${stl.content} ${stl[type + "_content"]} `);
+      setStyleMap(`${stl.map} ${stl[type + "_map"]}`);
+      setStyleItem(`${stl.items} ${stl[type + "_item"]}`);
     }
   }, []);
 
@@ -118,18 +118,18 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
   const click = () => {
     if (typeComponent == 2) {
       setStyle(
-        `${stl.content} ${stl[type + "-content"]} ${stl[type + "-content-2"]} ${
+        `${stl.content} ${stl[type + "_content"]} ${stl[type + "_content_2"]} ${
           stl.content_2
         } ${stl.content_click}`
       );
       setStyleMap(
-        `${stl.map} ${stl[type + "-map"]} ${stl.map_2} ${
-          stl[type + "-map-2"]
+        `${stl.map} ${stl[type + "_map"]} ${stl.map_2} ${
+          stl[type + "_map_2"]
         } ${stl.map_click}`
       );
       setStyleItem(
-        `${stl[type + "-item"]} ${stl.items} ${stl.items_2} ${
-          stl[type + "-item-2"]
+        `${stl[type + "_item"]} ${stl.items} ${stl.items_2} ${
+          stl[type + "_item_2"]
         } ${stl.items_click}`
       );
     }
@@ -150,7 +150,7 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
         ) : null}
         <div className={styleMap} ref={contentMap}>
           {data.map(item => (
-            <div
+            <button
               className={styleItem}
               key={item.id}
               onClick={click}
@@ -171,39 +171,46 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
               {item.description ? (
                 <div className={stl.description}>
                   <p>{item.description}</p>
-                </div>
-              ) : null}
-
-              {item.link ? (
-                <div className={stl.link}>
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    Link
-                  </a>
+                  {item.link && item.name ? (
+                    <div className={stl.link}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {` ir a (> ${item.name} <)`}
+                      </a>
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
 
               {item.other2 && typeComponent != 1 ? (
                 <>
-                  <div className={stl.other1Title}>
-                    <p>{item.other1Title}</p>
-                  </div>
-                  <div className={stl.other1}>
-                    <p>{item.other1}</p>
+                  <div className={stl.other1_contain}>
+                    <div className={stl.other1Title}>
+                      <p>{item.other1Title}</p>
+                    </div>
+                    <div className={stl.other1}>
+                      <p>{item.other1}</p>
+                    </div>
                   </div>
                 </>
               ) : null}
 
               {item.other2 && typeComponent != 1 ? (
                 <>
-                  <div className={stl.other2Title}>
-                    <p>{item.other2Title}</p>
-                  </div>
-                  <div className={stl.other2}>
-                    <p>{item.other2}</p>
+                  <div className={stl.other2_contain}>
+                    <div className={stl.other2Title}>
+                      <p>{item.other2Title}</p>
+                    </div>
+                    <div className={stl.other2}>
+                      <p>{item.other2}</p>
+                    </div>
                   </div>
                 </>
               ) : null}
-            </div>
+            </button>
           ))}
         </div>
 

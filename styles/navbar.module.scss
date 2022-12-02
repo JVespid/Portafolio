@@ -5,7 +5,7 @@
   @include position(fixed);
   @include size(0, 100vh);
   @include simple-color($primarioOscuro);
-  z-index: 50;
+  z-index: 500;
   border-right: solid 1px $gris;
   overflow: visible;
   transition: width, 0.5s;
@@ -86,14 +86,13 @@
   .burgerBtn {
     @include position(fixed, 10px, 10px);
     @include size(40px, 40px);
+    @include simple-color($primario);
     @include center-flex {
       flex-direction: column;
     }
-
-    @include simple-color($primario);
     padding: 5px;
     border: solid 1px $naranja;
-    z-index: 10;
+    z-index: 501;
 
     .burger {
       @include size(calc(100% - 10px), calc(40% - 10px));
@@ -116,7 +115,7 @@
   @include size(0, 100vh);
   @include simple-color($negro-transparente);
   transform: translateX(0px);
-  z-index: 49;
+  z-index: 490;
   transition: width, 0.5s;
 }
 

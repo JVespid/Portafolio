@@ -30,9 +30,13 @@
     @include size(70px, 80%);
     margin: 10px;
     z-index: 300;
-    transition: left .5s;
+    transition: left 0.5s;
     &:hover {
       @include position(absolute, 50%, -10px);
+    }
+
+    @include media-max-width(768px) {
+      display: none;
     }
     button {
       @include size(100%, 100%);
@@ -47,8 +51,8 @@
       transition: background-color 0.5s;
 
       &:hover {
-        @include espejo{
-          color:$negro;
+        @include espejo {
+          color: $negro;
         }
         cursor: pointer;
       }
@@ -73,25 +77,33 @@
     }
     overflow: hidden;
     padding-bottom: 80px;
+    padding-top: clamp(0px, 100%, 40px);
 
     scroll-behavior: smooth;
 
     .items {
       @include position(relative);
-      @include size(300px, auto, 300px);
-      @include simple-color($test);
+      @include size(auto, auto, $size-items, $size-items);
+      @include media-max-width-items;
+      @include simple-color($gris);
       @include center-flex {
         flex-direction: column;
       }
-      margin: 10px;
+      margin: auto 10px;
       .img {
-        @include position(relative);
+        @include size(auto, auto, $size-items, $size-items);
+        @include media-max-width-items;
+        @include position(absolute, 0, 0);
         @include size(100%, 100%);
+        object-fit: cover;
         z-index: 150;
         img {
-          @include size(100%, 100%);
+          @include size(auto, auto, $size-items, $size-items);
+          @include media-max-width-items;
+          @include position(absolute, 0, 0);
           @include center-flex;
           object-fit: cover;
+          transition: top 0.5s;
         }
       }
 
@@ -104,11 +116,19 @@
         z-index: 200;
         h3 {
           @include color($negro, clamp(1rem, 2vw, 1.5rem));
-          padding-top: 20px;
-          padding-bottom: 20px;
+          @include center-flex {
+            justify-content: flex-start;
+          }
+          font-size: 1.4rem;
+          padding: 20px 20px 20px 0;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          transition: margin-left 0.5s;
+
+          @include media-max-width(768px) {
+            font-size: 1.2rem;
+          }
         }
       }
 
@@ -117,37 +137,125 @@
         @include position(absolute, 0);
         @include espejo;
 
-        transition: top 0.5s;
+        transition: top, background-color, 0.5s;
+
         overflow: inherit;
         z-index: -1;
         visibility: hidden;
         p {
-          @include simple-color($transparente, $negro);
+          @include simple-color($transparente, $gris);
           font-weight: bold;
           padding: 10px;
-          padding-top: 20px;
-          padding-bottom: 20px;
+          padding-top: 10px;
+          padding-bottom: 15px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
 
       .link {
+        @include size(calc(100% - 20px), auto);
+        margin: 0px 5px 10px 5px;
+        border: solid 1px $gris;
+        border-radius: 15px;
+        overflow: hidden;
         a {
+          @include size(100%, 100%);
+          @include center-flex;
+          @include simple-color($transparente, $gris);
+          font-weight: bold;
+          padding: 8px;
+          cursor: pointer;
+          transition: background-color 0.5s;
         }
       }
 
-      &:hover .description {
-        visibility: visible;
-        @include espejo(
-          $color-background-espejo-primario-hover,
-          $color-borde-espejo-primario
-        );
-        z-index: 100;
-        top: 100%;
+      &:hover {
+        cursor: pointer;
+        overflow: visible;
+
+        .name {
+          h3 {
+            margin-left: 40px;
+          }
+        }
+
+        .img {
+          img {
+            top: -50px;
+          }
+        }
+
+        .description {
+          visibility: visible;
+          z-index: 100;
+          top: 100%;
+          &:hover {
+            @include espejo(
+              $color-background-espejo-primario-hover,
+              $color-borde-espejo-primario
+            );
+          }
+        }
       }
 
-      &:hover {
+      &:focus {
+        z-index: 400;
         overflow: visible;
+
+        .name {
+          h3 {
+            margin-left: 40px;
+          }
+        }
+        .description {
+          @include espejo(
+            $color-background-espejo-primario-hover,
+            $color-borde-espejo-primario
+          );
+          visibility: visible;
+          z-index: 100;
+          top: 100%;
+          p {
+            color: $blanco;
+            font-weight: bold;
+          }
+        }
       }
+
+      .link:hover {
+        a {
+          @include simple-color(
+            $color-background-espejo-primario-hover,
+            $negro
+          );
+        }
+      }
+
+      @include media-max-width(768px) {
+        scroll-snap-align: start;
+      }
+    }
+
+    .FormacionAcademica_item,
+    .proyectos_item {
+      @include size(auto, auto, $size-width-item-rectangle, $size-items);
+      @include media-max-width-items(100);
+      .img {
+        @include size(auto, auto, $size-width-item-rectangle, $size-items);
+      @include media-max-width-items(100);
+        img {
+          @include size(auto, auto, $size-width-item-rectangle, $size-items);
+      @include media-max-width-items(100);
+        }
+      }
+    }
+
+    @include media-max-width(768px) {
+      overflow: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 100px;
     }
   }
 }

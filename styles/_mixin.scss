@@ -78,3 +78,12 @@
   background-size: 500% 500%;
   @content;
 }
+
+@mixin media-max-width-items($rectangle: 0px) {
+  @media (max-width: 800px) {
+    @include size(auto, auto, 200px + $rectangle, 200px);
+  }
+  @media (max-width: 500px) {
+    @include size(auto, auto, (150px + $rectangle), 150px);
+  }
+}

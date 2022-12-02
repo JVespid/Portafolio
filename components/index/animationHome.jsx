@@ -35,9 +35,9 @@ const AnimationHome = ({ type, request, title, redirect }) => {
   if (type === `Contacto`) {
     return (
       <section
-        className={`${stl.container_all} ${
-          stl["container_all_" + type]
-        } ${stl.layoutComponents} ${stl[type]}`}
+        className={`${stl.container_all} ${stl["container_all_" + type]} ${
+          stl.layoutComponents
+        } ${stl[type]}`}
         id={`${type}`}
       >
         <div
@@ -45,12 +45,18 @@ const AnimationHome = ({ type, request, title, redirect }) => {
             stl["container_previews_" + type]
           }`}
         >
-          <h1
-            className={`${stl.title_previews} ${stl["title_previews_" + type]}`}
-          >
-            {title}
-          </h1>
-          <Contacto />
+          <div className={stl[`${type}_h2`]}>
+            <h1
+              className={`${stl.title_previews} ${
+                stl["title_previews_" + type]
+              }`}
+            >
+              {title}
+            </h1>
+          </div>
+          <div className={stl[`${type}_content`]}>
+            <Contacto />
+          </div>
         </div>
       </section>
     );

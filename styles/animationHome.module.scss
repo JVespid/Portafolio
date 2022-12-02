@@ -65,17 +65,6 @@
       margin: auto;
     }
   }
-
-  @media (max-width: 965px) {
-    .btn_action::after {
-      background-size: 500% 500%;
-      animation: cambiar 2.5s ease-in-out infinite;
-    }
-    .btn_action::before {
-      background: $naranja;
-      animation: animation 2s linear infinite;
-    }
-  }
   .btn_action {
     position: absolute;
     top: 0;
@@ -100,15 +89,24 @@
     &::after {
       content: "";
       position: absolute;
-
       overflow: hidden;
       inset: 4px;
+
+      @include media-max-width(965px) {
+        background-size: 500% 500%;
+        animation: cambiar 2.5s ease-in-out infinite;
+      }
     }
     &::before {
       content: "";
       position: absolute;
       height: 70%;
       width: 1800%;
+
+      @include media-max-width(965px) {
+        background: $naranja;
+        animation: animation 2s linear infinite;
+      }
     }
     &:hover::before {
       background: $naranja;
@@ -123,7 +121,6 @@
       @include background-gradient-animationHome($primario, $rosa, $primario);
       animation: cambiar 3s ease-in-out infinite;
     }
-
     &_hobbies::after {
       @include background-gradient-animationHome(
         $primario,
@@ -132,7 +129,6 @@
       );
       animation: cambiar 3.5s ease-in-out infinite;
     }
-
     &_FormacionAcademica::after {
       @include background-gradient-animationHome(
         $primario,
@@ -141,7 +137,6 @@
       );
       animation: cambiar 2.5s ease-in-out infinite;
     }
-
     &_proyectos::after {
       @include background-gradient-animationHome($primario, $morado, $primario);
       animation: cambiar 4s ease-in-out infinite;
@@ -152,9 +147,7 @@
       z-index: 1;
       font-size: clamp(1.5rem, 1vw, 2rem);
       color: $gris;
-
-      width: 70%;
-      height: 70%;
+      @include size(70%, 70%);
 
       display: flex;
       justify-content: center;
@@ -164,25 +157,42 @@
       /*efecto espejo*/
       @include espejo;
 
-      .container_previews div h2 {
+      div h2 {
         font-size: clamp(1.5rem, 2.5vw, 2rem);
+      }
+      &_Contacto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        justify-content: center;
       }
     }
   }
 }
 
-.container_previews_Contacto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  justify-content: center;
-}
-
 .Contacto {
-  @include size(100%);
+  @include size(90%, auto, 0, 200px);
+  margin: auto;
   @include center-flex {
     flex-direction: column;
+  }
+
+  .container_previews_Contacto {
+    @include size(100%, 80%);
+    @include center-flex {
+      flex-direction: column;
+    }
+
+    @include espejo;
+    .Contacto_content,
+    .Contacto_h2 {
+      margin: 10px auto;
+    }
+    .Contacto_h2 {
+    }
+    .Contacto_content {
+    }
   }
 }
 
