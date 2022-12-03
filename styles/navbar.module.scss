@@ -6,7 +6,6 @@
   @include size(0, 100vh);
   @include simple-color($primarioOscuro);
   z-index: 500;
-  border-right: solid 1px $gris;
   overflow: visible;
   transition: width, 0.5s;
 

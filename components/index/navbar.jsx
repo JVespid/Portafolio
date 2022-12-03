@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import stl from "../../styles/navbar.module.scss";
 
-import { globalContext } from "../../context/global/globalState";
+import { indexContext } from "../../context/index/IndexState";
 
 const Navbar = () => {
-  const { pages } = useContext(globalContext);
+  const { pages } = useContext(indexContext);
 
   const [styleNav, setStyleNav] = useState(stl.nav);
   const [styleBloqued, setBloquedStyle] = useState(stl.complement);

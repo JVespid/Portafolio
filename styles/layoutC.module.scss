@@ -1,19 +1,174 @@
 @import "variables";
 @import "mixin";
+@import "efects";
+@import "animaciones";
 
-.layoutComponents {
-  @include size;
-  @include center-flex;
+.container_all {
+  @include size(100%);
+  @include position(relative);
+  @include simple-color($primarioOscuro);
+  @include center-flex{
+    justify-content: flex-start;
+  }
+  
   overflow: hidden;
   margin: 10px auto;
   padding: 30px;
+
+  &_click {
+    width: 100%;
+  }
+  &_Contacto {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include media-max-width(1200px) {
+    min-width: 500px;
+
+    &_click {
+      width: 100%;
+    }
+  }
+  @include media-max-width(720px) {
+    min-width: 300px;
+    &_click {
+      width: 100%;
+    }
+  }
+  @include media-max-width(320px) {
+    min-width: 200px;
+    &_click {
+      width: 100%;
+    }
+  }
+
+  .btn_action {
+    @include simple-color($transparente, $azulLetra);
+    @include center-flex;
+
+    margin: auto 10px;
+    padding: 10px 20px;
+
+    overflow: hidden;
+    transition: border, 0.1s;
+    border: solid 1px $secundario;
+
+
+    h2 {
+      @include size(100%, 100%);
+      @include simple-color($transparente, $azulLetra);
+      font-size: clamp(1.5rem, 1vw, 2rem);
+    }
+
+    &_click {
+      top: 120%;
+    }
+
+    &:hover {
+      border-radius: 15px 0;
+      cursor: pointer;
+    }
+    &:focus {
+      border-radius: 15px 0;
+      cursor: pointer;
+    }
+
+    &_Contacto {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      justify-content: center;
+    }
+    /*
+    &::after {
+      content: "";
+      position: absolute;
+      overflow: hidden;
+      inset: 4px;
+
+      @include media-max-width(965px) {
+        background-size: 500% 500%;
+        animation: cambiar 2.5s ease-in-out infinite;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      height: 70%;
+      width: 1800%;
+
+      @include media-max-width(965px) {
+        background: $naranja;
+        animation: animation 2s linear infinite;
+      }
+    }
+    &:hover::before {
+      background: $naranja;
+      animation: animation 2s linear infinite;
+    }
+    &:hover::after {
+      background-size: 500% 500%;
+      animation: cambiar 1.5s ease-in-out infinite;
+    }
+
+    &_skills::after {
+      @include background-gradient-animationHome($primario, $rosa, $primario);
+      animation: cambiar 3s ease-in-out infinite;
+    }
+    &_hobbies::after {
+      @include background-gradient-animationHome(
+        $primario,
+        $amarillo,
+        $primario
+      );
+      animation: cambiar 3s ease-in-out infinite;
+      //animation: cambiar 3.5s ease-in-out infinite;
+    }
+    &_FormacionAcademica::after {
+      @include background-gradient-animationHome(
+        $primario,
+        $azulFondo,
+        $primario
+      );
+      animation: cambiar 3s ease-in-out infinite;
+      //animation: cambiar 2.5s ease-in-out infinite;
+    }
+    &_proyectos::after {
+      @include background-gradient-animationHome($primario, $morado, $primario);
+      animation: cambiar 3s ease-in-out infinite;
+      //`animation: cambiar 4s ease-in-out infinite;
+    }*/
+  }
 }
 
-
 .Contacto {
-  @include size(100%);
+  @include size(90%, auto, 0, 200px);
+  margin: auto;
   @include center-flex {
     flex-direction: column;
+  }
+
+  .container_previews_Contacto {
+    @include size(100%, 80%);
+    @include center-flex {
+      flex-direction: column;
+    }
+
+    @include espejo;
+    .Contacto_content,
+    .Contacto_h2 {
+      margin: 10px auto;
+    }
+    .Contacto_h2 {
+    }
+    .Contacto_content {
+    }
   }
 }
 
@@ -38,4 +193,8 @@
       @include simple-color($naranja, $gris);
     }
   }
+}
+
+.ContactoComponent{
+  background-color: black;
 }

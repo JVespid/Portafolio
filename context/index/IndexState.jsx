@@ -12,9 +12,9 @@ const methods = {
   SET_CHANGE_WIDTH_TO_ITEMS: "SET_CHANGE_WIDTH_TO_ITEMS",
 };
 
-export const globalContext = createContext();
+export const indexContext = createContext();
 
-export const GlobalState = ({ children }) => {
+export const IndexState = ({ children }) => {
   const initialState = {
     valuePrueba: "wa ha ha",
 
@@ -40,7 +40,7 @@ export const GlobalState = ({ children }) => {
     clientWidthItems: 0,
   };
 
-  const [state, disPatch] = useReducer(GlobalReducer, initialState);
+  const [state, disPatch] = useReducer(LocalReducer, initialState);
 
   const getChangeData = async type => {
     const range = typeRange(type);
@@ -60,7 +60,7 @@ export const GlobalState = ({ children }) => {
   };
 
   return (
-    <globalContext.Provider
+    <indexContext.Provider
       value={{
         state,
 
@@ -78,11 +78,11 @@ export const GlobalState = ({ children }) => {
       }}
     >
       <>{children}</>
-    </globalContext.Provider>
+    </indexContext.Provider>
   );
 };
 
-const GlobalReducer = (state, action) => {
+const LocalReducer = (state, action) => {
   const { payload, type, dataToChange } = action;
 
   switch (type) {

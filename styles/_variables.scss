@@ -1,7 +1,13 @@
 //color de fondo principal
-$primario: rgba(30, 30, 30, 1);
+//$primario1: rgba(30, 30, 30, 1);
+
+
+$primario: rgb(39, 39, 39);
+$secundario: rgba(240, 240, 240, 1);
+$terciario: rgba(195, 117, 24, 1);
+
 //color de fondo principal variante oscura
-$primarioOscuro: rgba(20, 18, 18, 1);
+$primarioOscuro: rgb(28, 40, 51);
 
 $negro-transparente: rgba(0, 0, 0, 0.5);
 
@@ -15,13 +21,13 @@ $transparente: rgba(0, 0, 0, 0);
 // colores comunes en el programa
 $azulLetra: rgba(51, 144, 255, 1);
 $naranja: rgba(195, 117, 24, 1);
-$blanco: rgba(255, 255, 255, 1);
+//$blanco: rgba(255, 255, 255, 1);
 $gris: rgba(240, 240, 240, 1);
+$blanco: #272727;
 
 // colores extras con multi propósito
 $negro: rgba(0, 0, 0, 1);
 $test: red;
-
 
 //colores de efectos ya creados
 $color-borde-espejo-primario: rgba(222, 142, 255, 1);

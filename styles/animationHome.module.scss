@@ -13,11 +13,6 @@
   margin: 10px auto;
   padding: 30px;
   border-radius: 15px 0;
-  border: 1px solid $gris;
-  /*sombra 1*/
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
-  box-shadow: 10px 10px 5px 0px rgba(46, 45, 46, 1);
 
   &_click {
     width: 100%;
@@ -127,7 +122,8 @@
         $amarillo,
         $primario
       );
-      animation: cambiar 3.5s ease-in-out infinite;
+      animation: cambiar 3s ease-in-out infinite;
+      //animation: cambiar 3.5s ease-in-out infinite;
     }
     &_FormacionAcademica::after {
       @include background-gradient-animationHome(
@@ -135,11 +131,13 @@
         $azulFondo,
         $primario
       );
-      animation: cambiar 2.5s ease-in-out infinite;
+      animation: cambiar 3s ease-in-out infinite;
+      //animation: cambiar 2.5s ease-in-out infinite;
     }
     &_proyectos::after {
       @include background-gradient-animationHome($primario, $morado, $primario);
-      animation: cambiar 4s ease-in-out infinite;
+      animation: cambiar 3s ease-in-out infinite;
+      //`animation: cambiar 4s ease-in-out infinite;
     }
 
     .container_previews {

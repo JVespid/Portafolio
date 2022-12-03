@@ -1,84 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable @next/next/no-img-element */
 
-import { useContext, useEffect, useState, useRef, createRef } from "react";
-import { globalContext } from "../context/global/globalState";
+import { useContext, useEffect, useState, useRef } from "react";
+import { indexContext } from "../context/index/IndexState";
 import stl from "../styles/dataComponent.module.scss";
 
 const DataComponent = ({ type, typeComponent, title, change }) => {
-  const {
-    clientWidthItems,
-    setClientWidthItems,
-    skills,
-    hobbies,
-    FormacionAcademica,
-    proyectos,
-  } = useContext(globalContext);
+  const { clientWidthItems, setClientWidthItems, state } =
+    useContext(indexContext);
 
   const [visibleLeft, setVisibleLeft] = useState(false);
   const [visibleRight, setVisibleRight] = useState(true);
-
   const [style, setStyle] = useState(``);
   const [styleMap, setStyleMap] = useState(``);
   const [styleItem, setStyleItem] = useState(``);
+  let data = state[`${type}`];
+  
   const contentMap = useRef([]);
   const items = useRef([]);
-
   const [Map, setMap] = useState(contentMap.current);
+  
+  // este elemento se ejecuta cuando cambia la información solicitada
 
-  //const Map = contentMap.current.clientWidth;
-  const desplegable = items.current.clientWidth;
+  useEffect(() => {
+    data = state[`${type}`];
+  }, [type]);
 
-  const scrollRight = () => {
-    let preview = contentMap.current.scrollLeft;
+  // con el cambio de estado de la variable change se ejecuta el useEffect para obtener ciertas medidas de los elementos del DOM
+  useEffect(() => {
+    let desplegable = items.current.clientWidth;
+    if (
+      (clientWidthItems === 0 || clientWidthItems === undefined) &&
+      desplegable !== 0
+    )
+      setClientWidthItems(desplegable);
+    setMap(contentMap.current.clientWidth);
+  }, [change]);
 
-    contentMap.current.scrollLeft += contentMap.current.offsetWidth;
-
-    setTimeout(() => {
-      preview = contentMap.current.scrollLeft - preview;
-      if (preview < contentMap.current.offsetWidth) {
-        setVisibleRight(false);
-      } else {
-        setVisibleRight(true);
-      }
-    }, 650);
-    setVisibleLeft(true);
-  };
-
-  const scrollLeft = () => {
-    contentMap.current.scrollLeft -= contentMap.current.offsetWidth;
-
-    setTimeout(() => {
-      if (contentMap.current.scrollLeft <= contentMap.current.offsetWidth / 1.5)
-        setVisibleLeft(false);
-      else setVisibleLeft(true);
-    }, 500);
-    setVisibleRight(true);
-  };
-
-  let data;
-  switch (type) {
-    case "skills": {
-      data = skills;
-      break;
-    }
-    case "hobbies": {
-      data = hobbies;
-      break;
-    }
-    case "FormacionAcademica": {
-      data = FormacionAcademica;
-      break;
-    }
-    case "proyectos": {
-      data = proyectos;
-      break;
-    }
-    case "Contacto":
-      break;
-  }
-
+  // este useEffect es para que cambien las clases predeterminadas de algunos elementos del componente para cambiar los estilos usados
   useEffect(() => {
     if (typeComponent == 2) {
       setStyle(
@@ -99,22 +60,9 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
       setStyleMap(`${stl.map} ${stl[type + "_map"]}`);
       setStyleItem(`${stl.items} ${stl[type + "_item"]}`);
     }
-  }, []);
+  }, [typeComponent]);
 
-  useEffect(() => {
-    setMap(contentMap.current.clientWidth);
-  }, [change]);
-
-  useEffect(() => {
-    let desplegable = items.current.clientWidth;
-    if (
-      (clientWidthItems === 0 || clientWidthItems === undefined) &&
-      desplegable !== 0
-    ) {
-      setClientWidthItems(desplegable);
-    }
-  }, [desplegable]);
-
+  // estas funciones se ejecutan cuando se hace click en cualquier botón
   const click = () => {
     if (typeComponent == 2) {
       setStyle(
@@ -134,6 +82,31 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
       );
     }
   };
+  const scrollRight = () => {
+    let preview = contentMap.current.scrollLeft;
+
+    contentMap.current.scrollLeft += contentMap.current.offsetWidth;
+
+    setTimeout(() => {
+      preview = contentMap.current.scrollLeft - preview;
+      if (preview < contentMap.current.offsetWidth) {
+        setVisibleRight(false);
+      } else {
+        setVisibleRight(true);
+      }
+    }, 650);
+    setVisibleLeft(true);
+  };
+  const scrollLeft = () => {
+    contentMap.current.scrollLeft -= contentMap.current.offsetWidth;
+
+    setTimeout(() => {
+      if (contentMap.current.scrollLeft <= contentMap.current.offsetWidth / 1.5)
+        setVisibleLeft(false);
+      else setVisibleLeft(true);
+    }, 500);
+    setVisibleRight(true);
+  };
 
   return (
     <>
@@ -141,6 +114,7 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
         <div className={stl.title}>
           <h2>{title}</h2>
         </div>
+
         {clientWidthItems * data.length > Map &&
         typeComponent == 1 &&
         visibleLeft ? (
@@ -148,6 +122,7 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
             <button onClick={scrollLeft}>{"<<"}</button>
           </div>
         ) : null}
+
         <div className={styleMap} ref={contentMap}>
           {data.map(item => (
             <button
@@ -161,13 +136,11 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
                   <img src={item.img} alt={`imagen de la ${type}`} />
                 </div>
               ) : null}
-
               {item.name ? (
                 <div className={stl.name}>
                   <h3>{item.name}</h3>
                 </div>
               ) : null}
-
               {item.description ? (
                 <div className={stl.description}>
                   <p>{item.description}</p>
@@ -184,7 +157,6 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
                   ) : null}
                 </div>
               ) : null}
-
               {item.other2 && typeComponent != 1 ? (
                 <>
                   <div className={stl.other1_contain}>
@@ -197,7 +169,6 @@ const DataComponent = ({ type, typeComponent, title, change }) => {
                   </div>
                 </>
               ) : null}
-
               {item.other2 && typeComponent != 1 ? (
                 <>
                   <div className={stl.other2_contain}>

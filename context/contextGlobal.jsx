@@ -12,12 +12,12 @@ const bbdd = {
   ],
 
 };
-export const globalContext = React.createContext();
+export const indexContext = React.createContext();
 
 export const ContextGlobal = ({ children }) => {
   return (
     <>
-      <globalContext.Provider value={bbdd}>{children}</globalContext.Provider>
+      <indexContext.Provider value={bbdd}>{children}</indexContext.Provider>
     </>
   );
 };

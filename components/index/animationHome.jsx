@@ -64,79 +64,9 @@ const AnimationHome = ({ type, request, title, redirect }) => {
 
   return (
     <>
-      <section
-        className={`${stl.container_all} ${
-          stl["container_all_" + type]
-        } ${btnActionSTL} ${stl.layoutComponents} ${stl[type]}`}
-        id={`${type}`}
-      >
-        <div
-          className={`${stl.animation_children} ${
-            stl["animation_children_" + type]
-          } ${childrenSTL}`}
-        >
-          <button onClick={backClick}>regresar</button>
-
-          <Children
-            type={type}
-            title={title}
-            request={request}
-            redirect={redirect}
-            change={change}
-          />
-        </div>
-
-        <button
-          onClick={click}
-          className={`${stl.btn_action} ${
-            stl["btn_action_" + type]
-          } ${btnStyle}`}
-        >
-          <div
-            className={`${stl.container_previews} ${
-              stl["container_previews_" + type]
-            }`}
-          >
-            <div
-              className={`${stl.title_previews} ${
-                stl["title_previews_" + type]
-              }`}
-            >
-              <h2>{title}</h2>
-            </div>
-          </div>
-        </button>
-      </section>
+      <section>wa ha ah</section>
     </>
   );
 };
 
 export default AnimationHome;
-
-const Children = ({ type, request, redirect, title, change }) => {
-  return (
-    <>
-      <div className={stl.bar}>
-        {type != "contacto" ? (
-          <button className={stl.request} onClick={request}>
-            recargar
-          </button>
-        ) : null}
-
-        <button className={stl.redirect} onClick={redirect}>
-          {"Ver más ->"}
-        </button>
-      </div>
-      <DataComponent
-        type={type}
-        key={type}
-        typeComponent={1}
-        request={() => {
-          request(type);
-        }}
-        title={title}
-        change={change}
-      />
-    </>
-  );
-};
