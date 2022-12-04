@@ -7,7 +7,7 @@
   @include size(auto, auto, 600px, 300px);
   @include center-flex;
   @include position(relative);
-  @include simple-color($primarioOscuro);
+  @include simple-color($primarioSegundo);
 
   overflow: hidden;
   margin: 10px auto;
@@ -99,12 +99,12 @@
       width: 1800%;
 
       @include media-max-width(965px) {
-        background: $naranja;
+        background: $terciario;
         animation: animation 2s linear infinite;
       }
     }
     &:hover::before {
-      background: $naranja;
+      background: $terciario;
       animation: animation 2s linear infinite;
     }
     &:hover::after {
@@ -144,7 +144,7 @@
       position: relative;
       z-index: 1;
       font-size: clamp(1.5rem, 1vw, 2rem);
-      color: $gris;
+      color: $secundario;
       @include size(70%, 70%);
 
       display: flex;
@@ -208,11 +208,11 @@
     margin-right: 10px;
     padding: 2px 10px;
     border-radius: 15px;
-    @include simple-color($gris, $negro);
+    @include simple-color($secundario, $negro);
 
     &:hover {
       cursor: pointer;
-      @include simple-color($naranja, $gris);
+      @include simple-color($terciario, $secundario);
     }
   }
 }

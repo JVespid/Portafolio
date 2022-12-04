@@ -25,7 +25,7 @@
   margin: 0 5px;
   a {
     &:hover {
-      @include simple-color($naranja, $blanco);
+      @include simple-color($terciario, $secundario);
       cursor: pointer;
     }
   }
@@ -38,16 +38,16 @@
   a {
     @include center-flex;
     @include size(21px, 21px);
-    @include simple-color($blanco);
+    @include simple-color($secundario);
     border: solid 1px $negro;
     border-radius: 15px;
     &:hover {
-      @include simple-color($naranja, $blanco);
+      @include simple-color($terciario, $secundario);
       cursor: pointer;
     }
   }
 }
 
 .active a {
-  @include simple-color($naranja, $blanco);
+  @include simple-color($terciario, $secundario);
 }

@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import Router from "next/router";
+import disableScroll from "disable-scroll";
+import useWindowSize from "../hooks/useWindowSize";
 
 import stl from "../styles/layoutC.module.scss";
 import DataComponent from "./dataComponent";
@@ -10,12 +12,16 @@ import Contacto from "./subDataComponents/contacto";
 
 const LayoutComponents = () => {
   const router = Router;
-  const { getChangeData, state, pages } = useContext(indexContext);
-  const [iterator, setIterator] = useState(3);
+
+  const { width } = useWindowSize();
+  const { getChangeData, pages } = useContext(indexContext);
+
+  const [iterator, setIterator] = useState(0);
   const [page, setPage] = useState(pages[iterator]);
   const [type, setType] = useState(page.type);
   const [title, setTitle] = useState(page.title);
-  const [clicked, setClicked] = useState(false);
+
+  let dataC = useRef();
 
   const redirect = () => {
     const url = `/moreInfo?type=${type}`;
@@ -28,44 +34,59 @@ const LayoutComponents = () => {
   useEffect(() => {
     setPage(pages[iterator]);
   }, [iterator]);
-
   useEffect(() => {
     setType(page.type);
     setTitle(page.title);
   }, [page]);
 
   // código para los estilos css
-  const [childrenSTL, setChildrenSTL] = useState(``);
-  const [btnActionSTL, setAtnActionSTL] = useState(``);
-  const [btnStyle, setBtnStyle] = useState(``);
   const [change, setChange] = useState(false);
+  const [dataContentStl, setDataContent] = useState(``);
+  const [dataStl, setData] = useState(``);
+  const [buttonsStl, setButtons] = useState(``);
 
-  const clickChange = () => {
-    if (!change) {
-      setChange(true);
-    } else if (change) {
-      setChange(false);
-    }
+  const changeData = () => {
+    if (change) setChange(false);
+    else setChange(true);
   };
   const click = e => {
-    setChildrenSTL(`${stl.animation_children_click}`);
-    setAtnActionSTL(`${stl.container_all_click}`);
-    setBtnStyle(`${stl.btn_action_click}`);
-    clickChange();
+    setDataContent(`${stl.dataComponent_click}`);
+    setData(`${stl.data_click}`);
+    setButtons(`${stl.buttons_click}`);
+    changeData();
   };
   const backClick = e => {
-    setChildrenSTL(``);
-    setAtnActionSTL(``);
-    setBtnStyle(``);
-    clickChange();
+    setDataContent(` ${stl.dataComponent_click_back}`);
+    setData(``);
+    setButtons(``);
+    changeData();
   };
 
+  const mouseDown = e => {
+    if (width > 850) {
+      disableScroll.on();
+    }
+  };
+
+  const mouseUp = e => {
+    if (width > 850) {
+      disableScroll.off();
+    }
+  };
+
+  const pruebas = e => {
+    if (e.deltaY > 0 && width > 850) {
+      e.target.scrollLeft += 100;
+    } else {
+      e.target.scrollLeft -= 100;
+    }
+  };
   return (
     <>
       <section
-        className={`${stl.container_all} ${
-          stl["container_all_" + type]
-        } ${btnActionSTL} ${stl.layoutComponents} ${stl[type]}`}
+        className={`${stl.container_all} ${stl["container_all_" + type]} ${
+          stl.layoutComponents
+        } ${stl[type]}`}
         id={`${type}`}
       >
         {pages.map((page, index) => {
@@ -74,10 +95,12 @@ const LayoutComponents = () => {
               <button
                 className={`${stl.btn_action} ${
                   stl["btn_action_" + page.type]
-                } ${btnStyle}`}
+                }`}
                 key={page.id}
                 onClick={() => {
+                  changeData();
                   setIterator(index);
+                  click();
                 }}
               >
                 <h2>{page.title}</h2>
@@ -86,25 +109,43 @@ const LayoutComponents = () => {
         })}
       </section>
 
-      <section className="">
-        <DataComponent
-          type={type}
-          title={title}
-          change={change}
-          typeComponent={1}
-        />
-      </section>
+      <section className={`${stl.dataComponent} ${dataContentStl}`}>
+        <div className={stl.scrolling}>
+          <p>{"<<<<"}</p>
+          <p>{"<<"}</p>
+          <p>{" Scroll"}</p>
+          <p>{">> "}</p>
+          <p>{">>>> "}</p>
+        </div>
 
-      <section className="">
+        <div className={stl.title}>
+          <h3>{title}</h3>
+        </div>
+
         <div
-          className={`${stl._children} ${
-            stl["children_" + type]
-          } ${childrenSTL}`}
+          className={`${stl.data} ${dataStl}`}
+          onPointerOut={mouseUp}
+          onPointerOver={mouseDown}
+          onWheel={pruebas}
+          ref={dataC}
         >
-          <button onClick={backClick}>cerrar</button>
-          <button onClick={backClick}>cerrar</button>
+          <DataComponent type={type} typeComponent={1} change={change} />
+        </div>
+
+        <div className={`${stl.buttons} ${buttonsStl}`}>
+          <button onClick={backClick} className={stl.request}>
+            cerrar{" "}
+          </button>
+          <button onClick={request} className={stl.request}>
+            recargar{" "}
+          </button>
+          <button onClick={redirect} className={stl.redirect}>
+            {"Ver mas ->"}
+          </button>
         </div>
       </section>
+
+      <section className=""></section>
 
       <section className="">
         <Contacto />

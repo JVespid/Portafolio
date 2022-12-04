@@ -4,20 +4,17 @@
 @import "animaciones";
 
 .container_all {
-  @include size(100%);
+  @include size(100%, auto, 100%, 100px);
   @include position(relative);
-  @include simple-color($primarioOscuro);
-  @include center-flex{
+  @include simple-color($primarioSegundo);
+  @include center-flex {
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
-  
-  overflow: hidden;
-  margin: 10px auto;
-  padding: 30px;
+  user-select: none;
 
-  &_click {
-    width: 100%;
-  }
+  overflow: hidden;
+
   &_Contacto {
     width: 100%;
     height: auto;
@@ -48,25 +45,23 @@
   }
 
   .btn_action {
-    @include simple-color($transparente, $azulLetra);
+    @include simple-color($transparente, $azul);
+    @include size(150px, 30px, 150px);
     @include center-flex;
-
-    margin: auto 10px;
+    margin: 10px auto;
     padding: 10px 20px;
-
     overflow: hidden;
     transition: border, 0.1s;
     border: solid 1px $secundario;
 
-
     h2 {
       @include size(100%, 100%);
-      @include simple-color($transparente, $azulLetra);
+      @include simple-color($transparente, $azul);
       font-size: clamp(1.5rem, 1vw, 2rem);
-    }
 
-    &_click {
-      top: 120%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     &:hover {
@@ -85,65 +80,6 @@
 
       justify-content: center;
     }
-    /*
-    &::after {
-      content: "";
-      position: absolute;
-      overflow: hidden;
-      inset: 4px;
-
-      @include media-max-width(965px) {
-        background-size: 500% 500%;
-        animation: cambiar 2.5s ease-in-out infinite;
-      }
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      height: 70%;
-      width: 1800%;
-
-      @include media-max-width(965px) {
-        background: $naranja;
-        animation: animation 2s linear infinite;
-      }
-    }
-    &:hover::before {
-      background: $naranja;
-      animation: animation 2s linear infinite;
-    }
-    &:hover::after {
-      background-size: 500% 500%;
-      animation: cambiar 1.5s ease-in-out infinite;
-    }
-
-    &_skills::after {
-      @include background-gradient-animationHome($primario, $rosa, $primario);
-      animation: cambiar 3s ease-in-out infinite;
-    }
-    &_hobbies::after {
-      @include background-gradient-animationHome(
-        $primario,
-        $amarillo,
-        $primario
-      );
-      animation: cambiar 3s ease-in-out infinite;
-      //animation: cambiar 3.5s ease-in-out infinite;
-    }
-    &_FormacionAcademica::after {
-      @include background-gradient-animationHome(
-        $primario,
-        $azulFondo,
-        $primario
-      );
-      animation: cambiar 3s ease-in-out infinite;
-      //animation: cambiar 2.5s ease-in-out infinite;
-    }
-    &_proyectos::after {
-      @include background-gradient-animationHome($primario, $morado, $primario);
-      animation: cambiar 3s ease-in-out infinite;
-      //`animation: cambiar 4s ease-in-out infinite;
-    }*/
   }
 }
 
@@ -172,29 +108,166 @@
   }
 }
 
-.bar {
-  @include size(99%);
-  padding: 10px auto;
+.dataComponent {
+  @include size(100%, 10px);
+  @include simple-color($transparente, $azul);
+  @include position(relative);
+  @include center-flex {
+    flex-direction: column;
+  }
+  border: 1px solid;
+  border-top-color: $secundario;
+  border-bottom-color: $secundario;
+  overflow: hidden;
+  z-index: 1000;
 
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
+  .title {
+    display: none;
+    @include size(100%);
+    @include center-flex;
+    margin: 30px auto;
+    
+    @include media-max-width($initResponsible) {
+      margin: 10px auto;
+    }
+    h3 {
+      font-size: clamp(1.5rem, 1vw, 2rem);
+      @include simple-color($transparente, $azul);
+      border-bottom: 1px solid $azul;
+      padding: 10px;
+    }
+  }
+  .data {
+    @include size(90%, 0, 0, 0, 0);
+    overflow: hidden;
 
-  .request,
-  .redirect {
-    margin: 5px;
-    margin-right: 10px;
-    padding: 2px 10px;
-    border-radius: 15px;
-    @include simple-color($gris, $negro);
+    margin: 0px auto;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    @include media-media-data-padding;
+
+    &::-webkit-scrollbar {
+      height: 5px;
+      background: #000;
+    }
+
+    /* Add a thumb */
+    &::-webkit-scrollbar-thumb {
+      background-color: #aaa; /* or add it to the track */
+    }
 
     &:hover {
-      cursor: pointer;
-      @include simple-color($naranja, $gris);
+      cursor: all-scroll;
     }
+    &_click {
+      @include size(90%);
+    }
+
+    @include media-max-width($initResponsible) {
+      margin-bottom: 20px;
+      overflow-x: scroll;
+      &_click {
+        overflow-x: scroll;
+      }
+    }
+  }
+
+  .scrolling {
+    @include position(absolute, calc(100% - 60px), 5%);
+    @include size(calc(90% - 460px  ), 40px);
+    @include center-flex {
+      justify-content: space-between;
+    }
+    @include simple-color($primarioSegundo, $azul);
+    z-index: -10;
+
+    p {
+      margin: auto;
+    }
+    @include media-max-width($initResponsible) {
+      display: none;
+    }
+  }
+
+  .buttons {
+    @include position(absolute, calc(96% - 50px), calc(95% - 450px));
+    @include center-flex;
+    width: auto;
+    height: 0;
+    button {
+      @include size(90px, 100%);
+      @include simple-color($transparente, $terciario, $terciario);
+      border: solid 1px;
+      margin: 10px;
+      padding: 0 20px;
+      transition: border, background-color, 0.5s;
+      &:focus,
+      &:hover {
+        @include simple-color($transparente, $secundario, $secundario);
+        border-radius: 15px 0;
+        cursor: pointer;
+      }
+    }
+    &_click {
+      height: 50px;
+      overflow: visible;
+    }
+
+    @include media-max-width($initResponsible) {
+      @include position(relative);
+      width: 100%;
+      height: auto;
+      @include center-flex {
+        flex-wrap: wrap;
+      }
+
+      margin: 10px;
+      overflow: hidden;
+      padding: 10px;
+      button {
+        min-width: 150px;
+        height: 40px;
+
+        display: inline-block;
+        margin: 10px;
+        padding: 0 20px;
+        transition: border, background-color, 0.5s;
+        &:focus,
+        &:hover {
+          @include simple-color($transparente, $secundario, $secundario);
+          border-radius: 15px 0;
+          cursor: pointer;
+        }
+      }
+
+      &_click {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &_click {
+    animation: height-dataContent 0.5s ease-in-out;
+    @include size(100%);
+    .title {
+      display: flex;
+    }
+  }
+  &_click_back {
+    animation: height-dataContentback 0.5s ease-in-out;
+    @include size(100%, 10px);
+    overflow: hidden;
+    .title {
+      display: none;
+    }
+  }
+
+  @include media-max-width($initResponsible) {
+    margin-bottom: 10px;
   }
 }
 
-.ContactoComponent{
+.ContactoComponent {
   background-color: black;
 }

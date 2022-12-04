@@ -9,9 +9,7 @@ import { indexContext } from "../../context/index/IndexState";
 import { useContext, useEffect, useState } from "react";
 
 export default function Home() {
-  const { getChangeData, pages, state } = useContext(indexContext);
-
-  const [stateData, setStateData] = useState(state)
+  const { getChangeData, pages } = useContext(indexContext);
 
   useEffect(() => {
     pages.forEach(page => {
@@ -21,11 +19,6 @@ export default function Home() {
     });
   }, [pages]);
 
-  useEffect(() => {
-    setStateData(state);
-  }, [state]);
-
-  console.log(state);
   return (
     <>
       <Head>
@@ -41,12 +34,9 @@ export default function Home() {
       </header>
 
       <main className={stl.main}>
-        {stateData ? <LayoutComponents /> : null}
+        <LayoutComponents />
       </main>
 
-      <div className={stl.up}>
-        <a href="#nav">subir ^</a>
-      </div>
 
       <Footer></Footer>
     </>

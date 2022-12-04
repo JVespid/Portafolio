@@ -80,10 +80,17 @@
 }
 
 @mixin media-max-width-items($rectangle: 0px) {
-  @media (max-width: 800px) {
+  @media (max-width: $initResponsible) {
     @include size(auto, auto, 200px + $rectangle, 200px);
   }
   @media (max-width: 500px) {
     @include size(auto, auto, (150px + $rectangle), 150px);
   }
 }
+
+@mixin media-media-data-padding() {
+  @media (max-width: $initResponsible) {
+    padding-bottom: 0px;
+  }
+}
+

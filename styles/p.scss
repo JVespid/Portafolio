@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: $gris;
+  background-color: $secundario;
   position: relative;
   cursor: pointer;
   overflow: hidden;
@@ -48,7 +48,7 @@
   z-index: -1;
   transition: 0.25s;
   width: calc(100% - 5px);
-  background-color: $blanco;
+  background-color: $secundario;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -61,7 +61,7 @@
 .items h3 {
   width: calc(100% - 5px);
   height: 40px;
-  background-color: $blanco;
+  background-color: $secundario;
   padding-left: 5px;
   position: absolute;
   display: flex;
@@ -75,7 +75,7 @@
 
 a {
   text-decoration: none;
-  color: $naranja;
+  color: $terciario;
 }
 
 .items:hover h3 {

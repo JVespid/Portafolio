@@ -4,7 +4,7 @@
 .nav {
   @include position(fixed);
   @include size(0, 100vh);
-  @include simple-color($primarioOscuro);
+  @include simple-color($primarioSegundo);
   z-index: 500;
   overflow: visible;
   transition: width, 0.5s;
@@ -30,7 +30,7 @@
       transition: 0.2s;
 
       &:hover {
-        @include simple-color($naranja);
+        @include simple-color($terciario);
         transform: translateX(20px);
       }
       &::before {
@@ -52,11 +52,11 @@
         button {
           @include size(100%, 100%);
           @include center-flex;
-          @include simple-color($transparente, $gris);
+          @include simple-color($transparente, $secundario);
           border-radius: 5px;
           font-weight: bold;
           &:hover {
-            @include simple-color($transparente, $naranja);
+            @include simple-color($transparente, $terciario);
             cursor: pointer;
           }
         }
@@ -90,22 +90,22 @@
       flex-direction: column;
     }
     padding: 5px;
-    border: solid 1px $naranja;
+    border: solid 1px $terciario;
     z-index: 501;
 
     .burger {
       @include size(calc(100% - 10px), calc(40% - 10px));
-      @include simple-color($naranja);
+      @include simple-color($terciario);
       margin: auto;
     }
 
     &:hover {
-      @include simple-color($naranja, auto, $negro);
+      @include simple-color($terciario, auto, $negro);
       cursor: pointer;
     }
 
     &:hover .burger {
-      @include simple-color($gris);
+      @include simple-color($secundario);
     }
   }
 }

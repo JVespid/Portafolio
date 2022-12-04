@@ -2,259 +2,201 @@
 @import "mixin";
 @import "efects";
 
-.content {
-  @include size(100%);
-  @include position(relative);
-  @include simple-color($primarioOscuro, $gris);
-  @include center-flex {
-    flex-wrap: wrap;
-  }
-  .title {
+.map {
+  display: flex;
+  @include size(max-content, auto, max-content, auto, max-content, auto);
+
+  user-select: none;
+
+  .items {
     @include position(relative);
-    @include size(100%, 10%);
-    @include center-flex;
-    h2 {
-      @include simple-color($transparente, $azulLetra);
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      margin: 20px auto;
-    }
-  }
-
-  .rightBtn,
-  .leftBtn {
-    //@include position(absolute, 300px, 0);
-    @include position(absolute, 50%, -35px);
-    transform: translateY(-50%);
-
-    @include size(70px, 80%);
-    margin: 10px;
-    z-index: 300;
-    transition: left 0.5s;
-    &:hover {
-      @include position(absolute, 50%, -10px);
-    }
-
-    @include media-max-width(768px) {
-      display: none;
-    }
-    button {
-      @include size(100%, 100%);
-      @include simple-color($negro-transparente);
-      border: solid 1px $color-borde-espejo-primario;
-      @include center-flex {
-        justify-content: flex-end;
-        padding-right: 10px;
-        font-weight: bold;
-      }
-      font-size: clamp(1.5rem, 2vw, 1.5rem);
-      transition: background-color 0.5s;
-
-      &:hover {
-        @include espejo {
-          color: $negro;
-        }
-        cursor: pointer;
-      }
-    }
-  }
-  .rightBtn {
-    @include position(absolute, 50%, calc(100% - 55px));
-    button {
-      justify-content: flex-start;
-      padding-left: 10px;
-    }
-    &:hover {
-      @include position(absolute, 50%, calc(100% - 80px));
-    }
-  }
-
-  .map {
-    @include position(relative);
-    @include size(100%, 90%);
+    @include size(auto, auto, $size-items, $size-items);
+    @include media-max-width-items;
+    @include simple-color($secundario);
     @include center-flex {
-      justify-content: flex-start;
+      flex-direction: column;
     }
-    overflow: hidden;
-    padding-bottom: 80px;
-    padding-top: clamp(0px, 100%, 40px);
+    margin: auto 10px;
 
-    scroll-behavior: smooth;
-
-    .items {
-      @include position(relative);
+    .img {
       @include size(auto, auto, $size-items, $size-items);
       @include media-max-width-items;
-      @include simple-color($gris);
-      @include center-flex {
-        flex-direction: column;
-      }
-      margin: auto 10px;
-      .img {
+      @include position(absolute, 0, 0);
+      @include size(100%, 100%);
+
+      z-index: 150;
+      &:after {
+        content: "";
         @include size(auto, auto, $size-items, $size-items);
         @include media-max-width-items;
         @include position(absolute, 0, 0);
-        @include size(100%, 100%);
+        @include simple-color($transparente, $transparente);
+        z-index: 300000;
+        transition: top 0.5s;
+      }
+      img {
+        @include size(auto, auto, $size-items, $size-items);
+        @include media-max-width-items;
+        @include position(absolute, 0, 0);
+        @include center-flex;
         object-fit: cover;
-        z-index: 150;
-        img {
-          @include size(auto, auto, $size-items, $size-items);
-          @include media-max-width-items;
-          @include position(absolute, 0, 0);
-          @include center-flex;
-          object-fit: cover;
-          transition: top 0.5s;
+
+        object-position: 1px 1px;
+        transition: top 0.5s;
+        z-index: 20;
+      }
+    }
+
+    .name {
+      @include size(calc(100% - 20px));
+      @include position(absolute, calc((100% - 1.5rem) - 40px));
+      @include espejo;
+      padding-left: 20px;
+      overflow: inherit;
+      z-index: 200;
+      h3 {
+        @include color($negro, clamp(1rem, 2vw, 1.5rem));
+        @include center-flex {
+          justify-content: flex-start;
+        }
+        font-size: 1.4rem;
+        padding: 20px 20px 20px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        transition: margin-left 0.5s;
+
+        @include media-max-width(80px) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .description {
+      @include size(100%);
+      @include position(absolute, 0);
+      @include espejo;
+
+      transition: top, background-color, 0.5s;
+
+      overflow: inherit;
+      z-index: -1;
+      visibility: hidden;
+      p {
+        @include simple-color($transparente, $secundario);
+        font-weight: bold;
+        padding: 10px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .link {
+      @include size(calc(100% - 20px), auto);
+      margin: 0px 5px 10px 5px;
+      border: solid 1px $secundario;
+      border-radius: 15px;
+      overflow: hidden;
+      a {
+        @include size(100%, 100%);
+        @include center-flex;
+        @include simple-color($transparente, $secundario);
+        font-weight: bold;
+        padding: 8px;
+        cursor: pointer;
+        transition: background-color 0.5s;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      overflow: visible;
+
+      .name {
+        h3 {
+          margin-left: 40px;
         }
       }
 
-      .name {
-        @include size(calc(100% - 20px));
-        @include position(absolute, calc((100% - 1.5rem) - 40px));
-        @include espejo;
-        padding-left: 20px;
-        overflow: inherit;
-        z-index: 200;
-        h3 {
-          @include color($negro, clamp(1rem, 2vw, 1.5rem));
-          @include center-flex {
-            justify-content: flex-start;
-          }
-          font-size: 1.4rem;
-          padding: 20px 20px 20px 0;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          transition: margin-left 0.5s;
-
-          @include media-max-width(768px) {
-            font-size: 1.2rem;
-          }
+      .img {
+        img {
+          top: -50px;
         }
       }
 
       .description {
-        @include size(100%);
-        @include position(absolute, 0);
-        @include espejo;
-
-        transition: top, background-color, 0.5s;
-
-        overflow: inherit;
-        z-index: -1;
-        visibility: hidden;
-        p {
-          @include simple-color($transparente, $gris);
-          font-weight: bold;
-          padding: 10px;
-          padding-top: 10px;
-          padding-bottom: 15px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-      }
-
-      .link {
-        @include size(calc(100% - 20px), auto);
-        margin: 0px 5px 10px 5px;
-        border: solid 1px $gris;
-        border-radius: 15px;
-        overflow: hidden;
-        a {
-          @include size(100%, 100%);
-          @include center-flex;
-          @include simple-color($transparente, $gris);
-          font-weight: bold;
-          padding: 8px;
-          cursor: pointer;
-          transition: background-color 0.5s;
-        }
-      }
-
-      &:hover {
-        cursor: pointer;
-        overflow: visible;
-
-        .name {
-          h3 {
-            margin-left: 40px;
-          }
-        }
-
-        .img {
-          img {
-            top: -50px;
-          }
-        }
-
-        .description {
-          visibility: visible;
-          z-index: 100;
-          top: 100%;
-          &:hover {
-            @include espejo(
-              $color-background-espejo-primario-hover,
-              $color-borde-espejo-primario
-            );
-          }
-        }
-      }
-
-      &:focus {
-        z-index: 400;
-        overflow: visible;
-
-        .name {
-          h3 {
-            margin-left: 40px;
-          }
-        }
-        .description {
+        visibility: visible;
+        z-index: 100;
+        top: 100%;
+        &:hover {
           @include espejo(
             $color-background-espejo-primario-hover,
             $color-borde-espejo-primario
           );
-          visibility: visible;
-          z-index: 100;
-          top: 100%;
-          p {
-            color: $blanco;
-            font-weight: bold;
-          }
         }
-      }
-
-      .link:hover {
-        a {
-          @include simple-color(
-            $color-background-espejo-primario-hover,
-            $negro
-          );
-        }
-      }
-
-      @include media-max-width(768px) {
-        scroll-snap-align: start;
       }
     }
 
-    .FormacionAcademica_item,
-    .proyectos_item {
+    &:focus {
+      z-index: 400;
+      overflow: visible;
+
+      .name {
+        h3 {
+          margin-left: 40px;
+        }
+      }
+      .description {
+        @include espejo(
+          $color-background-espejo-primario-hover,
+          $color-borde-espejo-primario
+        );
+        visibility: visible;
+        z-index: 100;
+        top: 100%;
+        p {
+          color: $secundario;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .link:hover {
+      a {
+        @include simple-color($color-background-espejo-primario-hover, $negro);
+      }
+    }
+
+    @include media-max-width($initResponsible) {
+      scroll-snap-align: start;
+    }
+  }
+
+  .FormacionAcademica_item,
+  .proyectos_item {
+    @include size(auto, auto, $size-width-item-rectangle, $size-items);
+    @include media-max-width-items(100);
+    .img {
       @include size(auto, auto, $size-width-item-rectangle, $size-items);
       @include media-max-width-items(100);
-      .img {
+      &:after {
         @include size(auto, auto, $size-width-item-rectangle, $size-items);
-      @include media-max-width-items(100);
-        img {
-          @include size(auto, auto, $size-width-item-rectangle, $size-items);
-      @include media-max-width-items(100);
-        }
+        @include media-max-width-items(100);
+      }
+      img {
+        @include size(auto, auto, $size-width-item-rectangle, $size-items);
+        @include media-max-width-items(100);
       }
     }
+  }
 
-    @include media-max-width(768px) {
-      overflow: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 100px;
-    }
+  @include media-max-width($initResponsible) {
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 50px;
+    padding-top: 40px;
   }
 }

@@ -7,7 +7,7 @@
   height: auto;
   width: 100%;
   margin-bottom: 10px;
-  border-bottom: 1px solid $gris;
+  border-bottom: 1px solid $secundario;
 }
 .main{
   display: flex;
@@ -22,7 +22,7 @@
   height: 60px;
 
   border-radius: 50%;
-  background-color: $gris;
+  background-color: $secundario;
 
   z-index: 100;
 
@@ -41,6 +41,6 @@
 }
 
 .up:hover > a {
-  color: $gris;
-  background-color: $naranja;
+  color: $secundario;
+  background-color: $terciario;
 }
