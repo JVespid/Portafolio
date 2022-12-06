@@ -1,15 +1,7 @@
 @import "variables";
 @import "mixin";
 
-
-.header {
-  background-color: $primario;
-  height: auto;
-  width: 100%;
-  margin-bottom: 10px;
-  border-bottom: 1px solid $secundario;
-}
-.main{
+.main {
   display: flex;
   flex-wrap: wrap;
   width: 100%;

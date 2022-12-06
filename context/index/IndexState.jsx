@@ -35,7 +35,20 @@ export const IndexState = ({ children }) => {
     FormacionAcademica: [],
     proyectos: [],
 
-    users: [],
+    imgProfile: [
+      {
+        id: uuidv4(),
+        img: "https://jvespid.github.io/apis//portafolio/img/aboutMe/JV.png",
+      },
+      {
+        id: uuidv4(),
+        img: "https://i.pinimg.com/474x/8e/06/f1/8e06f1a04fdaf2c32527fb1699f247f7.jpg",
+      },
+      {
+        id: uuidv4(),
+        img: "https://jvespid.github.io/apis//portafolio/img/aboutMe/ICONO.png",
+      },
+    ],
     prueba: "",
     clientWidthItems: 0,
   };
@@ -69,7 +82,7 @@ export const IndexState = ({ children }) => {
         hobbies: state.hobbies,
         FormacionAcademica: state.FormacionAcademica,
         proyectos: state.proyectos,
-        users: state.users,
+        imgProfile: state.imgProfile,
         prueba: state.prueba,
         valuePrueba: state.valuePrueba,
         clientWidthItems: state.clientWidthItems,

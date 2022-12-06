@@ -1,22 +1,23 @@
 @import "variables";
+@import "efects";
 * {
+  margin: 0;
+  padding: 0;
+  border: 0;
   list-style: none;
   font-family: Arial, Helvetica, sans-serif !important;
   box-sizing: content-box !important;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  margin: 0;
-  padding: 0;
-  border: 0;
   font-family: Arial, Helvetica, sans-serif;
   vertical-align: baseline;
-
   color: $secundario;
-
-  
-}
-html {
-  background-color: $primario;
   scroll-behavior: smooth;
+}
+
+html {
+  @include background-Malla;
+  background-clip: border-box;
+  padding: 0;
 }
 
 /* 
@@ -72,36 +73,5 @@ section {
       color: $secundario;
       background-color: $terciario;
     }
-  }
-}
-
-/*animaciones*/
-
-@keyframes animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes cambiar {
-  0% {
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0 50%;
-  }
-}
-
-@keyframes moveLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(200px);
   }
 }

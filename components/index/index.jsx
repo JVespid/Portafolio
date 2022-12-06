@@ -29,14 +29,11 @@ export default function Home() {
 
       <Navbar />
 
-      <header className={stl.header}>
-        <AboutMe />
-      </header>
+      <AboutMe />
 
       <main className={stl.main}>
         <LayoutComponents />
       </main>
-
 
       <Footer></Footer>
     </>
