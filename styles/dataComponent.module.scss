@@ -16,7 +16,7 @@
     @include center-flex {
       flex-direction: column;
     }
-    margin: auto 10px;
+    margin: auto .625rem;
 
     .img {
       @include size(auto, auto, $size-items, $size-items);
@@ -41,33 +41,33 @@
         @include center-flex;
         object-fit: cover;
 
-        object-position: 1px 1px;
+        object-position: .0625rem .0625rem;
         transition: top 0.5s;
         z-index: 20;
       }
     }
 
     .name {
-      @include size(calc(100% - 20px));
-      @include position(absolute, calc((100% - 1.5rem) - 40px));
+      @include size(calc(100% - 1.25rem));
+      @include position(absolute, calc((100% - 24px) - 2.5rem));
       @include espejo;
-      padding-left: 20px;
+      padding-left: 1.25rem;
       overflow: inherit;
       z-index: 200;
       h3 {
-        @include color($negro, clamp(1rem, 2vw, 1.5rem));
+        @include color($negro, clamp(16px, 2vw, 24px));
         @include center-flex {
           justify-content: flex-start;
         }
-        font-size: 1.4rem;
-        padding: 20px 20px 20px 0;
+        font-size: 22.4px;
+        padding: 1.25rem 1.25rem 1.25rem 0;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         transition: margin-left 0.5s;
 
-        @include media-max-width(80px) {
-          font-size: 1.2rem;
+        @include media-max-width(5rem) {
+          font-size: 19.2px;
         }
       }
     }
@@ -85,9 +85,9 @@
       p {
         @include simple-color($transparente, $secundario);
         font-weight: bold;
-        padding: 10px;
-        padding-top: 10px;
-        padding-bottom: 15px;
+        padding: .625rem;
+        padding-top: .625rem;
+        padding-bottom: .9375rem;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -95,17 +95,17 @@
     }
 
     .link {
-      @include size(calc(100% - 20px), auto);
-      margin: 0px 5px 10px 5px;
-      border: solid 1px $secundario;
-      border-radius: 15px;
+      @include size(calc(100% - 1.25rem), auto);
+      margin: 0rem .3125rem .625rem .3125rem;
+      border: solid .0625rem $secundario;
+      border-radius: .9375rem;
       overflow: hidden;
       a {
         @include size(100%, 100%);
         @include center-flex;
         @include simple-color($transparente, $secundario);
         font-weight: bold;
-        padding: 8px;
+        padding: .5rem;
         cursor: pointer;
         transition: background-color 0.5s;
       }
@@ -117,13 +117,13 @@
 
       .name {
         h3 {
-          margin-left: 40px;
+          margin-left: 2.5rem;
         }
       }
 
       .img {
         img {
-          top: -50px;
+          top: -3.125rem;
         }
       }
 
@@ -146,7 +146,7 @@
 
       .name {
         h3 {
-          margin-left: 40px;
+          margin-left: 2.5rem;
         }
       }
       .description {
@@ -178,17 +178,17 @@
   .FormacionAcademica_item,
   .proyectos_item {
     @include size(auto, auto, $size-width-item-rectangle, $size-items);
-    @include media-max-width-items(100);
+    @include media-max-width-items(6.25rem);
     .img {
       @include size(auto, auto, $size-width-item-rectangle, $size-items);
-      @include media-max-width-items(100);
+      @include media-max-width-items(6.25rem);
       &:after {
         @include size(auto, auto, $size-width-item-rectangle, $size-items);
-        @include media-max-width-items(100);
+        @include media-max-width-items(6.25rem);
       }
       img {
         @include size(auto, auto, $size-width-item-rectangle, $size-items);
-        @include media-max-width-items(100);
+        @include media-max-width-items(6.25rem);
       }
     }
   }
@@ -196,7 +196,7 @@
   @include media-max-width($initResponsible) {
     overflow: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 50px;
-    padding-top: 40px;
+    padding-bottom: 3.125rem;
+    padding-top: 2.5rem;
   }
 }

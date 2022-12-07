@@ -9,11 +9,13 @@
 
   .aboutMy {
     @include size(100%, 50%);
-    @include center-flex;
-    margin: 30px auto;
+    @include center-flex {
+      flex-wrap: wrap;
+    }
+    margin: auto;
 
     .fotoContent {
-      @include size(clamp(100px, 100%, 500px), auto);
+      @include size(clamp(6.25rem, 100%, 31.25rem), auto);
       @include center-flex {
         flex-direction: column;
       }
@@ -21,7 +23,10 @@
       margin: 10px 10px;
 
       .fotos {
-        @include size(clamp(100px, 90%, 300px), clamp(100px, 90vw, 300px));
+        @include size(
+          clamp(6.25rem, 90%, 18.75rem),
+          clamp(6.25rem, 90vw, 18.75rem)
+        );
         @include center-flex {
           justify-content: flex-start;
         }
@@ -58,32 +63,35 @@
           border-radius: 50%;
           overflow: hidden;
 
+          &:first-child button {
+            background-color: $morado;
+          }
           button {
             @include size(100%, 100%);
             @include center-flex;
             background-color: $secundario;
             margin: auto;
-            :first-child {
-              background-color: $morado;
+
+            &:hover {
+              cursor: pointer;
+              background-color: $morado !important;
             }
           }
         }
-        .moveImageActive {
-          .button {
-            background-color: red;
-          }
-        }
+      }
+      @include media-max-width(67.5625rem) {
+        order: -1;
       }
     }
 
     .aboutMy_title {
       @include espejo;
-      @include size(clamp(200px, 100%, 520px));
+      @include size(clamp(12.5rem, 100%, 32.5rem));
       @include center-flex {
         flex-direction: column;
       }
-      margin: 10px 10px;
-      padding: 10px;
+      margin: 0.625rem 0.625rem;
+      padding: 60px 10px;
       h3 {
         display: flex;
         justify-content: center;
@@ -91,18 +99,20 @@
         text-align: center;
         color: $secundario;
         margin: auto;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid $secundario;
+        margin-bottom: 0.625rem;
+        padding-bottom: 0.625rem;
+        border-bottom: 0.0625rem solid $secundario;
       }
       p {
         display: flex;
         flex-direction: column;
-        color: $secundario;
+        color: $morado;
+        font-weight: bold;
+        font-size: 1rem;
         margin: auto;
-        margin-top: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid $secundario;
+        margin-top: 0.625rem;
+        padding-bottom: 0.625rem;
+        border-bottom: 0.0625rem solid $secundario;
       }
     }
   }
@@ -110,10 +120,10 @@
   .aboutMy_description {
     @include espejo;
     display: flex;
-    width: clamp(200px, 100%, 520px);
+    width: clamp(12.5rem, 100%, 32.5rem);
     align-content: center;
     margin: auto;
-    padding: 10px;
+    padding: 0.625rem;
 
     p {
       display: flex;
@@ -122,24 +132,58 @@
       text-align: justify;
       margin: auto;
       color: $secundario;
-      padding-bottom: 10px;
-      border-bottom: 1px solid $secundario;
+      padding-bottom: 0.625rem;
+      border-bottom: 0.0625rem solid $secundario;
     }
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 50rem) {
   .header-container {
     flex-direction: column;
   }
   .foto {
     order: -1;
-    margin: 15px auto;
+    margin: 0.9375rem auto;
   }
 }
 
 @media (max-width: 1349px) {
   .aboutMy {
-    width: clamp(200px, 80%, 550px);
+    width: clamp(12.5rem, 80%, 34.375rem);
+  }
+}
+
+.animatedText {
+  height: auto;
+
+  /*This part is important for centering*/
+  display: grid;
+  place-items: center;
+
+  p {
+    width: 22ch;
+    animation: typing 6s steps(22), blink 0.5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.625rem solid;
+    font-family: monospace;
+    font-size: 1em;
+    border-color: $secundario;
+  }
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-right-color: transparent;
   }
 }

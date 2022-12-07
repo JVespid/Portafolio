@@ -10,20 +10,20 @@
   transition: width, 0.5s;
 
   ul {
-    @include position(relative, 0, -210px);
+    @include position(relative, 0, -13.125rem);
     @include size(0);
     display: flex;
 
     margin: 0 auto;
-    margin-top: clamp(80px, 100%, 120px);
+    margin-top: clamp(5rem, 100%, 7.5rem);
     flex-direction: column;
     transition: width, 0.5s;
 
     li {
       @include position(relative);
-      @include size((clamp(100px, 100%, 270px)), 50px);
+      @include size((clamp(6.25rem, 100%, 16.875rem)), 3.125rem);
 
-      margin: 15px auto;
+      margin: .9375rem auto;
       text-align: center;
       clip-path: polygon(80% 1%, 100% 53%, 80% 100%, 0 100%, 0 0);
       overflow: hidden;
@@ -31,7 +31,7 @@
 
       &:hover {
         @include simple-color($terciario);
-        transform: translateX(20px);
+        transform: translateX(1.25rem);
       }
       &::before {
         content: "";
@@ -39,7 +39,7 @@
         @include simple-color($primario);
         clip-path: polygon(80% 1%, 100% 53%, 80% 100%, 0 100%, 0 0);
         overflow: hidden;
-        inset: 2px;
+        inset: .125rem;
         z-index: 10;
         overflow: hidden;
       }
@@ -53,7 +53,7 @@
           @include size(100%, 100%);
           @include center-flex;
           @include simple-color($transparente, $secundario);
-          border-radius: 5px;
+          border-radius: .3125rem;
           font-weight: bold;
           &:hover {
             @include simple-color($transparente, $terciario);
@@ -76,25 +76,25 @@
     }
     .Contacto {
       background: rgba(222, 142, 255, 0.93);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(9px);
-      -webkit-backdrop-filter: blur(9px);
+      box-shadow: 0 .25rem 1.875rem rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(.5625rem);
+      -webkit-backdrop-filter: blur(.5625rem);
     }
   }
 
   .burgerBtn {
-    @include position(fixed, 10px, 10px);
-    @include size(40px, 40px);
+    @include position(fixed, .625rem, .625rem);
+    @include size(2.5rem, 2.5rem);
     @include simple-color($primario);
     @include center-flex {
       flex-direction: column;
     }
-    padding: 5px;
-    border: solid 1px $terciario;
+    padding: .3125rem;
+    border: solid .0625rem $terciario;
     z-index: 501;
 
     .burger {
-      @include size(calc(100% - 10px), calc(40% - 10px));
+      @include size(calc(100% - .625rem), calc(40% - .625rem));
       @include simple-color($terciario);
       margin: auto;
     }
@@ -113,18 +113,18 @@
   @include position(fixed, 0, 0, 0, 0);
   @include size(0, 100vh);
   @include simple-color($negro-transparente);
-  transform: translateX(0px);
+  transform: translateX(0rem);
   z-index: 490;
   transition: width, 0.5s;
 }
 
 .navClick {
-  @include size(clamp(100px, 90%, 300px), 100vh);
+  @include size(clamp(6.25rem, 90%, 18.75rem), 100vh);
   ul {
     @include size(100%);
     left: 0;
     li {
-      height: 40px;
+      height: 2.5rem;
     }
   }
 }

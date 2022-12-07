@@ -1,38 +1,159 @@
+// Love dynamically typed text? You're gonna love this
+// Edit these strings to see them typed on the screen:
 @import "variables";
 @import "mixin";
+$strings: (
+  "Bienvenid@" "Mi nombre es Bernardo Abel"
+    "Mi nombre en el internet es JVespid" "Soy Programador Web Full Stack"
+    "y este es mi portafolio Web"
+);
 
-.main {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: auto;
+// now for some timing (in seconds)
+$durCharFwd: 0.1; // character typed
+$durFullGap: 2; // time between typed/delete
+$durCharBwd: 0.08; // character deleted
+$durDoneGap: 1; // time between strings
+
+// initializing some variables and functions ✊🏼
+$charCount: 0;
+$durTotal: 0;
+@each $string in $strings {
+  $charCount: $charCount + str-length($string);
+  $durTotal: $durTotal +
+    (str-length($string) * ($durCharFwd + $durCharBwd)) +
+    $durFullGap +
+    $durDoneGap;
+}
+@function percent($string, $letter, $modifier) {
+  $stringsPast: $string - 1;
+  $time: 0;
+  @while $stringsPast > 0 {
+    $time: $time +
+      (
+        ($durCharFwd + $durCharBwd) * (str-length(nth($strings, $stringsPast)))
+      ) +
+      $durFullGap +
+      $durDoneGap;
+    $stringsPast: $stringsPast - 1;
+  }
+  @if $letter <= str-length(nth($strings, $string)) {
+    $time: $time + ($durCharFwd * ($letter - 1));
+  } @else {
+    $time: $time +
+      ($durCharFwd * str-length(nth($strings, $string))) +
+      $durFullGap +
+      ($durCharBwd * ($letter - str-length(nth($strings, $string))));
+  }
+  @return ($time / $durTotal * 100 + $modifier) + "%";
+}
+$currentPercentage: 0;
+// now THIS is where the magic happens... ✨
+@keyframes typed {
+  @for $i from 1 through length($strings) {
+    // @for $j from 1 through (str-length(nth($strings, $i)) * 2 - 1) {
+    @for $j from 1 through (str-length(nth($strings, $i)) * 2) {
+      /* string #{$i}, char #{$j} */
+      @if $j < str-length(nth($strings, $i)) * 2 {
+        // not last character deleted
+        #{percent($i, $j, 0)},
+        #{percent($i, $j+1, -0.001)} {
+          @if $j <= str-length(nth($strings, $i)) {
+            content: quote(#{str_slice(nth($strings, $i), 1, $j)});
+          } @else {
+            content: quote(
+              #{str_slice(
+                  nth($strings, $i),
+                  1,
+                  str-length(nth($strings, $i)) -
+                    ($j - str-length(nth($strings, $i)))
+                )}
+            );
+          }
+        }
+      } @else {
+        @if $i < length($strings) {
+          // not last string
+          #{percent($i, $j, 0)},
+          #{percent($i+1, 1, -0.001)} {
+            content: "​"; // zero-width space to retain element height
+          }
+        } @else {
+          // last string
+          #{percent($i, $j, 0)},
+          100% {
+            content: "​"; // zero-width space to retain element height
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes beam-blink {
+  75% {
+    border-color: transparent;
+  }
 }
 
-.up {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-
-  border-radius: 50%;
-  background-color: $secundario;
-
-  z-index: 100;
-
-  left: calc(100% - 70px);
-  top: calc(100% - 70px);
-
+.body {
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  border: solid 1px $primario;
+  width: 100vw;
+  height: 100vh;
 }
-.up > a {
-  width: 100%;
-  height: 100%;
+.body {
   display: flex;
-  justify-content: center;
   align-items: center;
-}
+  justify-content: center;
+  background-color: #000;
+  background-image: /* skeuomorphism anyone?*/ radial-gradient(
+      rgba(#fff, 0.125),
+      rgba(#fff, 0)
+    ),
+    linear-gradient(to bottom, #000, #000 2px, #111 3px);
+  background-repeat: repeat-y;
+  background-position: center center;
+  background-size: cover, 100% 3px;
+  font-size: calc(10px + 2vw);
+  font-family: "VT323", monospace, sans-serif;
+  color: $morado; // hacker green
 
-.up:hover > a {
-  color: $secundario;
-  background-color: $terciario;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  &::after {
+    content: ""; // zero-width space to retain element height
+    position: relative;
+    top: -13px;
+    @media (max-width: 575px) {
+      top: -33px;
+    }
+    display: inline-block;
+    padding-right: 3px;
+    padding-right: calc(3px + 0.1vw);
+    border-right: 10px solid rgba($morado, 0.75);
+    border-right: calc(1.1vw + 4px) solid rgba($morado, 0.75);
+    text-shadow: 0 0 5px $morado;
+    white-space: nowrap;
+    animation: typed #{$durTotal + "s"} linear 1s infinite,
+      beam-blink 1s infinite;
+  }
+
+  button {
+    @include position(absolute, calc(100% - 200px), calc(100% - 220px));
+    @include size(200px, 100px);
+    @include simple-color($transparente, $morado, $morado);
+    font-size: calc(10px + 1vw);
+    transition: border, 0.5s ease-in-out;
+    border-bottom: 1px solid $transparente;
+
+    &:hover {
+      cursor: pointer;
+      border-bottom: 1px solid $morado;
+    }
+  }
 }
+// body[onload] {
+// 	&::before, &::after { display: none !important; }
+// 	background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1580009/codepen_css-typed-this.png) center / cover;
+// }

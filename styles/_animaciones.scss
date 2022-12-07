@@ -25,24 +25,24 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(200px);
+    transform: translateX(12.5rem);
   }
 }
 
 @keyframes height-dataContent {
   0% {
-    height: 10px;
+    height: .625rem;
   }
   100% {
-    height: 505px;
+    height: 31.5625rem;
   }
 }
 
 @keyframes height-dataContentback {
   0% {
-    height: 505px;
+    height: 31.5625rem;
   }
   100% {
-    height: 10px;
+    height: .625rem;
   }
 }

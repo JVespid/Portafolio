@@ -1,14 +1,27 @@
 import React from "react";
-import Index from "../components/index/index";
+import stl from "./../styles/index.module.scss";
+import Router from "next/router";
 
-import { IndexState } from "../context/index/IndexState";
+const Pruebas = () => {
+  const router = Router;
+  const redirect = () => {
+    router.push("/home");
+  };
+  const redirectAuto = () => {
+    setTimeout(() => {
+      redirect();
+    }, 38500);
+  };
 
-const app = () => {
+  React.useEffect(() => {
+    redirectAuto();
+  }, []);
+
   return (
-    <IndexState>
-      <Index />
-    </IndexState>
+    <div className={stl.body}>
+      <button onClick={redirect}>{"saltar >>"}</button>
+    </div>
   );
 };
 
-export default app;
+export default Pruebas;

@@ -61,7 +61,7 @@
   @content;
 }
 
-@mixin media-max-width($size: 250px) {
+@mixin media-max-width($size: 15.625rem) {
   @media (max-width: $size) {
     @content;
   }
@@ -79,18 +79,18 @@
   @content;
 }
 
-@mixin media-max-width-items($rectangle: 0px) {
+@mixin media-max-width-items($rectangle: 0rem) {
   @media (max-width: $initResponsible) {
-    @include size(auto, auto, 200px + $rectangle, 200px);
+    @include size(auto, auto, 12.5rem + $rectangle, 12.5rem);
   }
   @media (max-width: 500px) {
-    @include size(auto, auto, (150px + $rectangle), 150px);
+    @include size(auto, auto, (9.375rem + $rectangle), 9.375rem);
   }
 }
 
 @mixin media-media-data-padding() {
   @media (max-width: $initResponsible) {
-    padding-bottom: 0px;
+    padding-bottom: 0rem;
   }
 }
 

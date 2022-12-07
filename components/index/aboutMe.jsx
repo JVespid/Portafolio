@@ -9,10 +9,10 @@ const AboutMe = () => {
 
   const moveImage = useRef([]);
   moveImage.current = [];
+
   const clickChangeImage = e => {
     const value = e.target.value;
     const width = refImg.current.clientWidth;
-    //const before = refImg.current.scrollLeft;
     const move = width * value;
     refImg.current.scrollLeft = move;
 
@@ -35,7 +35,9 @@ const AboutMe = () => {
         <div className={stl.aboutMy}>
           <div className={stl.aboutMy_title}>
             <h3>Bernardo Abel Lopez Sanchez </h3>
-            <p>Engineer Web FullStack</p>
+            <div className={stl.animatedText}>
+              <p>Engineer Web FullStack</p>
+            </div>
           </div>
 
           <div className={stl.fotoContent}>

@@ -4,7 +4,7 @@ import Footer from "../footer";
 import AboutMe from "./aboutMe";
 import LayoutComponents from "../layoutComponents";
 
-import stl from "../../styles/index.module.scss";
+import stl from "../../styles/home.module.scss";
 import { indexContext } from "../../context/index/IndexState";
 import { useContext, useEffect, useState } from "react";
 
