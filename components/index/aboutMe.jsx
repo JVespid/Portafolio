@@ -28,11 +28,14 @@ const AboutMe = () => {
     if (el && !moveImage.current.includes(el)) {
       moveImage.current.push(el);
     }
-  };
+  }
+
   return (
     <>
       <header className={stl.header}>
+
         <div className={stl.aboutMy}>
+          
           <div className={stl.aboutMy_title}>
             <h3>Bernardo Abel Lopez Sanchez </h3>
             <div className={stl.animatedText}>
@@ -80,7 +83,7 @@ const AboutMe = () => {
             dignissimos neque accusantium ducimus dicta beatae totam nostrum
             incidunt fugiat, explicabo minus doloribus laudantium at.
             Consequatur aliquam deleniti error sapiente velit. Voluptatum labore
-            repellendus qui pariatur, corporis, expedita iste in eligendi
+            repellendus qui pariatur, corpori, expedita iste in eligendi
             dolores nemo doloremque quibusdam esse atque sed nihil nesciunt
             laudantium repudiandae explicabo. Deleniti ratione beatae fugiat
             nobis hic officia minima?

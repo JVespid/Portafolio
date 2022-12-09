@@ -54,7 +54,7 @@
           @include center-flex;
           @include simple-color($transparente, $secundario);
           border-radius: .3125rem;
-          font-weight: bold;
+          
           &:hover {
             @include simple-color($transparente, $terciario);
             cursor: pointer;

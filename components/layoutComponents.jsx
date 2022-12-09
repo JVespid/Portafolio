@@ -8,7 +8,7 @@ import stl from "../styles/layoutC.module.scss";
 import DataComponent from "./dataComponent";
 
 import { indexContext } from "../context/index/IndexState";
-import Contacto from "./subDataComponents/contacto";
+import { motion } from "framer-motion";
 
 const LayoutComponents = () => {
   const router = Router;
@@ -21,7 +21,8 @@ const LayoutComponents = () => {
   const [type, setType] = useState(page.type);
   const [title, setTitle] = useState(page.title);
 
-  let dataC = useRef();
+  const dataC = useRef();
+  const [widthDataC, setWidthDataC] = useState(0);
 
   const redirect = () => {
     const url = `/moreInfo?type=${type}`;
@@ -34,27 +35,29 @@ const LayoutComponents = () => {
   useEffect(() => {
     setPage(pages[iterator]);
   }, [iterator]);
+
   useEffect(() => {
     setType(page.type);
     setTitle(page.title);
   }, [page]);
 
   // código para los estilos css
-  const [change, setChange] = useState(false);
+  const [change, setChange] = useState(0);
   const [dataContentStl, setDataContent] = useState(``);
   const [dataStl, setData] = useState(``);
   const [buttonsStl, setButtons] = useState(``);
 
   const changeData = () => {
-    if (change) setChange(false);
-    else setChange(true);
+    setChange(change + 1);
   };
-  const click = e => {
+
+  const click = () => {
     setDataContent(`${stl.dataComponent_click}`);
     setData(`${stl.data_click}`);
     setButtons(`${stl.buttons_click}`);
     changeData();
   };
+
   const backClick = e => {
     setDataContent(` ${stl.dataComponent_click_back}`);
     setData(``);
@@ -62,25 +65,11 @@ const LayoutComponents = () => {
     changeData();
   };
 
-  const mouseDown = e => {
-    if (width > 850) {
-      disableScroll.on();
-    }
+  const mouseOver = e => {
+    setWidthDataC(dataC.current.offsetWidth);
+    console.log(e.target.scrollLeft);
   };
 
-  const mouseUp = e => {
-    if (width > 850) {
-      disableScroll.off();
-    }
-  };
-
-  const pruebas = e => {
-    if (e.deltaY > 0 && width > 850) {
-      e.target.scrollLeft += 100;
-    } else {
-      e.target.scrollLeft -= 100;
-    }
-  };
   return (
     <>
       <section
@@ -110,27 +99,33 @@ const LayoutComponents = () => {
       </section>
 
       <section className={`${stl.dataComponent} ${dataContentStl}`}>
-        <div className={stl.scrolling}>
-          <p>{"<<<<"}</p>
-          <p>{"<<"}</p>
-          <p>{" Scroll"}</p>
-          <p>{">> "}</p>
-          <p>{">>>> "}</p>
-        </div>
-
         <div className={stl.title}>
           <h3>{title}</h3>
         </div>
-
-        <div
-          className={`${stl.data} ${dataStl}`}
-          onPointerOut={mouseUp}
-          onPointerOver={mouseDown}
-          onWheel={pruebas}
-          ref={dataC}
-        >
-          <DataComponent type={type} typeComponent={1} change={change} />
-        </div>
+        {width > 720 ? (
+          <motion.div
+            className={`${stl.data} ${dataStl}`}
+            onPointerOver={mouseOver}
+            ref={dataC}
+          >
+            <DataComponent
+              type={type}
+              typeComponent={1}
+              change={change}
+              widthDataC={widthDataC}
+              width={width}
+            />
+          </motion.div>
+        ) : (
+          <div className={`${stl.data} ${dataStl}`}>
+            <DataComponent
+              type={type}
+              typeComponent={1}
+              change={change}
+              width={width}
+            />
+          </div>
+        )}
 
         <div className={`${stl.buttons} ${buttonsStl}`}>
           <button onClick={backClick} className={stl.request}>
@@ -146,10 +141,6 @@ const LayoutComponents = () => {
       </section>
 
       <section className=""></section>
-
-      <section className="">
-        <Contacto />
-      </section>
     </>
   );
 };

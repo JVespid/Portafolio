@@ -1,0 +1,12 @@
+@import "variables";
+@import "mixin";
+@import "efects";
+@import "animaciones";
+
+.aside{
+  width: 100%;
+  height: 100vh;
+  @include simple-color($primario, $morado, $morado);
+
+
+}

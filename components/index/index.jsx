@@ -6,7 +6,8 @@ import LayoutComponents from "../layoutComponents";
 
 import stl from "../../styles/home.module.scss";
 import { indexContext } from "../../context/index/IndexState";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import Contacto from "../subDataComponents/contacto";
 
 export default function Home() {
   const { getChangeData, pages } = useContext(indexContext);
@@ -34,6 +35,8 @@ export default function Home() {
       <main className={stl.main}>
         <LayoutComponents />
       </main>
+
+      <Contacto />
 
       <Footer></Footer>
     </>

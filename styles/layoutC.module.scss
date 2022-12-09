@@ -6,7 +6,7 @@
 .container_all {
   @include size(100%, auto, 100%, 100px);
   @include position(relative);
-  @include simple-color($primarioSegundo);
+  @include simple-color($primario);
   @include center-flex {
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -45,7 +45,7 @@
   }
 
   .btn_action {
-    @include simple-color($transparente, $azul);
+    @include simple-color($transparente);
     @include size(150px, 30px, 150px);
     @include center-flex;
     margin: 10px auto;
@@ -110,7 +110,7 @@
 
 .dataComponent {
   @include size(100%, 10px);
-  @include simple-color($transparente, $azul);
+  @include simple-color($primarioSegundo);
   @include position(relative);
   @include center-flex {
     flex-direction: column;
@@ -126,13 +126,14 @@
     @include size(100%);
     @include center-flex;
     margin: 30px auto;
-    
+
     @include media-max-width($initResponsible) {
       margin: 10px auto;
     }
     h3 {
-      font-size: clamp(1.5rem, 1vw, 2rem);
-      @include simple-color($transparente, $azul);
+      @include simple-color($transparente, $morado);
+      font-size: 2em;
+      font-weight: 900;
       border-bottom: 1px solid $azul;
       padding: 10px;
     }
@@ -143,9 +144,9 @@
 
     margin: 0px auto;
     padding-top: 20px;
-    padding-bottom: 100px;
-    @include media-media-data-padding;
+    padding-bottom: 50px;
 
+    @include media-media-data-padding;
     &::-webkit-scrollbar {
       height: 5px;
       background: #000;
@@ -154,10 +155,6 @@
     /* Add a thumb */
     &::-webkit-scrollbar-thumb {
       background-color: #aaa; /* or add it to the track */
-    }
-
-    &:hover {
-      cursor: all-scroll;
     }
     &_click {
       @include size(90%);
@@ -172,28 +169,14 @@
     }
   }
 
-  .scrolling {
-    @include position(absolute, calc(100% - 60px), 5%);
-    @include size(calc(90% - 460px  ), 40px);
-    @include center-flex {
-      justify-content: space-between;
-    }
-    @include simple-color($primarioSegundo, $azul);
-    z-index: -10;
-
-    p {
-      margin: auto;
-    }
-    @include media-max-width($initResponsible) {
-      display: none;
-    }
-  }
-
   .buttons {
-    @include position(absolute, calc(96% - 50px), calc(95% - 450px));
-    @include center-flex;
-    width: auto;
+    @include center-flex {
+      justify-content: flex-end;
+    }
+    width: 95%;
     height: 0;
+    margin: 1.25rem auto;
+
     button {
       @include size(90px, 100%);
       @include simple-color($transparente, $terciario, $terciario);

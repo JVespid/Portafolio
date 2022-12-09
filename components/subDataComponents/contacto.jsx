@@ -1,8 +1,13 @@
 import React from 'react'
+import stl from '../../styles/contacto.module.scss'
 
 const Contacto = () => {
   return (
-    <div>Contacto</div>
+    <aside className={stl.aside} id="Contacto">
+
+
+
+    </aside>
   )
 }
 

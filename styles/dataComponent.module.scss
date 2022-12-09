@@ -5,7 +5,6 @@
 .map {
   display: flex;
   @include size(max-content, auto, max-content, auto, max-content, auto);
-
   user-select: none;
 
   .items {
@@ -16,7 +15,8 @@
     @include center-flex {
       flex-direction: column;
     }
-    margin: auto .625rem;
+    margin: auto 0.625rem;
+    user-select: none;
 
     .img {
       @include size(auto, auto, $size-items, $size-items);
@@ -33,6 +33,9 @@
         @include simple-color($transparente, $transparente);
         z-index: 300000;
         transition: top 0.5s;
+        &:hover {
+          cursor: grab;
+        }
       }
       img {
         @include size(auto, auto, $size-items, $size-items);
@@ -41,7 +44,7 @@
         @include center-flex;
         object-fit: cover;
 
-        object-position: .0625rem .0625rem;
+        object-position: 0.0625rem 0.0625rem;
         transition: top 0.5s;
         z-index: 20;
       }
@@ -65,6 +68,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         transition: margin-left 0.5s;
+        user-select: none;
 
         @include media-max-width(5rem) {
           font-size: 19.2px;
@@ -84,35 +88,37 @@
       visibility: hidden;
       p {
         @include simple-color($transparente, $secundario);
-        font-weight: bold;
-        padding: .625rem;
-        padding-top: .625rem;
-        padding-bottom: .9375rem;
+
+        padding: 0.625rem;
+        padding-top: 0.625rem;
+        padding-bottom: 0.9375rem;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        user-select: none;
       }
     }
 
     .link {
       @include size(calc(100% - 1.25rem), auto);
-      margin: 0rem .3125rem .625rem .3125rem;
-      border: solid .0625rem $secundario;
-      border-radius: .9375rem;
+      margin: 0rem 0.3125rem 0.625rem 0.3125rem;
+      border: solid 0.0625rem $secundario;
+      border-radius: 0.9375rem;
       overflow: hidden;
       a {
         @include size(100%, 100%);
         @include center-flex;
         @include simple-color($transparente, $secundario);
-        font-weight: bold;
-        padding: .5rem;
+
+        padding: 0.5rem;
         cursor: pointer;
         transition: background-color 0.5s;
+        user-select: none;
       }
     }
 
     &:hover {
-      cursor: pointer;
+      cursor: grab;
       overflow: visible;
 
       .name {
@@ -141,6 +147,7 @@
     }
 
     &:focus {
+      cursor: grabbing;
       z-index: 400;
       overflow: visible;
 
@@ -159,7 +166,6 @@
         top: 100%;
         p {
           color: $secundario;
-          font-weight: bold;
         }
       }
     }
