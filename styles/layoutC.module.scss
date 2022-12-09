@@ -85,10 +85,10 @@
 
 .Contacto {
   @include size(90%, auto, 0, 200px);
-  margin: auto;
   @include center-flex {
     flex-direction: column;
   }
+  margin: auto;
 
   .container_previews_Contacto {
     @include size(100%, 80%);

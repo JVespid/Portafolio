@@ -1,0 +1,15 @@
+@import "variables";
+@import "mixin";
+@import "efects";
+@import "animaciones";
+
+
+.footer{
+  @include simple-color($negro, $negro, $negro);
+  width: 100%;
+  height: 100px;
+
+  color: $secundario;
+
+
+}

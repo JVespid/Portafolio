@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Navbar from "./navbar";
-import Footer from "../footer";
+import Footer from "../subDataComponents/footer";
 import AboutMe from "./aboutMe";
 import LayoutComponents from "../layoutComponents";
 
